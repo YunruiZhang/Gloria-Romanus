@@ -1,8 +1,9 @@
 package unsw.backend;
 
 public class Artillery extends Unit {
-    final static int full_cap = 400;
+    final static double killDamage = 100;
+    final static double defencePoint = 80;
     public Artillery(String name, Province location, String type) {
-        super(full_cap, name, location, type);
+        super(name, location, type, killDamage, defencePoint);
     }
 }

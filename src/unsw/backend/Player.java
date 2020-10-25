@@ -33,6 +33,14 @@ public class Player {
             totalPoints += troop.caculateAttactPoint();
         }
         //caculate the total defence point.
+        double totalPointsEnemy = 0;
+        for(Unit troop : enemy.getUnits()){
+            totalPointsEnemy += troop.caculateDefencePoint();
+            totalPointsEnemy += troop.caculateAttactPoint();
+            //also the wall shit
+        }
+        //the compare algo determine who wins or lose 
+        //reduce the amount of soldiers in the unit
     }
 
     /**

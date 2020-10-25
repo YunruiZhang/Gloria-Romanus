@@ -1,7 +1,7 @@
 package unsw.backend;
 
 abstract public class Unit {
-    private int soldiers;
+    private int soldiers = 500;
     private String name;
     private Province location;
     private String type;
@@ -10,19 +10,20 @@ abstract public class Unit {
     private double reduceEnemyDamagePercent;
     private double killDamage;
     private double morale;
+    private double basicDefencepoint;
 
     public abstract void move(Province dest);
     public abstract void attact();
-    public Unit(int soldiers, String name, Province location, String type, double kd, ){
-        this.soldiers = soldiers;
+    public Unit(String name, Province location, String type, double kd, double bdp){
         this.name = name;
         this.location = location;
         this.type = type;
         this.reduceEnemyDamage = 0;
         this.soldierSpeed = 1;
         this.reduceEnemyDamagePercent = 0;
-        this.killDamage = 0;
+        this.killDamage = kd;
         this.morale = 0;
+        this.basicDefencepoint = bdp;
     }
     public String getName(){
         return name;
@@ -32,12 +33,12 @@ abstract public class Unit {
     }
 
     public double caculateDefencePoint(){
-        double damageLeft = (100 * (1+reduceEnemyDamagePercent)) + reduceEnemyDamage;
-        return damageLeft;
+        double defencepoint = (basicDefencepoint * (1+reduceEnemyDamagePercent)) + reduceEnemyDamage;
+        return defencepoint*soldiers;
     }
 
     public double caculateAttactPoint(){
-
+        return killDamage*soldiers;
     }
 
     /**

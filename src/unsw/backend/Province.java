@@ -2,7 +2,6 @@ package unsw.backend;
 
 import java.util.ArrayList;
 
-import com.esri.arcgisruntime.geometry.Unit;
 
 public class Province {
     private String Name;
