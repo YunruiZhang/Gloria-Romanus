@@ -2,8 +2,9 @@ package unsw.backend;
 
 
 public class Infantry extends Unit {
-    final static int full_cap = 600;
+    final static double killDamage = 100;
+    final static double defencePoint = 40;
     public Infantry(String name, Province location, String type) {
-        super(full_cap, name, location, type);
+        super(name, location, type, killDamage, defencePoint);
     }
 }
