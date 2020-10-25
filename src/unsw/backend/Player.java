@@ -2,6 +2,8 @@ package unsw.backend;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -20,6 +22,17 @@ public class Player {
         this.conquest_goal = false;
         this.treasury_goal = false;
         this.infustructure_goal = false;
+    }
+
+    public void attact(Province from, Province enemy, ArrayList<Unit> troops){
+        //check whether they are adjancent
+        //caculate the total attect point
+        double totalPoints = 0;
+        for(Unit troop : troops){
+            totalPoints += troop.caculateDefencePoint();
+            totalPoints += troop.
+        }
+        //caculate the total defence point.
     }
 
     /**
