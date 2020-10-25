@@ -6,9 +6,10 @@ abstract public class Unit {
     private Province location;
     private String type;
     private double reduceEnemyDamage;
-    private double soilderSpeed;
+    private double soldierSpeed;
     private double reduceEnemyDamagePercent;
     private double killDamage;
+    private double morale;
 
     public abstract void move(Province dest);
     public abstract void attact();
@@ -18,9 +19,10 @@ abstract public class Unit {
         this.location = location;
         this.type = type;
         this.reduceEnemyDamage = 0;
-        this.soilderSpeed = 1;
+        this.soldierSpeed = 1;
         this.reduceEnemyDamagePercent = 0;
         this.killDamage = 0;
+        this.morale = 0;
     }
     public String getName(){
         return name;
@@ -102,17 +104,17 @@ abstract public class Unit {
     }
 
     /**
-     * @return double return the soilderSpeed
+     * @return double return the soldierSpeed
      */
-    public double getSoilderSpeed() {
-        return soilderSpeed;
+    public double getSoldierSpeed() {
+        return soldierSpeed;
     }
 
     /**
-     * @param soilderSpeed the soilderSpeed to set
+     * @param soldierSpeed the soldierSpeed to set
      */
-    public void setSoilderSpeed(double soilderSpeed) {
-        this.soilderSpeed = soilderSpeed;
+    public void setSoldierSpeed(double soldierSpeed) {
+        this.soldierSpeed = soldierSpeed;
     }
 
     /**
@@ -143,4 +145,17 @@ abstract public class Unit {
         this.killDamage = killDamage;
     }
 
+    /**
+     * @return double return the morale
+     */
+    public double getMorale() {
+        return morale;
+    }
+
+    /**
+     * @param morale the morale to set
+     */
+    public void setMorale(double morale) {
+        this.morale = morale;
+    }
 }
