@@ -39,7 +39,6 @@ public class Smith extends Infrastructure{
     }
 
     public void receiveArmourBonus(Unit unit) {
-        int temp = unit.reduceEnemyDamagePercent;
         switch(super.getLevel()) {
 
             case 1:
@@ -93,13 +92,13 @@ public class Smith extends Infrastructure{
     }
 
     public void weaponUp(Unit unit, double tempDamage, double moraleInc) {
-        double dam = unit.getkillDamage + (unit.getkillDamage * tempDamage); 
+        double dam = unit.getKillDamage() + (unit.getKillDamage() * tempDamage); 
         if (dam < 5) { //5 is the maximum kill damage
             unit.setKillDamage(dam);
         } else {
             unit.setKillDamage(5);
         }
-        double morale = unit.morale + (unit.morale*moraleInc);
+        double morale = unit.getMorale() + (unit.getMorale()*moraleInc);
         if (morale < 5) {
              unit.setMorale(morale);
         } else {
