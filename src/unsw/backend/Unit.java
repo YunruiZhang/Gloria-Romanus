@@ -12,7 +12,7 @@ abstract public class Unit {
 
     public abstract void move(Province dest);
     public abstract void attact();
-    public Unit(int soldiers, String name, Province location, String type){
+    public Unit(int soldiers, String name, Province location, String type, double kd, ){
         this.soldiers = soldiers;
         this.name = name;
         this.location = location;
@@ -35,7 +35,7 @@ abstract public class Unit {
     }
 
     public double caculateAttactPoint(){
-        
+
     }
 
     /**

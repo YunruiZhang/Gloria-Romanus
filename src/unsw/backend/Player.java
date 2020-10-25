@@ -30,7 +30,7 @@ public class Player {
         double totalPoints = 0;
         for(Unit troop : troops){
             totalPoints += troop.caculateDefencePoint();
-            totalPoints += troop.
+            totalPoints += troop.caculateAttactPoint();
         }
         //caculate the total defence point.
     }
