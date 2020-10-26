@@ -10,6 +10,8 @@ public class Province {
     private ArrayList<Infrastructure> buildings;
     private double provinceWealth;
     private double taxRate;
+    private double recruitmentCost = 500;
+    private int trainTime = 2;
 
     public Province() {
 
@@ -53,17 +55,17 @@ public class Province {
     }
 
     /**
-     * @return double return the provinceWealth
-     */
-    public double getProvinceWealth() {
-        return provinceWealth;
-    }
-
-    /**
      * @param building the buildings to set
      */
     public void addBuildings(Infrastructure building) {
         buildings.add(building);
+    }
+
+    /**
+     * @return double return the provinceWealth
+     */
+    public double getProvinceWealth() {
+        return provinceWealth;
     }
 
     /**
@@ -102,4 +104,54 @@ public class Province {
         }
     }
 
+    public double getTax() {
+        return provinceWealth*taxRate;
+    }
+
+
+
+    public void generateUnits(String type, String uName) {
+        for (Unit j: units) {
+            if (j.getName().equals(uName) && j.getType().equals(type)) {
+                Owner.subGold(100);
+                findProductionBuilding(type, uName);
+            }
+        }
+    }
+
+    public void addToUnit(String type, int num, String uName) {
+        for (Unit i: units) {
+            if (i.getType().equals(type)) {
+                i.addSoldiers(num);
+            }
+        }
+    }
+
+    public void findProductionBuilding(String type, String uName) {
+        for (Infrastructure i: buildings) {
+            if (i instanceof TroopProduction) {
+                TroopProduction temp = (TroopProduction) i;
+                addToUnit(type, temp.generate(type), uName);
+            }
+        }
+    }
+
+    public int findFarm() {
+        int j = 0;
+        for (Infrastructure i: buildings) {
+            if (i instanceof Farm) {
+                Farm temp = (Farm) i;
+                j = temp.getProductionRate();
+            }
+        }
+        return j;
+    }
+
+    public boolean checkIfRoman() {
+        if (Owner.getFaction().equals("Roman")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -1,13 +1,13 @@
 package unsw.backend;
 
 public class Farm extends Infrastructure{
-    private String type = "Farm";
+    static private String type = "Farm";
     static private double baseCost = 3000;
     static private double upgradeCost = 1100;
     static private int maxUpgrade = 5;
 
-    public Farm() {
-        super(2, baseCost, upgradeCost, maxUpgrade);
+    public Farm(Province province) {
+        super(2, baseCost, upgradeCost, maxUpgrade, type, province);
     }
 
     public void upgradeFarm() {
