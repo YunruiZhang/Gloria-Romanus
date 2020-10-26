@@ -10,7 +10,7 @@ import org.json.JSONException;
 public class Player {
     private String faction;
     private  ArrayList<Province> provinces;
-    private int gold;
+    private double gold;
     //private int total_wealth;
     private boolean conquest_goal;
     private boolean treasury_goal;
@@ -74,15 +74,29 @@ public class Player {
     /**
      * @return int return the gold
      */
-    public int getGold() {
+    public double getGold() {
         return gold;
     }
 
     /**
      * @param gold the gold to set
      */
-    public void setGold(int gold) {
+    public void setGold(double gold) {
         this.gold = gold;
+    }
+
+    /**
+     * @param gold adds gold 
+     */
+    public void addGold(double numGold) {
+        this.gold += numGold;
+    }
+
+    /**
+     * @param gold subtracts gold 
+     */
+    public void subGold(double numGold) {
+        this.gold -= numGold;
     }
 
     /**
