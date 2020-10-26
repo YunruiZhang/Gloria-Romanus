@@ -1,7 +1,7 @@
 package unsw.backend;
 
 abstract public class Unit {
-    private int soldiers = 500;
+    private int soldiers;
     private String name;
     private Province location;
     private String type;
@@ -24,6 +24,7 @@ abstract public class Unit {
         this.killDamage = kd;
         this.morale = 0;
         this.basicDefencepoint = bdp;
+        this.soldiers = 0;
     }
     public String getName(){
         return name;
@@ -51,8 +52,8 @@ abstract public class Unit {
     /**
      * @param soldiers the soldiers to set
      */
-    public void setSoldiers(int soldiers) {
-        this.soldiers = soldiers;
+    public void addSoldiers(int soldiers) {
+        this.soldiers += soldiers;
     }
 
     /**

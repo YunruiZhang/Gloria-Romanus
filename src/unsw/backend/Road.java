@@ -1,12 +1,12 @@
 package unsw.backend;
 
 public class Road extends Infrastructure{
-    private String type = "Road";
+    static private String type = "Road";
     static private double baseCost = 10000;
     static private double upgradeCost = 5000;
     static private int maxUpgrade = 4;
-    public Road() {
-        super(1, baseCost, upgradeCost, maxUpgrade);
+    public Road(Province province) {
+        super(1, baseCost, upgradeCost, maxUpgrade, type, province);
     }
     
     public int crossPoints() {
@@ -30,5 +30,14 @@ public class Road extends Infrastructure{
 
     public String getType() {
         return type;
+    }
+
+    public void levelUp() {
+        if (super.getLevel() < 3) {
+            super.levelUp();
+        }
+        if (super.getLevel() == 3 && super.getProvince().checkIfRoman()) {
+            super.levelUp();
+        }
     }
 }

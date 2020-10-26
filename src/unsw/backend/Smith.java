@@ -1,13 +1,13 @@
 package unsw.backend;
 
 public class Smith extends Infrastructure{
-    private String type = "Smith";
+    static private String type = "Smith";
     static private double baseCost = 10000;
     static private double upgradeCost = 5000;
     static private int maxUpgrade = 4;
 
-    public Smith() {
-        super(2, baseCost, upgradeCost, maxUpgrade);
+    public Smith(Province province) {
+        super(2, baseCost, upgradeCost, maxUpgrade, type, province);
     }
 
     public void upgradeSmith() {
@@ -81,10 +81,6 @@ public class Smith extends Infrastructure{
                 weaponUp(unit, 0.215, 0.115);
                 break;
         }
-    }
-    
-    public void receiveFArrowBonus(Unit unit) {
-        unit.missileKill -= (unit.missileKill*0.10);
     }
 
     public String getType() {
