@@ -1,6 +1,7 @@
 package unsw.backend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Province implements Observer{
@@ -12,10 +13,11 @@ public class Province implements Observer{
     private double taxRate;
     private double recruitmentCost = 500;
     private int trainTime = 2;
+    private ArrayList<Object[]> soldierTraining;
     private int turn;
 
     public Province() {
-
+        this.soldierTraining = new ArrayList<Object[]>();
     }
 
     public void update (Object o){
@@ -124,19 +126,19 @@ public class Province implements Observer{
         }
     }
 
-    public void addToUnit(String type, int num, String uName) {
-        for (Unit i: units) {
-            if (i.getType().equals(type)) {
-                i.addSoldiers(num);
-            }
-        }
+    public void addToSchool(String type, int num, String uName) {
+        Object[] soldier = new Object[3];
+        soldier[0] = num;
+        soldier[1] = uName;
+        soldier[2] = trainTime(type);
+        soldierTraining.add(soldier);
     }
 
     public void findProductionBuilding(String type, String uName) {
         for (Infrastructure i: buildings) {
             if (i instanceof TroopProduction) {
                 TroopProduction temp = (TroopProduction) i;
-                addToUnit(type, temp.generate(type), uName);
+                addToSchool(type, temp.generate(type), uName);
             }
         }
     }
@@ -158,5 +160,54 @@ public class Province implements Observer{
         } else {
             return false;
         }
+    }
+
+    public int trainTime(String type) {
+        int traintime = 0;
+        String[] a = {"Cannon", "Chariot", "Crossbowman"};
+        String[] b = {"Flagbearer", "Hopitle", "Horse", "NetFighter", "Elephant"};
+        String[] c = {"Pikeman", "Slingerman", "Spearman", "Trebuchet"};
+        String[] d = {"ArcherMan", "Camel", "Swordsman", "Druid"};
+        if (Arrays.stream(a).anyMatch(type::equals)) {
+            traintime = 1; 
+        } else if (Arrays.stream(b).anyMatch(type::equals)) {
+            traintime = 2; 
+        } else if (Arrays.stream(c).anyMatch(type::equals)) {
+            traintime = 3; 
+        } else {
+            traintime = 4; 
+        }
+        return traintime;
+    }
+
+    public void trainSoldier() {
+        Object[] slotA = soldierTraining.get(0);
+        Object[] slotB = soldierTraining.get(1);
+        if ((int)slotA[2] != 0) {
+            decreaseTrainTime(0);
+        } else {
+            addToUnit(slotA);
+        }
+
+        if ((int)slotB[2] != 0) {
+            decreaseTrainTime(1);
+        } else {
+            addToUnit(slotB);
+        }
+    }
+
+    public void addToUnit(Object[] troop) {
+        for (Unit i: units) {
+            if (i.getName().equals((String)troop[1])) {
+                i.addSoldiers((int)troop[0]);
+                soldierTraining.remove(troop);
+            }
+        }
+    }
+
+    public void decreaseTrainTime(int index) {
+        int temp = (int)soldierTraining.get(index)[2];
+        temp -= 1;
+        soldierTraining.get(index)[2] = (Object)temp;
     }
 }
