@@ -33,6 +33,8 @@ public class Province implements Observer{
         setBuildingUpgrade();
         setRecruitmentCost();
         setBuidingPrice();
+        calculateWealth();
+        Owner.addGold(getTax());
     }
 
     public String getName() {
@@ -87,20 +89,27 @@ public class Province implements Observer{
     }
 
     /**
-     * @param  the provinceWealth to set
+     * changes the wealth every turn according to the tax rate.
      */
     public void calculateWealth() {
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        
+        if (taxRate == 10) {
+            provinceWealth += 10;
+        } else if (taxRate == 15) {
+            provinceWealth += 0;
+        } else if (taxRate == 20) {
+            if (provinceWealth-10 < 0) {
+                provinceWealth = 0;
+            } else {
+                provinceWealth -= 10;
+            }
+        } else if (taxRate == 25) {
+            if (provinceWealth-30 < 0) {
+                provinceWealth = 0;
+            } else {
+                provinceWealth -= 30;
+            }
+            decreaseAllMorale();
+        }
     }
 
     /**
@@ -244,6 +253,7 @@ public class Province implements Observer{
         for (Unit i: units) {
             if (i.getName().equals((String)troop[1])) {
                 i.addSoldiers((int)troop[0]);
+                provinceWealth += ((int)troop[0]*5);    //each troop adds 5 gold to the economy.
                 soldierTraining.remove(troop);
             }
         }
@@ -266,6 +276,8 @@ public class Province implements Observer{
             if (infra.getBuildTime() == 0) {
                 buildings.add(infra);
                 itr.remove();
+                //once building has been built, it contributes to the economy.
+                provinceWealth += 700;
             } else {
                 infra.setBuildTime();
             }
@@ -376,6 +388,8 @@ public class Province implements Observer{
         for (Infrastructure i: buildings) {
             if (i.getType().equals(type)) {
                 i.upgradeInfrastructure();
+                //once building has been upgraded, it contributes to the economy.
+                provinceWealth += 300;
             }
         }
     }
@@ -388,5 +402,11 @@ public class Province implements Observer{
             }
         }
         return temp;
+    }
+
+    public void decreaseAllMorale() {
+        for (Unit u : units) {
+            u.decreaseMorale(1);
+        }
     }
 }
