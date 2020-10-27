@@ -3,7 +3,7 @@ package unsw.backend;
 import java.util.ArrayList;
 
 
-public class Province {
+public class Province implements Observer{
     private String Name;
     private Player Owner;
     private ArrayList<Unit> units;
@@ -12,9 +12,14 @@ public class Province {
     private double taxRate;
     private double recruitmentCost = 500;
     private int trainTime = 2;
+    private int turn;
 
     public Province() {
 
+    }
+
+    public void update (Object o){
+        this.turn = (int) o;
     }
 
     public String getName() {
