@@ -1,20 +1,12 @@
 package unsw.backend;
 
 public class Farm extends Infrastructure{
+    static private int buildTime = 3;
     static private String type = "Farm";
-    static private double baseCost = 3000;
-    static private double upgradeCost = 1100;
     static private int maxUpgrade = 5;
 
     public Farm(Province province) {
-        super(2, baseCost, upgradeCost, maxUpgrade, type, province);
-    }
-
-    public void upgradeFarm() {
-        int temp = super.getLevel();
-        if (temp < 5) {
-            super.levelUp();
-        }
+        super(buildTime, maxUpgrade, type, province);
     }
 
     public String getType() {

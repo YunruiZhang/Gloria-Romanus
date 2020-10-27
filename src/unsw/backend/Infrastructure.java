@@ -3,24 +3,21 @@ package unsw.backend;
 public class Infrastructure {
     private int level;
     private int buildTime;
-    private double baseCost;
-    private double upgradeCost;
     private int maxUpgradable;
     private String type;
     private Province province;
 
-    public Infrastructure (int buildTime, double baseCost, double upgradeCost, int maxUpgradable ,String type, Province province) {
+    public Infrastructure (int buildTime, int maxUpgradable ,String type, Province province) {
         this.level = 1;
         this.buildTime = buildTime;
-        this.baseCost = baseCost;
-        this.upgradeCost = upgradeCost;
         this.maxUpgradable = maxUpgradable;
         this.type = type;
         this.province = province;
-    }
-
-    public void levelUp() {
-        level += 1;
+        int time = 3 - province.getBTime();
+        if (time < 1) {
+            time = 1;
+        }
+        buildTime = time;
     }
 
     public int getLevel() {
@@ -43,23 +40,36 @@ public class Infrastructure {
     }
 
     /**
-     * @return double return the baseCost
-     */
-    public double getBaseCost() {
-        return baseCost;
-    }
-
-    /**
-     * @return double return the upgradeCost
-     */
-    public double getUpgradeCost() {
-        return upgradeCost;
-    }
-
-    /**
      * @return int return the maxUpgradable
      */
     public int getMaxUpgradable() {
         return maxUpgradable;
+    }
+
+    public void setBuildTime() {
+        buildTime -= 1;
+    }
+
+    public void upgradeInfrastructure() {
+        if (type.equals("Road")) {
+            if (level < 3) {
+                level += 1;
+            }
+            if (level == 3 && province.checkIfRoman()) {
+                level += 1;
+            }
+        } else {
+            if (level < maxUpgradable) {
+                level += 1;
+            }
+        }
+    }
+
+    public boolean checkifmax() {
+        if (level == maxUpgradable) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

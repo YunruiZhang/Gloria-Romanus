@@ -2,7 +2,7 @@ package unsw.backend;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Iterator;
 
 public class Province implements Observer{
     private String Name;
@@ -11,17 +11,28 @@ public class Province implements Observer{
     private ArrayList<Infrastructure> buildings;
     private double provinceWealth;
     private double taxRate;
-    private double recruitmentCost = 500;
-    private int trainTime = 2;
+    private double recruitmentCost = 200;
     private ArrayList<Object[]> soldierTraining;
+    private ArrayList<Infrastructure> buildinConstruction;
     private int turn;
+    private double buidingPrice = 2000;
+    private double buildingUpgrade = 1000; 
 
     public Province() {
         this.soldierTraining = new ArrayList<Object[]>();
+        this.buildinConstruction = new ArrayList<Infrastructure>();
+        this.units = new ArrayList<Unit>();
+        this.buildings = new ArrayList<Infrastructure>();
+        //this.buidingPricing = new ArrayList<Object[]>();
     }
 
     public void update (Object o){
         this.turn = (int) o;
+        trainSoldier();
+        decreaseBBTime();
+        setBuildingUpgrade();
+        setRecruitmentCost();
+        setBuidingPrice();
     }
 
     public String getName() {
@@ -119,9 +130,13 @@ public class Province implements Observer{
 
     public void generateUnits(String type, String uName) {
         for (Unit j: units) {
-            if (j.getName().equals(uName) && j.getType().equals(type)) {
-                Owner.subGold(100);
-                findProductionBuilding(type, uName);
+            if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
+                if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
+                    Owner.subGold(100);
+                    findProductionBuilding(type, uName);
+                } else {
+                    //System.out.println("Request denied"); //JAVAFX+++++++++++++++++++++++++++++++
+                }
             }
         }
     }
@@ -132,6 +147,15 @@ public class Province implements Observer{
         soldier[1] = uName;
         soldier[2] = trainTime(type);
         soldierTraining.add(soldier);
+    }
+
+    public boolean cfsProductionBuilding() {
+        for (Infrastructure i: buildings) {
+            if (i instanceof TroopProduction) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void findProductionBuilding(String type, String uName) {
@@ -174,25 +198,35 @@ public class Province implements Observer{
             traintime = 2; 
         } else if (Arrays.stream(c).anyMatch(type::equals)) {
             traintime = 3; 
-        } else {
+        } else if (Arrays.stream(d).anyMatch(type::equals)){
             traintime = 4; 
         }
         return traintime;
     }
 
     public void trainSoldier() {
-        Object[] slotA = soldierTraining.get(0);
-        Object[] slotB = soldierTraining.get(1);
-        if ((int)slotA[2] != 0) {
-            decreaseTrainTime(0);
-        } else {
-            addToUnit(slotA);
+        try {
+            Object[] slotA = soldierTraining.get(0);
+            if ((int)slotA[2] != 0) {
+                decreaseTrainTime(0);
+            } else {
+                addToUnit(slotA);
+            }
+        } catch (Exception e){
+            //no soldiers currently being trained.
+            return;
         }
 
-        if ((int)slotB[2] != 0) {
-            decreaseTrainTime(1);
-        } else {
-            addToUnit(slotB);
+        try {
+            Object[] slotB = soldierTraining.get(1);
+            if ((int)slotB[2] != 0) {
+                decreaseTrainTime(1);
+            } else {
+                addToUnit(slotB);
+            }
+        } catch (Exception e){
+            //no soldiers currently being trained.
+            return;
         }
     }
 
@@ -209,5 +243,140 @@ public class Province implements Observer{
         int temp = (int)soldierTraining.get(index)[2];
         temp -= 1;
         soldierTraining.get(index)[2] = (Object)temp;
+    }
+
+    public void constructNBuilding(Infrastructure temp) {
+        buildinConstruction.add(temp);
+    }
+
+    public void decreaseBBTime() {
+        Iterator<Infrastructure> itr = buildinConstruction.iterator();
+        while (itr.hasNext()) {
+            Infrastructure infra = itr.next();
+            if (infra.getBuildTime() == 0) {
+                buildings.add(infra);
+                itr.remove();
+            } else {
+                infra.setBuildTime();
+            }
+        }
+    }
+    
+    /**
+     * @param Owner the Owner to set
+     */
+    public void setOwner(Player Owner) {
+        //+++++++++++++++++++===================+++++++++++=============+++++++++++++++++++===================+++++++++++=============+++++++++++++++++++===================+++++++++++=============
+        this.Owner = Owner;
+    }
+
+    /**
+     * sets the discounted soldier creation price every turn according to available markets
+     */
+    public void setRecruitmentCost() {
+        double priceR = buidingPrice;
+        for (Infrastructure i: buildings) {
+            if (i instanceof Mine) {
+                Mine temp = (Mine) i;
+                priceR = temp.discountedSoldierPrice();
+            }
+        }
+        this.recruitmentCost = priceR;
+    }
+
+    /**
+     * @return double return the buidingPrice
+     */
+    public double getBuidingPrice() {
+        return buidingPrice;
+    }
+
+    /**
+     * sets the upgraded discounted building price every turn according to available markets
+     */
+    public void setBuidingPrice() {
+        double priceR = buidingPrice;
+        for (Infrastructure i: buildings) {
+            if (i instanceof Market) {
+                Market temp = (Market) i;
+                priceR = temp.discountedPriceBase();
+            }
+        }
+        this.buidingPrice = priceR;
+    }
+
+    /**
+     * @return double return the buildingUpgrade
+     */
+    public double getBuildingUpgrade() {
+        return buildingUpgrade;
+    }
+
+    /**
+     * sets the upgraded discounted building price every turn according to available markets
+     */
+    public void setBuildingUpgrade() {
+        double priceR = buildingUpgrade;
+        for (Infrastructure i: buildings) {
+            if (i instanceof Market) {
+                Market temp = (Market) i;
+                priceR = temp.discountedPrice();
+            }
+        }
+        this.buildingUpgrade = priceR;
+    }
+
+    public boolean checkIfBuildingExistsA(String type) {
+        boolean check = false;
+        for (Infrastructure i: buildinConstruction) {
+            if (i.getType().equals(type)) {
+                check = true;
+                return true;
+            }
+        }
+        return check;
+    }
+
+    public boolean checkIfBuildingExistsB(String type) {
+        boolean check = false;
+        for (Infrastructure j: buildings) {
+            if (j.getType().equals(type)) {
+                check = true;
+                return true;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * if mine is level x then overall build time is reduced by x turns.
+     * @return the time reduced by buiding an advanced mine
+     */
+    public int getBTime() {
+        int timeReduce = 0;
+        for (Infrastructure i: buildings) {
+            if (i instanceof Mine) {
+                timeReduce = i.getLevel();
+            }
+        }
+        return timeReduce;
+    }
+
+    public void upgradeBUILDING(String type) {
+        for (Infrastructure i: buildings) {
+            if (i.getType().equals(type)) {
+                i.upgradeInfrastructure();
+            }
+        }
+    }
+
+    public boolean CheckIfMAX(String type) {
+        boolean temp = false;
+        for (Infrastructure i: buildings) {
+            if (i.getType().equals(type)) {
+                temp = i.checkifmax();
+            }
+        }
+        return temp;
     }
 }
