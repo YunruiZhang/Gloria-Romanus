@@ -240,5 +240,17 @@ public class Player implements Observer{
             return false;
         }
     }
+
+    public void increaseTax(Province p) {
+        p.increaseTaxRate();
+    }
+
+    public void decreaseTax(Province p) {
+        p.decreaseTaxRate();
+    }
+
+    public void taxProvince(Province p) {
+        gold += p.getTax();
+    }
 }
 
