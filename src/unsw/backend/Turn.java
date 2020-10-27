@@ -17,6 +17,7 @@ public class Turn implements Subject {
     }
     public void incTurn(){
         this.turn += 1;
+        notify();
     }
     public void Notify(){
         for(Observer temp: observers){
