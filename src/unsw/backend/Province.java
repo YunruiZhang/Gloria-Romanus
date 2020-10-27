@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class Province {
+public class Province implements Observer{
     private String Name;
     private Player Owner;
     private ArrayList<Unit> units;
@@ -14,9 +14,14 @@ public class Province {
     private double recruitmentCost = 500;
     private int trainTime = 2;
     private ArrayList<Object[]> soldierTraining;
+    private int turn;
 
     public Province() {
         this.soldierTraining = new ArrayList<Object[]>();
+    }
+
+    public void update (Object o){
+        this.turn = (int) o;
     }
 
     public String getName() {

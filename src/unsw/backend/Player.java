@@ -7,10 +7,11 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class Player {
+public class Player implements Observer{
     private String faction;
     private  ArrayList<Province> provinces;
     private double gold;
+    private int turn;
     //private int total_wealth;
     private boolean conquest_goal;
     private boolean treasury_goal;
@@ -22,6 +23,10 @@ public class Player {
         this.conquest_goal = false;
         this.treasury_goal = false;
         this.infustructure_goal = false;
+    }
+
+    public void update (Object o){
+        this.turn = (int) o;
     }
 
     public void attact(Province from, Province enemy, ArrayList<Unit> troops){
