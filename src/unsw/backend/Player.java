@@ -146,5 +146,111 @@ public class Player implements Observer{
         this.infustructure_goal = infustructure_goal;
     }
 
+    public void constructNewBuilding(String type, Province p) {
+        switch(type) {
+            case "TroopProduction":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    TroopProduction temp = new TroopProduction(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//+++++++++++++++++++++
+                }
+                break;
+
+            case "Farm":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Farm temp = new Farm(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//+++++++++++++++++++++
+                }
+                break;
+
+            case "Market":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Market temp = new Market(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//+++++++++++++++++++++
+                }
+                break;
+
+            case "Port":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Port temp = new Port(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//+++++++++++++++++++++
+                }
+                break;
+
+            case "Road":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Road temp = new Road(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//+++++++++++++++++++++
+                }
+                break;
+
+            case "Smith":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Smith temp = new Smith(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
+                }
+                break;
+
+            case "Wall":
+                if(CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Wall temp = new Wall(p);
+                    subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                } else {
+                    //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
+                }
+                break;
+        }
+    }
+
+    public void upgradeBuilding(String type, Province p) {
+        if(!p.checkIfBuildingExistsB(type)) {
+            //System.out.println("cannot upgrade as buiding does not exist"); //JAVAFX ++++++++++++++++++++++++++
+        } else {
+            if(CheckIfGoldAvailable(p.getBuildingUpgrade()) && !p.CheckIfMAX(type)) {
+                subGold(p.getBuildingUpgrade());
+                p.upgradeBUILDING(type);
+            } else {
+                //System.out.println("Requst denies ~ not enough gold or alread on max level");//JAVAFX+++++++++++++++++++++
+            }
+        }
+    }
+
+    public boolean CheckIfGoldAvailable(double x) {
+        if (gold > x) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void increaseTax(Province p) {
+        p.increaseTaxRate();
+    }
+
+    public void decreaseTax(Province p) {
+        p.decreaseTaxRate();
+    }
+
+    public void taxProvince(Province p) {
+        gold += p.getTax();
+    }
 }
 

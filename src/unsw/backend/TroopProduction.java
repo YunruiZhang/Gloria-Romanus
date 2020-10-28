@@ -5,22 +5,13 @@ import java.util.Arrays;
 
 public class TroopProduction extends Infrastructure{
     static private String type = "TroopProduction";
-    static private double baseCost = 7220;
-    static private double upgradeCost = 4100;
+    static private int BuildTime = 3;
     static private int maxUpgrade = 3;
     private Province province;
-    private int trainTime = 2;
 
     public TroopProduction (Province province) {
-        super(3, baseCost, upgradeCost, maxUpgrade, type, province);
+        super(BuildTime, maxUpgrade, type, province);
         this.province = province;
-    }
-
-    public void upgradeTroopProduction() {
-        int temp = super.getLevel();
-        if (temp < 3) {
-            super.levelUp();
-        }
     }
 
     public String getType() {
@@ -60,4 +51,5 @@ public class TroopProduction extends Infrastructure{
         }
         return totalTroopsProvided;
     }
+
 }
