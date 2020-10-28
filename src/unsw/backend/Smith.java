@@ -1,20 +1,12 @@
 package unsw.backend;
 
 public class Smith extends Infrastructure{
+    static private int buildTime = 3;
     static private String type = "Smith";
-    static private double baseCost = 10000;
-    static private double upgradeCost = 5000;
     static private int maxUpgrade = 4;
 
     public Smith(Province province) {
-        super(2, baseCost, upgradeCost, maxUpgrade, type, province);
-    }
-
-    public void upgradeSmith() {
-        int temp = super.getLevel();
-        if (temp < 4) {
-            super.levelUp();
-        }
+        super(buildTime, maxUpgrade, type, province);
     }
 
     public void receiveHelmetBonus(Unit unit) {
