@@ -9,24 +9,16 @@ abstract public class Unit {
     private String type;
     private boolean melee;
     private double reduceEnemyDamage;
-    private double soldierSpeed;
     private double reduceEnemyDamagePercent;
-    private double killDamage;
-    private double morale;
-    private double basicDefencepoint;
     private int movementPoint;
 
     public abstract void move(Province dest, int point);
-    public Unit(String name, Province location, String type, double killDamage, double basicDefencepoint, String ClassName, int MovePoint){
+    public Unit(String name, Province location, String type, String ClassName, int MovePoint){
         this.name = name;
         this.location = location;
         this.type = type;
         this.reduceEnemyDamage = 0;
-        this.soldierSpeed = 1;
         this.reduceEnemyDamagePercent = 0;
-        this.killDamage = killDamage;
-        this.morale = 0;
-        this.basicDefencepoint = basicDefencepoint;
         this.soldiers = 0;
         String[] ranged = {"ArcherMan","HorseArcher", "missileInfantry"};
         if (Arrays.stream(ranged).anyMatch(type::equals) || ClassName.equals("Artillery")) {
@@ -52,14 +44,7 @@ abstract public class Unit {
         soldiers -= num;
     }
 
-    public double caculateDefencePoint(){
-        double defencepoint = (basicDefencepoint * (1+reduceEnemyDamagePercent)) + reduceEnemyDamage;
-        return defencepoint*soldiers;
-    }
-
-    public double caculateAttactPoint(){
-        return killDamage*soldiers;
-    }
+   
 
     /**
      * @return int return the soldiers
@@ -125,20 +110,6 @@ abstract public class Unit {
     }
 
     /**
-     * @return double return the soldierSpeed
-     */
-    public double getSoldierSpeed() {
-        return soldierSpeed;
-    }
-
-    /**
-     * @param soldierSpeed the soldierSpeed to set
-     */
-    public void setSoldierSpeed(double soldierSpeed) {
-        this.soldierSpeed = soldierSpeed;
-    }
-
-    /**
      * @return double return the reduceEnemyDamagePercent
      */
     public double getReduceEnemyDamagePercent() {
@@ -152,45 +123,5 @@ abstract public class Unit {
         this.reduceEnemyDamagePercent = reduceEnemyDamagePercent;
     }
 
-    /**
-     * @return double return the killDamage
-     */
-    public double getKillDamage() {
-        return killDamage;
-    }
-
-    /**
-     * @param killDamage the killDamage to set
-     */
-    public void setKillDamage(double killDamage) {
-        this.killDamage = killDamage;
-    }
-
-    /**
-     * @return double return the morale
-     */
-    public double getMorale() {
-        return morale;
-    }
-
-    /**
-     * increases the morale of unit
-     */
-    public void increaseMorale(int num) {
-        this.morale += num;
-    }
-
-    /**
-     * decreases the morale of unit
-     */
-    public void decreaseMorale(int num) {
-        this.morale -= num;
-    }
-
-    /**
-     * @param morale the morale to set
-     */
-    public void setMorale(double morale) {
-        this.morale = morale;
-    }
+    
 }
