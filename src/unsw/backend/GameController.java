@@ -45,6 +45,7 @@ public class GameController{
         this.turn.attach(player);
         for(Province temp: this.provinces){
             if(temp.getFaction().equals(faction)){
+                temp.changeOwner(player);
                 player.addProvince(temp);
             }
         }

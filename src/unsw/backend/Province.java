@@ -29,6 +29,7 @@ public class Province implements Observer{
         this.taxRate = 15;
     }
 
+    
 
     public void update (Object o){
         this.turn = (int) o;
@@ -296,14 +297,7 @@ public class Province implements Observer{
         }
     }
     
-    /**
-     * @param Owner the Owner to set
-     */
-    public void setOwner(Player Owner) {
-        //+++++++++++++++++++===================+++++++++++=============+++++++++++++++++++===================+++++++++++=============+++++++++++++++++++===================+++++++++++=============
-        this.Owner = Owner;
-    }
-
+   
     /**
      * sets the discounted soldier creation price every turn according to available markets
      */
