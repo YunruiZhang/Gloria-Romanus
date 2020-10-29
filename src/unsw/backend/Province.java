@@ -175,17 +175,21 @@ public class Province implements Observer{
         }
     }
 
-    public void generateTroop(String type, String uName) {
+
+    public boolean generateTroop(String type, String uName) {
         for (Unit j: units) {
             if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
                 if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
                     Owner.subGold(100);
                     findProductionBuilding(type, uName);
+                    return true;
                 } else {
+                    return false;
                     //System.out.println("Request denied"); //JAVAFX+++++++++++++++++++++++++++++++
                 }
             }
         }
+        return false;
     }
 
     public void addToSchool(String type, int num, String uName) {
@@ -235,10 +239,10 @@ public class Province implements Observer{
 
     public int trainTime(String type) {
         int traintime = 0;
-        String[] a = {"Cannon", "Chariot", "Crossbowman"};
-        String[] b = {"Flagbearer", "Hopitle", "Horse", "NetFighter", "Elephant"};
-        String[] c = {"Pikeman", "Slingerman", "Spearman", "Trebuchet"};
-        String[] d = {"ArcherMan", "Camel", "Swordsman", "Druid"};
+        String[] a = {"Cannon", "Chariot", "Crossbowman", "Lancer"};
+        String[] b = {"Hopitle", "NetFighter", "Elephant", "Javelin", "MissileMan"};
+        String[] c = {"Pikeman", "Spearman", "Trebuchet", "Berserker"};
+        String[] d = {"HorseArcher", "Camel", "Swordsman", "Druid", "legionary"};
         if (Arrays.stream(a).anyMatch(type::equals)) {
             traintime = 1; 
         } else if (Arrays.stream(b).anyMatch(type::equals)) {
