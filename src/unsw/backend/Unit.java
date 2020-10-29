@@ -154,6 +154,20 @@ abstract public class Unit {
     }
 
     /**
+     * increases the morale of unit
+     */
+    public void increaseMorale(int num) {
+        this.morale += num;
+    }
+
+    /**
+     * decreases the morale of unit
+     */
+    public void decreaseMorale(int num) {
+        this.morale -= num;
+    }
+
+    /**
      * @param morale the morale to set
      */
     public void setMorale(double morale) {

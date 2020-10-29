@@ -1,23 +1,27 @@
 package unsw.backend;
 
 public class Mine extends Infrastructure{
+    static private int buildTime = 2;
     static private String type = "Mine";
-    static private double baseCost = 3000;
-    static private double upgradeCost = 1100;
-    static private int maxUpgrade = 5;
+    static private int maxUpgrade = 3;
+    private double soldierCost = 200;
 
     public Mine(Province province) {
-        super(2, baseCost, upgradeCost, maxUpgrade, type, province);
-    }
-
-    public void upgradeMine() {
-        int temp = super.getLevel();
-        if (temp < 5) {
-            super.levelUp();
-        }
+        super(buildTime, maxUpgrade, type, province);
     }
 
     public String getType() {
         return type;
+    }
+
+    /**
+     * if level is 1 then a 10% discount is applied, if level is 2 then 20% adn so on.
+     * @return the discounted price for creating more troops.
+     */
+    public double discountedSoldierPrice() {
+        int level = super.getLevel();
+        level = 100 - (level*10);
+        double ret = (soldierCost*level)/100;
+        return ret;
     }
 }
