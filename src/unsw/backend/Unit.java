@@ -8,26 +8,30 @@ abstract public class Unit {
     private Province location;
     private String type;
     private boolean melee;
-    private double reduceEnemyDamage;
-    private double soldierSpeed;
-    private double reduceEnemyDamagePercent;
-    private double killDamage;
-    private double morale;
-    private double basicDefencepoint;
+    private double reduceEnemyDamage;//??????????????????????
+    private double reduceEnemyDamagePercent;//???????????????
+    private Morale morale;
+    private AttackDamage attackDamage;
+    private Armour armour;
+    private Shield shield;
+    private CombatSkill skill;
+    private Speed speed;
 
     public abstract void move(Province dest);
-    public Unit(String name, Province location, String type, double killDamage, double basicDefencepoint, String ClassName){
+    public Unit(String name, Province location, String type, String ClassName){
         this.name = name;
         this.location = location;
         this.type = type;
         this.reduceEnemyDamage = 0;
-        this.soldierSpeed = 1;
         this.reduceEnemyDamagePercent = 0;
-        this.killDamage = killDamage;
-        this.morale = 0;
-        this.basicDefencepoint = basicDefencepoint;
         this.soldiers = 0;
-        String[] ranged = {"ArcherMan","HorseArcher", "missileInfantry"};
+        this.attackDamage = new AttackDamage(type);
+        this.armour = new Armour(type);
+        this.shield = new Shield(type);
+        this.skill = new CombatSkill(type);
+        this.speed = new Speed(type);
+        this.morale = new Morale(type);
+        String[] ranged = {"HorseArcher", "MissileMan", "Javelin", "Trebuchet", "Crossbowman", "Cannon"};
         if (Arrays.stream(ranged).anyMatch(type::equals) || ClassName.equals("Artillery")) {
             melee = false; 
         } else {
@@ -39,15 +43,6 @@ abstract public class Unit {
     }
     public void soliders_die(int num){
         soldiers -= num;
-    }
-
-    public double caculateDefencePoint(){
-        double defencepoint = (basicDefencepoint * (1+reduceEnemyDamagePercent)) + reduceEnemyDamage;
-        return defencepoint*soldiers;
-    }
-
-    public double caculateAttactPoint(){
-        return killDamage*soldiers;
     }
 
     /**
@@ -114,20 +109,6 @@ abstract public class Unit {
     }
 
     /**
-     * @return double return the soldierSpeed
-     */
-    public double getSoldierSpeed() {
-        return soldierSpeed;
-    }
-
-    /**
-     * @param soldierSpeed the soldierSpeed to set
-     */
-    public void setSoldierSpeed(double soldierSpeed) {
-        this.soldierSpeed = soldierSpeed;
-    }
-
-    /**
      * @return double return the reduceEnemyDamagePercent
      */
     public double getReduceEnemyDamagePercent() {
@@ -142,44 +123,58 @@ abstract public class Unit {
     }
 
     /**
-     * @return double return the killDamage
-     */
-    public double getKillDamage() {
-        return killDamage;
-    }
-
-    /**
-     * @param killDamage the killDamage to set
-     */
-    public void setKillDamage(double killDamage) {
-        this.killDamage = killDamage;
-    }
-
-    /**
      * @return double return the morale
      */
     public double getMorale() {
-        return morale;
+        return morale.getmorale();
     }
 
     /**
      * increases the morale of unit
      */
-    public void increaseMorale(int num) {
-        this.morale += num;
+    public void increaseMorale(double num) {
+        morale.increasemorale(num);
     }
 
     /**
      * decreases the morale of unit
      */
-    public void decreaseMorale(int num) {
-        this.morale -= num;
+    public void decreaseMorale(double num) {
+        morale.decreasemorale(num);
     }
 
     /**
      * @param morale the morale to set
      */
-    public void setMorale(double morale) {
-        this.morale = morale;
+    public void setMorale(double num) {
+        morale.setmorale(num);
+    }
+
+    /**
+     * @param perCent increase the morale by a percentage
+     */
+    public void percentIncreaseMorale(double perCent) {
+        morale.percentIncrease(perCent);
+    }
+
+    /**
+     * @param slow decreases the soldier speed by a percentage
+     */
+    public void decreaseSoldierSpeed(double slow) {
+        speed.decreasesoldierspeed(slow);
+    }
+
+    /**
+     * @return the attack damage the unit can cause
+     */
+    public double getAttackDamage() {
+        return attackDamage.getDamage();
+    }
+
+    /**
+     * @param damage sets the damage the unit can cause.
+     */
+    public void increaseDamage(double perCent) {
+        attackDamage.increaseAttackDamage(perCent);
     }
 }

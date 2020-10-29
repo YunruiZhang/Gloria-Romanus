@@ -20,9 +20,9 @@ public class TroopProduction extends Infrastructure{
 
     public int generate(String type) {
         int totalTroopsProvided = 0;
-        String[] level1 = {"ArcherMan", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant"};
-        String[] level2 = {"ArcherMan", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Flagbearer", "Hopitle", "Horse", "NetFighter"};
-        String[] level3 = {"ArcherMan", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Flagbearer", "Hopitle", "Horse", "NetFighter", "Pikeman", "Slingerman", "Spearman", "Swordsman", "Trebuchet"};
+        String[] level1 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle"};
+        String[] level2 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle", "NetFighter", "Berserker", "Lancer", "Javelin", "MissileMan"};
+        String[] level3 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle", "NetFighter", "Pikeman", "Spearman", "Swordsman", "Trebuchet", "Lancer", "Berserker", "Javelin", "legionary", "MissileMan"};
         // more advanced troop priduction building can produce more type of soldiers.
         switch(super.getLevel()) {
             case 1:
