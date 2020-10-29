@@ -18,6 +18,7 @@ public class Player implements Observer{
     private boolean infustructure_goal;
 
     public Player(String faction){
+        this.provinces = new ArrayList<Province>();
         this.gold = 1000;
         this.faction = faction;
         this.conquest_goal = false;
@@ -29,24 +30,7 @@ public class Player implements Observer{
         this.turn = (int) o;
     }
 
-    public void attact(Province from, Province enemy, ArrayList<Unit> troops){
-        //check whether they are adjancent
-        //caculate the total attect point
-        double totalPoints = 0;
-        for(Unit troop : troops){
-            totalPoints += troop.caculateDefencePoint();
-            totalPoints += troop.caculateAttactPoint();
-        }
-        //caculate the total defence point.
-        double totalPointsEnemy = 0;
-        for(Unit troop : enemy.getUnits()){
-            totalPointsEnemy += troop.caculateDefencePoint();
-            totalPointsEnemy += troop.caculateAttactPoint();
-            //also the wall shit
-        }
-        //the compare algo determine who wins or lose 
-        //reduce the amount of soldiers in the unit
-    }
+   
 
     /**
      * @return String return the faction
@@ -74,6 +58,10 @@ public class Player implements Observer{
      */
     public void setProvinces(ArrayList<Province> provinces) {
         this.provinces = provinces;
+    }
+
+    public void addProvince(Province newP){
+        this.provinces.add(newP);
     }
 
     /**
