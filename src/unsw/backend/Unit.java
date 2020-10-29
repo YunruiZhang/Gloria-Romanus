@@ -13,7 +13,6 @@ abstract public class Unit {
     private double basicDefencepoint;
 
     public abstract void move(Province dest);
-    public abstract void attact();
     public Unit(String name, Province location, String type, double kd, double bdp){
         this.name = name;
         this.location = location;
