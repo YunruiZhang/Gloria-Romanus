@@ -60,10 +60,23 @@ public class Adjacent {
         Iterator<String> keys = adj.keys();
         while (keys.hasNext()) { 
             String key = keys.next();
-            if(adj.getString(key).equals("True") && convert(key, ALL).getFaction().equals(faction)){
+            if(adj.getString(key).equals("true") && convert(key, ALL).getFaction().equals(faction) && !visited.contains(convert(key, ALL))){
                 int currpath = FindPath(faction, convert(key, ALL), dest, visited, ALL);
-                if(currpath != 9999){
-                    ans = Math.min(ans, 1 + currpath);
+                if(currpath < 9999){
+                    Province temp = convert(key, ALL);
+                    int cost = 4;
+                    for(Infrastructure temp1 : temp.getBuildings()){
+                        if(temp1 instanceof Road){
+                            if(temp1.getLevel() == 1){
+                                cost = 3;
+                            }else if(temp1.getLevel() == 2){
+                                cost = 2;
+                            }else if(temp1.getLevel() == 3){
+                                cost = 1;
+                            }
+                        }
+                    }
+                    ans = Math.min(ans, cost + currpath);
                 }
             }
 

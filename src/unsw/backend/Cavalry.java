@@ -1,14 +1,18 @@
 package unsw.backend;
 
 
-public class Cavalry extends Unit {
+public class Cavalry extends Unit implements Observer{
     final static String className = "Cavalry";
 
     public Cavalry(String name, Province location, String type) {
-        super(name, location, type, className);
+        super(name, location, type, className, 15);
     }
 
-    public Move(Province dest){
-        
+    public void update(Object o){
+        super.setMovePoint(15);
+    }
+    public void move(Province dest, int point){
+        super.setLocation(dest);
+        super.SubtractPoint(point);
     }
 }

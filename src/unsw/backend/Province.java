@@ -158,6 +158,22 @@ public class Province implements Observer{
         return provinceWealth*taxRate*0.01;
     }
 
+    public void setTax(int level){
+        switch(level){
+            case 1:
+                taxRate = 10;
+                break;
+            case 2:
+                taxRate = 15;
+                break;
+            case 3: 
+                taxRate = 20;
+                break;
+            case 4:
+                taxRate = 25;
+                break;
+        }
+    }
 
 
     public boolean generateTroop(String type, String uName) {

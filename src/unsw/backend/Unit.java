@@ -16,9 +16,10 @@ abstract public class Unit {
     private Shield shield;
     private CombatSkill skill;
     private Speed speed;
+    private int movementPoint;
 
-    public abstract void move(Province dest);
-    public Unit(String name, Province location, String type, String ClassName){
+    public abstract void move(Province dest, int point);
+    public Unit(String name, Province location, String type, String ClassName, int MovePoint){
         this.name = name;
         this.location = location;
         this.type = type;
@@ -37,6 +38,16 @@ abstract public class Unit {
         } else {
             melee = true; 
         }
+        this.movementPoint = MovePoint;
+    }
+    public void setMovePoint(int point){
+        this.movementPoint = point;
+    }
+    public void SubtractPoint(int point){
+        this.movementPoint -= point;
+    }
+    public int getPoint(){
+        return this.movementPoint;
     }
     public String getName(){
         return name;
