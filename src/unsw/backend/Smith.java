@@ -13,7 +13,7 @@ public class Smith extends Infrastructure{
         switch(super.getLevel()) {
 
             case 1:
-                unit.setReduceEnemyDamage(1);
+                unit.setReduceEnemyDamage(1);////////////////////////////////////////////////////////
                 break;
 
             case 2:
@@ -34,23 +34,23 @@ public class Smith extends Infrastructure{
         switch(super.getLevel()) {
 
             case 1:
-                unit.setReduceEnemyDamagePercent(0.50);
-                unit.setSoldierSpeed(0.8);
+                unit.setReduceEnemyDamagePercent(0.50);/////////////////////////////////////////////////////////////////////
+                unit.decreaseSoldierSpeed(0.2);
                 break;
 
             case 2:
                 unit.setReduceEnemyDamage(0.55);
-                unit.setSoldierSpeed(0.64);
+                unit.decreaseSoldierSpeed(0.3);
                 break;
 
             case 3:
                 unit.setReduceEnemyDamage(0.6);
-                unit.setSoldierSpeed(0.512);
+                unit.decreaseSoldierSpeed(0.4);
                 break;
 
             case 4:
                 unit.setReduceEnemyDamage(0.625);
-                unit.setSoldierSpeed(0.4096);
+                unit.decreaseSoldierSpeed(0.5);
                 break;
         }
     }
@@ -58,19 +58,23 @@ public class Smith extends Infrastructure{
     public void receiveWeaponBonus(Unit unit) {
         switch(super.getLevel()) {
             case 1:
-                weaponUp(unit, 0.20, 0.10);
+                unit.increaseDamage(0.20);
+                unit.percentIncreaseMorale(0.10);
                 break;
 
             case 2:
-                weaponUp(unit, 0.205, 0.105);
+                unit.increaseDamage(0.21);
+                unit.percentIncreaseMorale(0.15);
                 break;
 
             case 3:
-                weaponUp(unit, 0.21, 0.11);
+                unit.increaseDamage(0.22);
+                unit.percentIncreaseMorale(0.2);
                 break;
 
             case 4:
-                weaponUp(unit, 0.215, 0.115);
+                unit.increaseDamage(0.23);
+                unit.percentIncreaseMorale(0.25);
                 break;
         }
     }
@@ -78,20 +82,4 @@ public class Smith extends Infrastructure{
     public String getType() {
         return type;
     }
-
-    public void weaponUp(Unit unit, double tempDamage, double moraleInc) {
-        double dam = unit.getKillDamage() + (unit.getKillDamage() * tempDamage); 
-        if (dam < 5) { //5 is the maximum kill damage
-            unit.setKillDamage(dam);
-        } else {
-            unit.setKillDamage(5);
-        }
-        double morale = unit.getMorale() + (unit.getMorale()*moraleInc);
-        if (morale < 5) {
-             unit.setMorale(morale);
-        } else {
-            unit.setMorale(5);
-        }
-    } 
-
 }
