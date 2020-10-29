@@ -142,7 +142,7 @@ public class Province implements Observer{
     }
 
     public double getTax() {
-        return provinceWealth*taxRate;
+        return provinceWealth*taxRate*0.01;
     }
 
 
