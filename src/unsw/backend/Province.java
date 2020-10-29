@@ -160,17 +160,20 @@ public class Province implements Observer{
 
 
 
-    public void generateTroop(String type, String uName) {
+    public boolean generateTroop(String type, String uName) {
         for (Unit j: units) {
             if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
                 if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
                     Owner.subGold(100);
                     findProductionBuilding(type, uName);
+                    return true;
                 } else {
+                    return false;
                     //System.out.println("Request denied"); //JAVAFX+++++++++++++++++++++++++++++++
                 }
             }
         }
+        return false;
     }
 
     public void addToSchool(String type, int num, String uName) {
