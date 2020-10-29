@@ -1,10 +1,13 @@
 package unsw.backend;
 
+import java.util.Arrays;
+
 abstract public class Unit {
     private int soldiers;
     private String name;
     private Province location;
     private String type;
+    private boolean melee;
     private double reduceEnemyDamage;
     private double soldierSpeed;
     private double reduceEnemyDamagePercent;
@@ -14,17 +17,23 @@ abstract public class Unit {
 
     public abstract void move(Province dest);
     public abstract void attact();
-    public Unit(String name, Province location, String type, double kd, double bdp){
+    public Unit(String name, Province location, String type, double killDamage, double basicDefencepoint, String ClassName){
         this.name = name;
         this.location = location;
         this.type = type;
         this.reduceEnemyDamage = 0;
         this.soldierSpeed = 1;
         this.reduceEnemyDamagePercent = 0;
-        this.killDamage = kd;
+        this.killDamage = killDamage;
         this.morale = 0;
-        this.basicDefencepoint = bdp;
+        this.basicDefencepoint = basicDefencepoint;
         this.soldiers = 0;
+        String[] ranged = {"ArcherMan","HorseArcher", "missileInfantry"};
+        if (Arrays.stream(ranged).anyMatch(type::equals) || ClassName.equals("Artillery")) {
+            melee = false; 
+        } else {
+            melee = true; 
+        }
     }
     public String getName(){
         return name;
