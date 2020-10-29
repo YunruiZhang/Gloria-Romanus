@@ -233,23 +233,12 @@ public class Player implements Observer{
     }
 
     public boolean CheckIfGoldAvailable(double x) {
-        if (gold > x) {
+        if (gold >= x) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void increaseTax(Province p) {
-        p.increaseTaxRate();
-    }
-
-    public void decreaseTax(Province p) {
-        p.decreaseTaxRate();
-    }
-
-    public void taxProvince(Province p) {
-        gold += p.getTax();
-    }
 }
 
