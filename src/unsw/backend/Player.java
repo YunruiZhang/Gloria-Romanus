@@ -53,6 +53,9 @@ public class Player implements Observer{
         return provinces;
     }
 
+    public void removeProvince(Province pro){
+        this.provinces.remove(pro);
+    }
     /**
      * @param provinces the provinces to set
      */

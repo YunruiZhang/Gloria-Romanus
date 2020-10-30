@@ -16,12 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class GameController{
-    private Player player;
+    private ArrayList<Player> player;
     private ArrayList<Province> provinces;
     private Turn turn = new Turn();
     Adjacent adj = new Adjacent();
     public GameController(){
         provinces = new ArrayList<Province>();
+        player = new ArrayList<Player>();
         try{
             String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
             JSONObject jsonprovince = new JSONObject(content);
@@ -42,12 +43,13 @@ public class GameController{
     }
 
     public void setPlayer(String faction){
-        this.player = new Player(faction);
-        this.turn.attach(player);
-        for(Province temp: this.provinces){
-            if(temp.getFaction().equals(faction)){
-                temp.changeOwner(player);
-                player.addProvince(temp);
+        Player temp = new Player(faction);
+        player.add(temp);
+        this.turn.attach(temp);
+        for(Province temp1: this.provinces){
+            if(temp1.getFaction().equals(faction)){
+                temp1.changeOwner(temp);
+                temp.addProvince(temp1);
             }
         }
 
@@ -57,14 +59,14 @@ public class GameController{
         this.turn.Notify();
     }
 
-    public void MoveUnit(ArrayList<Unit> Army, Province src, Province dest){
+    public void MoveUnit(Player py, ArrayList<Unit> Army, Province src, Province dest){
         int avaiablePoint = 9999;
         for(Unit temp : Army){
             if(avaiablePoint > temp.getPoint()){
                 avaiablePoint = temp.getPoint();
             }
         }
-        int point = adj.ShortestPath(src, dest, player, provinces);
+        int point = adj.ShortestPath(src, dest, py, provinces);
         if(point > avaiablePoint){
             System.out.println("Can't move the army");
             return;
@@ -106,8 +108,8 @@ public class GameController{
 
     }
 
-    public boolean addsolider(Province pro, Unit unit, int num){
-        if(!pro.getOwner().equals(player)){
+    public boolean addsolider(Player py, Province pro, Unit unit, int num){
+        if(!pro.getOwner().equals(py)){
             return false;
         }
         if(!pro.generateTroop(unit.getType(), unit.getName())){
@@ -118,12 +120,12 @@ public class GameController{
         
     }
 
-    public boolean bulid(String type, Province pro){
+    public boolean bulid(Player py, String type, Province pro){
         ConstructionFactory factory = new ConstructionFactory();
-        if(!pro.getOwner().equals(player)){
+        if(!pro.getOwner().equals(py)){
             return false;
         }
-        if (!factory.constructNewBuilding(type, pro, player)){
+        if (!factory.constructNewBuilding(type, pro, py)){
             return false;
         } else {
             return true;
@@ -135,12 +137,12 @@ public class GameController{
         // }
     }
 
-    public boolean upgrade(String type, Province pro){
+    public boolean upgrade(Player py, String type, Province pro){
         ConstructionFactory factory = new ConstructionFactory();
-        if(!pro.getOwner().equals(player)){
+        if(!pro.getOwner().equals(py)){
             return false;
         }
-        if(factory.upgradeBuilding(type, pro, player)){
+        if(factory.upgradeBuilding(type, pro, py)){
             return false;
         }else{
             return true;
@@ -152,11 +154,20 @@ public class GameController{
         // }
     }
 
-    public void war(){
+    public boolean Battle(Player py, ArrayList<Unit>Army, Province src, Province dest){
+        if(!adj.Check_adj(src, dest)){
+            return false;
+        }
+        Battle newbt = new Battle(Army, dest.getUnits());
+        int result = newbt.StartBattle();
+        if(result == 1){
+            dest.getOwner().removeProvince(dest);
+            py.addProvince(dest);
+        }
 
     }
-    public boolean setTax(Province pro, int level){
-        if(!pro.getOwner().equals(player)){
+    public boolean setTax(Player py, Province pro, int level){
+        if(!pro.getOwner().equals(py)){
             return false;
         }
         pro.setTax(level);
