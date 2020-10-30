@@ -13,11 +13,15 @@ public class Battle {
     private int enemysize;
     private int myloss;
     private int enemyloss;
+    private ArrayList<Unit> cowardfriend;
+    private ArrayList<Unit> cowardenemy;
 
     public Battle(ArrayList<Unit> MyArmy, ArrayList<Unit> OppositionArmy) {
         this.MyArmy = MyArmy;
         this.OppositionArmy = OppositionArmy;
         this.engagementCounter = 0;
+        cowardfriend = new ArrayList<Unit>();
+        cowardenemy = new ArrayList<Unit>();
     }
 
     public int StartBattle() {
@@ -69,7 +73,7 @@ public class Battle {
     public boolean startEngagement(boolean range, Unit friend, Unit enemy){
         mysize = friend.getSoldiers();
         enemysize = enemy.getSoldiers();
-        if (engagementCounter + 1 > 200) {
+        if (engagementCounter++ > 200) {
             draw = true;
             return false;
         }
@@ -99,8 +103,7 @@ public class Battle {
         } else {
             increaseMeleeChance = 0.10 * (enemy.GetSpeed() - friend.GetSpeed());
         }
-        double chanceMeele = 1/(0.5 + increaseMeleeChance);
-        if (new Random().nextDouble() <= chanceMeele) {
+        if (new Random().nextDouble() <= 0.5 + increaseMeleeChance) {
             return true;
         } else {
             return false;
@@ -129,7 +132,7 @@ public class Battle {
     public boolean getDestroyedShortRange(Unit friend, Unit enemy) {
         Random r = new Random();
         
-        double damA = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield() + enemy.getCSkill()))*(1 + r.nextGaussian());
+        double damA = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield() + friend.getCSkill()))*(1 + r.nextGaussian());
         double damB = (enemy.getSoldiers() * 0.1)*(discountedDamage(enemy, friend)/(enemy.GetArmour() + enemy.GetShield() + enemy.getCSkill()))*(1 + r.nextGaussian());
         friend.soliders_die((int)damA);
         enemy.soliders_die((int)damB);
@@ -163,10 +166,70 @@ public class Battle {
         }
         if (friendFleaBase != -1) friendFleaBase += (((myloss/mysize)/(enemyloss/enemysize))*(0.1));
         if (enemyFleaBase != -1) enemyFleaBase += (((enemyloss/enemysize)/(myloss/mysize))*(0.1));
+        if(friendFleaBase != -1){
+            boolean friendHasFlee = FleeChanceCaculater(friendFleaBase);
+            if(friendHasFlee == true){
+                if(enemy == null ){
+                    MyArmy.remove(friend);
+                    cowardfriend.add(friend);
+                }else{
+                    MyArmy.remove(friend);
+                    boolean temp = Routing(friend, enemy);
+                    if(temp = true){
+                        cowardfriend.add(friend);
+                    }
+                }
+            }
+        }
+        if(enemyFleaBase != -1){
+            boolean enemyHasFlee = FleeChanceCaculater(enemyFleaBase);
+            if(enemyHasFlee == true){
+                if(friend == null){
+                    OppositionArmy.remove(enemy);
+                    cowardenemy.add(enemy);
+                }else{
+                    OppositionArmy.remove(enemy);
+                    Routing(enemy, friend);
+                    boolean temp = Routing(enemy, friend);
+                    if(temp = true){
+                        cowardenemy.add(enemy);
+                    }
+                }
+            }
+        }
+        
 
     }
 
-    public void UnitAbort(Unit coward) {
+    public boolean FleeChanceCaculater (double chance){
+        if (new Random().nextDouble() <= chance) {
+            return true;
+        } else {
+            return false;
+        }  
+    }
 
+    public boolean Routing(Unit coward, Unit chaseing){
+        boolean flee = CanTheyEscape(chaseing, coward);
+        if(flee){
+            return true;
+        }else{
+            while(!flee){
+                Random r = new Random();
+                double damA = (coward.getSoldiers() * 0.1)*(discountedDamage(coward, chaseing)/(coward.GetArmour() + coward.GetShield() + coward.getCSkill()))*(1 + r.nextGaussian());
+                engagementCounter++;
+                coward.soliders_die((int)damA);
+                if(coward.getSoldiers() <= 0){
+                    return false;
+                }
+                flee = CanTheyEscape(chaseing, coward);
+            }
+        }
+        return flee;
+    }
+
+    public boolean CanTheyEscape(Unit police, Unit flee){
+        double chance = 0.5 + (0.1*(flee.GetSpeed() - police.GetSpeed()));
+        return FleeChanceCaculater(chance);
     }
 }
