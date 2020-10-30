@@ -13,7 +13,7 @@ public class Smith extends Infrastructure{
         switch(super.getLevel()) {
 
             case 1:
-                unit.setReduceEnemyDamage(1);////////////////////////////////////////////////////////
+                unit.setReduceEnemyDamage(1);
                 break;
 
             case 2:
@@ -34,7 +34,7 @@ public class Smith extends Infrastructure{
         switch(super.getLevel()) {
 
             case 1:
-                unit.setReduceEnemyDamagePercent(0.50);/////////////////////////////////////////////////////////////////////
+                unit.setReduceEnemyDamagePercent(0.50);
                 unit.decreaseSoldierSpeed(0.2);
                 break;
 
