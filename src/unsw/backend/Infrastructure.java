@@ -52,10 +52,10 @@ public class Infrastructure {
 
     public void upgradeInfrastructure() {
         if (type.equals("Road")) {
-            if (level < 3) {
+            if (level < 2) {
                 level += 1;
             }
-            if (level == 3 && province.checkIfRoman()) {
+            if (level == 2 && province.checkIfRoman()) {
                 level += 1;
             }
         } else {
