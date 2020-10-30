@@ -49,7 +49,14 @@ public class Battle {
 
     public double discountedDamage(Unit a, Unit b) {
         //gets the damage that the b has on a.
-        double damage;
+        double damage = b.getAttackDamage();
+        double reduction = (damage - a.getReduceEnemyDamage())*(1-a.getReduceEnemyDamagePercent());
+        if (reduction < 1) {
+            return 1;
+        } else {
+            return reduction;
+        }
+
     }
 
     public boolean startEngagement(boolean range, Unit friend, Unit enemy){
