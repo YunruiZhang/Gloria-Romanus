@@ -188,4 +188,18 @@ abstract public class Unit {
     public void increaseDamage(double perCent) {
         attackDamage.increaseAttackDamage(perCent);
     }
+
+    /**
+     * @return if the unit is of type melee.
+     */
+    public boolean getMelee() {
+        return melee;
+    }
+
+    /**
+     * @return the speed of the unit.
+     */
+    public double getSpeed() {
+        return speed.getSpeed();
+    }
 }
