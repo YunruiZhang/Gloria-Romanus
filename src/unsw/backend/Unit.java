@@ -188,4 +188,32 @@ abstract public class Unit {
     public void increaseDamage(double perCent) {
         attackDamage.increaseAttackDamage(perCent);
     }
+
+    /**
+     * @return if the unit is of type melee.
+     */
+    public boolean getMelee() {
+        return melee;
+    }
+
+    /**
+     * @return the speed of the unit.
+     */
+    public double GetSpeed() {
+        return speed.getSpeed();
+    }
+
+    /**
+     * @return the armour points of the unit
+     */
+    public double GetArmour() {
+        return armour.getArmour();
+    }
+
+    /**
+     * @return the shield points of the unit
+     */
+    public double GetShield() {
+        return shield.getShield();
+    }
 }
