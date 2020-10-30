@@ -216,4 +216,11 @@ abstract public class Unit {
     public double GetShield() {
         return shield.getShield();
     }
+
+    /**
+     * @return the self defence ability of the unit
+     */
+    public double getCSkill() {
+        return skill.getSkill();
+    }
 }
