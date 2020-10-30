@@ -119,24 +119,37 @@ public class GameController{
     }
 
     public boolean bulid(String type, Province pro){
+        ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(player)){
             return false;
         }
-        if(!player.constructNewBuilding(type, pro)){
+        if (!factory.constructNewBuilding(type, pro, player)){
             return false;
-        }else{
+        } else {
             return true;
         }
+        // if(!player.constructNewBuilding(type, pro)){
+        //     return false;
+        // }else{
+        //     return true;
+        // }
     }
 
     public boolean upgrade(String type, Province pro){
+        ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(player)){
             return false;
-        }if(player.upgradeBuilding(type, pro)){
+        }
+        if(factory.upgradeBuilding(type, pro, player)){
             return false;
         }else{
             return true;
         }
+        // if(player.upgradeBuilding(type, pro)){
+        //     return false;
+        // }else{
+        //     return true;
+        // }
     }
 
     public void war(){
