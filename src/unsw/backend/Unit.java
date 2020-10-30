@@ -199,7 +199,21 @@ abstract public class Unit {
     /**
      * @return the speed of the unit.
      */
-    public double getSpeed() {
+    public double GetSpeed() {
         return speed.getSpeed();
+    }
+
+    /**
+     * @return the armour points of the unit
+     */
+    public double GetArmour() {
+        return armour.getArmour();
+    }
+
+    /**
+     * @return the shield points of the unit
+     */
+    public double GetShield() {
+        return shield.getShield();
     }
 }

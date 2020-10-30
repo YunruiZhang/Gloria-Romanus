@@ -47,8 +47,9 @@ public class Battle {
         }
     }
 
-    public double discountedDamage(Unit friend, Unit enemy) {
-
+    public double discountedDamage(Unit a, Unit b) {
+        //gets the damage that the b has on a.
+        double damage;
     }
 
     public boolean startEngagement(boolean range, Unit friend, Unit enemy){
@@ -66,9 +67,9 @@ public class Battle {
     public boolean EngagementChanceCalculator(Unit friend, Unit enemy) {
         double increaseMeleeChance;
         if (friend.getMelee()) {
-            increaseMeleeChance = 0.10 * (friend.getSpeed() - enemy.getSpeed());
+            increaseMeleeChance = 0.10 * (friend.GetSpeed() - enemy.GetSpeed());
         } else {
-            increaseMeleeChance = 0.10 * (enemy.getSpeed() - friend.getSpeed());
+            increaseMeleeChance = 0.10 * (enemy.GetSpeed() - friend.GetSpeed());
         }
         double chanceMeele = 1/(0.5 + increaseMeleeChance);
         if (new Random().nextDouble() <= chanceMeele) {
@@ -79,7 +80,11 @@ public class Battle {
     }
 
     public boolean getDestroyedLongRange(Unit friend, Unit enemy) {
-
+        if (friend.getMelee()) {
+            double damage  = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield()));
+        } else {
+            double damagee  = (enemy.getSoldiers() * 0.1)*(discountedDamage(enemy, friend)/(enemy.GetArmour() + enemy.GetShield()));
+        }
     }
 
     public boolean getDestroyedShortRange(Unit friend, Unit enemy) {
