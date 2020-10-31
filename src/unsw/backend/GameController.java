@@ -42,7 +42,7 @@ public class GameController{
         }
     }
 
-    public void setPlayer(String faction){
+    public Player setPlayer(String faction){
         Player temp = new Player(faction);
         player.add(temp);
         this.turn.attach(temp);
@@ -52,6 +52,7 @@ public class GameController{
                 temp.addProvince(temp1);
             }
         }
+        return temp;
 
     }
 
@@ -59,7 +60,17 @@ public class GameController{
         this.turn.Notify();
     }
 
-    public void MoveUnit(Player py, ArrayList<Unit> Army, Province src, Province dest){
+    public void MoveUnit(Player py, ArrayList<Unit> Army, String source, String destt){
+        Province src = getProvinceFromString(source);
+        if(src == null){
+            System.out.println("province does not exist");
+            return;
+        }
+        Province dest = getProvinceFromString(destt);
+        if(dest == null){
+            System.out.println("province does not exist");
+            return;
+        }    
         int avaiablePoint = 9999;
         for(Unit temp : Army){
             if(avaiablePoint > temp.getPoint()){
@@ -77,17 +88,11 @@ public class GameController{
         }
     }
 
-    public void createUnit(String province, String type, String name){
-        Province pro = null;
-        for(Province temp: provinces){
-            if(temp.getName().equals(province)){
-                pro = temp;
-                break;
-            }
-        }
+    public Unit createUnit(String province, String type, String name){
+        Province pro = getProvinceFromString(province);
         if(pro == null){
             System.out.println("province does not exist");
-            return;
+            return null;
         }   
         switch (type){
             case "Hopitle":
@@ -101,26 +106,32 @@ public class GameController{
             case "legionary":
                 Infantry inf = new Infantry(name, pro, type);
                 pro.addUnits(inf);
-                break;
+                return inf;
             case "Trebuchet":
             case "MissileMan":
             case "Crossbowman":
             case "Cannon":
                 Artillery art = new Artillery(name, pro, type);
                 pro.addUnits(art);
-                break;
+                return art;
             case "HorseArcher":
             case "Elephant":
             case "Chariot":
             case "Lancer":
                 Cavalry cav = new Cavalry(name, pro, type);
                 pro.addUnits(cav);
-                break;
+                return cav;
         }
+        return null;
 
     }
 
-    public boolean addsolider(Player py, Province pro, Unit unit, int num){
+    public boolean addsolider(Player py, String province, Unit unit, int num){
+        Province pro = getProvinceFromString(province);
+        if(pro == null){
+            System.out.println("province does not exist");
+            return false;
+        }  
         if(!pro.getOwner().equals(py)){
             return false;
         }
@@ -132,7 +143,12 @@ public class GameController{
         
     }
 
-    public boolean bulid(Player py, String type, Province pro){
+    public boolean bulid(Player py, String type, String province){
+        Province pro = getProvinceFromString(province);
+        if(pro == null){
+            System.out.println("province does not exist");
+            return false;
+        }  
         ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(py)){
             return false;
@@ -149,7 +165,12 @@ public class GameController{
         // }
     }
 
-    public boolean upgrade(Player py, String type, Province pro){
+    public boolean upgrade(Player py, String type, String province){
+        Province pro = getProvinceFromString(province);
+        if(pro == null){
+            System.out.println("province does not exist");
+            return false;
+        }  
         ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(py)){
             return false;
@@ -166,7 +187,17 @@ public class GameController{
         // }
     }
 
-    public boolean Battle(Player py, ArrayList<Unit>Army, Province src, Province dest){
+    public boolean Battle(Player py, ArrayList<Unit>Army, String source, String destt){
+        Province src = getProvinceFromString(source);
+        if(src == null){
+            System.out.println("province source does not exist");
+            return false;
+        } 
+        Province dest = getProvinceFromString(destt);
+        if(dest == null){
+            System.out.println("province destt does not exist");
+            return false;
+        }   
         if(!adj.Check_adj(src, dest)){
             return false;
         }
@@ -180,7 +211,12 @@ public class GameController{
         return false;
 
     }
-    public boolean setTax(Player py, Province pro, int level){
+    public boolean setTax(Player py, String province, int level){
+        Province pro = getProvinceFromString(province);
+        if(pro == null){
+            System.out.println("province does not exist");
+            return false;
+        }  
         if(!pro.getOwner().equals(py)){
             return false;
         }
@@ -193,5 +229,16 @@ public class GameController{
         for(Unit temp1: Army){
             temp.removeUnit(temp1);
         }
+    }
+
+    public Province getProvinceFromString(String province){
+        Province pro = null;
+        for(Province temp: provinces){
+            if(temp.getName().equals(province)){
+                pro = temp;
+                break;
+            }
+        }
+        return pro;
     }
 }
