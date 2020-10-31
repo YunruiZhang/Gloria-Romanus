@@ -129,16 +129,21 @@ public class GameController{
 
     public boolean addsolider(Player py, String province, Unit unit, int num){
         Province pro = getProvinceFromString(province);
+        System.out.println("TEST 1");
         if(pro == null){
             System.out.println("province does not exist");
+            System.out.println("TEST 2");
             return false;
         }  
         if(!pro.getOwner().equals(py)){
+            System.out.println("TEST 3");
             return false;
         }
         if(!pro.generateTroops(unit.getType(), unit.getName(), num)){
+            System.out.println("TEST 4pp");
             return false;
         }else{
+            System.out.println("TEST 5");
             return true;
         }
         
@@ -147,11 +152,11 @@ public class GameController{
     public boolean bulid(Player py, String type, String province){
         //get num in constructing
         Province pro = getProvinceFromString(province);
-        int num = pro.getBuildinCons().size();
         if(pro == null){
             System.out.println("province does not exist");
             return false;
         }  
+        int num = pro.getBuildinCons().size();
         ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(py)){
             return false;

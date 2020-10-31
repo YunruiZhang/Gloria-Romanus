@@ -15,7 +15,8 @@ public class TroopProduction extends Infrastructure implements Observer{
     }
 
     public void update (Object o){
-        TrainSoldier();
+        TrainSoldier(1);
+        TrainSoldier(0);
     }
 
     public String getType() {
@@ -24,7 +25,7 @@ public class TroopProduction extends Infrastructure implements Observer{
 
     public int generate(String type) {
         int totalTroopsProvided = 0;
-        String[] level1 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle"};
+        String[] level1 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Elephant", "Hopitle"};
         String[] level2 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle", "NetFighter", "Berserker", "Lancer", "Javelin", "MissileMan"};
         String[] level3 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Druid", "Elephant", "Hopitle", "NetFighter", "Pikeman", "Spearman", "Swordsman", "Trebuchet", "Lancer", "Berserker", "Javelin", "legionary", "MissileMan"};
         // more advanced troop priduction building can produce more type of soldiers.
@@ -58,17 +59,17 @@ public class TroopProduction extends Infrastructure implements Observer{
 
     public boolean soldierCreator(double cost, int num, String type, String uName) {
         Player owner = province.getOwner();
-        if (owner.CheckIfGoldAvailable(cost*num)) {
+        if (owner.CheckIfGoldAvailable(cost*num) && (num <= generate(type))) {
             owner.subGold(cost*num);
             Object[] soldier = new Object[3];
-            soldier[0] = generate(type);
+            soldier[0] = num;
             soldier[1] = uName;
             soldier[2] = trainTime(type);
             province.soldierTrainingadd(soldier);
             return true;
         } else {
-            return false;
             //System.out.println("not enough gold available"); //JAVAFX+++++++++++++++++++++++++++++++
+            return false;
         }
     }
 
@@ -101,30 +102,34 @@ public class TroopProduction extends Infrastructure implements Observer{
         return j;
     }
 
-    public void TrainSoldier() {
+    public void TrainSoldier(int position) {
         ArrayList<Object[]> soldierTraining = province.getSoldierTraining();
         try {
-            Object[] slotA = soldierTraining.get(0);
-            if ((int)slotA[2] != 0) {
-                province.decreaseTrainTime(0);
+            Object[] slotB = soldierTraining.get(position);
+            if ((int)slotB[2] != 1) {
+                decreaseTrainTime(position);
             } else {
-                province.addToUnit(slotA);
+                addToUnit(slotB);
             }
         } catch (Exception e){
-            //no soldiers currently being trained.
             return;
         }
+    }
 
-        try {
-            Object[] slotB = soldierTraining.get(1);
-            if ((int)slotB[2] != 0) {
-                province.decreaseTrainTime(1);
-            } else {
-                province.addToUnit(slotB);
+    public void decreaseTrainTime(int index) {
+        ArrayList<Object[]> soldierTraining = province.getSoldierTraining();
+        int temp = (int)soldierTraining.get(index)[2];
+        temp -= 1;
+        soldierTraining.get(index)[2] = (Object)temp;
+    }
+
+    public void addToUnit(Object[] troop) {
+        for (Unit i: province.getUnits()) {
+            if (i.getName().equals((String)troop[1])) {
+                i.addSoldiers((int)troop[0]);
+                province.provinceWealthAdder(((int)troop[0]*5)); //each troop adds 5 gold to the economy.
+                province.getSoldierTraining().remove(troop);
             }
-        } catch (Exception e){
-            //no soldiers currently being trained.
-            return;
         }
     }
 }
