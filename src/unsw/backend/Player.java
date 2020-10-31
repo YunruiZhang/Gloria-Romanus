@@ -8,21 +8,18 @@ public class Player implements Observer{
     private double gold;
     private int turn;
     //private int total_wealth;
-    private boolean conquest_goal;
-    private boolean treasury_goal;
-    private boolean infustructure_goal;
+    GoalSystem goalsystem;
 
-    public Player(String faction){
+    public Player(String faction, GoalSystem goalsystem){
         this.provinces = new ArrayList<Province>();
         this.gold = 10000;
         this.faction = faction;
-        this.conquest_goal = false;
-        this.treasury_goal = false;
-        this.infustructure_goal = false;
+        this.goalsystem = goalsystem;
     }
 
     public void update (Object o){
         this.turn = (int) o;
+        goalsystem.checkMeet(this);
     }
 
     public int getCurrentTurn() {
@@ -90,48 +87,6 @@ public class Player implements Observer{
      */
     public void subGold(double numGold) {
         this.gold -= numGold;
-    }
-
-    /**
-     * @return boolean return the conquest_goal
-     */
-    public boolean isConquest_goal() {
-        return conquest_goal;
-    }
-
-    /**
-     * @param conquest_goal the conquest_goal to set
-     */
-    public void setConquest_goal(boolean conquest_goal) {
-        this.conquest_goal = conquest_goal;
-    }
-
-    /**
-     * @return boolean return the treasury_goal
-     */
-    public boolean isTreasury_goal() {
-        return treasury_goal;
-    }
-
-    /**
-     * @param treasury_goal the treasury_goal to set
-     */
-    public void setTreasury_goal(boolean treasury_goal) {
-        this.treasury_goal = treasury_goal;
-    }
-
-    /**
-     * @return boolean return the infustructure_goal
-     */
-    public boolean isInfustructure_goal() {
-        return infustructure_goal;
-    }
-
-    /**
-     * @param infustructure_goal the infustructure_goal to set
-     */
-    public void setInfustructure_goal(boolean infustructure_goal) {
-        this.infustructure_goal = infustructure_goal;
     }
 
     public boolean CheckIfGoldAvailable(double x) {
