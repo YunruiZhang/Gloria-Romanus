@@ -138,6 +138,6 @@ public class TestMine {
         Province v = newGame.getProvinceFromString("V");
         Province vi = newGame.getProvinceFromString("VI");
         Unit x = newGame.createUnit("V", "Spearman", "sps");
-        newGame.addsolider(temp, "V", x, num)
+        newGame.addsolider(temp, "V", x, 5);
     }
 }
