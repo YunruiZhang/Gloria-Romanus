@@ -32,7 +32,7 @@ public class GameController{
                 String key = keys.next();
                 JSONArray temparray = jsonprovince.getJSONArray(key);
                 for(int i = 0; i < temparray.length(); i++){
-                    Province temp = new Province(temparray.getString(i), key);
+                    Province temp = new Province(temparray.getString(i), key, null);
                     provinces.add(temp);
                     this.turn.attach(temp);
                 } 

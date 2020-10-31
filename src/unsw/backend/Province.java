@@ -64,7 +64,7 @@ public class Province implements Observer{
      * @param dude
      */
     public void changeOwner(Player dude) {
-        Owner = dude;
+        this.Owner = dude;
     }
     
     /**
