@@ -43,7 +43,8 @@ public class GameController{
     }
 
     public Player setPlayer(String faction){
-        Player temp = new Player(faction);
+        GoalSystem newsystem = new GoalSystem();
+        Player temp = new Player(faction, newsystem);
         player.add(temp);
         this.turn.attach(temp);
         for(Province temp1: this.provinces){
@@ -147,11 +148,11 @@ public class GameController{
     public boolean bulid(Player py, String type, String province){
         //get num in constructing
         Province pro = getProvinceFromString(province);
-        int num = pro.getBuildinCons().size();
         if(pro == null){
             System.out.println("province does not exist");
             return false;
-        }  
+        } 
+        int num = pro.getBuildinCons().size(); 
         ConstructionFactory factory = new ConstructionFactory();
         if(!pro.getOwner().equals(py)){
             return false;
