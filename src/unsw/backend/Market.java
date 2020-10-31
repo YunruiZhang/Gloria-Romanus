@@ -1,14 +1,14 @@
 package unsw.backend;
 
 public class Market extends Infrastructure{
-    static private int buildTime = 3;
+    //static private int buildTime = 3;
     static private String type = "Market";
     static private int maxUpgrade = 5;
     private double d = 2000;
     private double build = 1000;
 
     public Market(Province province) {
-        super(buildTime, maxUpgrade, type, province);
+        super(3, maxUpgrade, type, province);
     }
 
     /**

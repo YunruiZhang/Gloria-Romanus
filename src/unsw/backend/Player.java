@@ -1,11 +1,6 @@
 package unsw.backend;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 public class Player implements Observer{
     private String faction;
@@ -30,7 +25,9 @@ public class Player implements Observer{
         this.turn = (int) o;
     }
 
-   
+    public int getCurrentTurn() {
+        return turn;
+    }
 
     /**
      * @return String return the faction

@@ -1,6 +1,5 @@
 package unsw.backend;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TroopProduction extends Infrastructure{
