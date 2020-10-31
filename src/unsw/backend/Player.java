@@ -19,7 +19,7 @@ public class Player implements Observer{
 
     public Player(String faction){
         this.provinces = new ArrayList<Province>();
-        this.gold = 1000;
+        this.gold = 10000;
         this.faction = faction;
         this.conquest_goal = false;
         this.treasury_goal = false;
