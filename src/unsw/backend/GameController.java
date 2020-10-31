@@ -71,6 +71,7 @@ public class GameController{
             System.out.println("Can't move the army");
             return;
         }
+        removeFromProvince(Army);
         for(Unit tmp: Army){
             tmp.move(dest, point);
         }
@@ -163,7 +164,9 @@ public class GameController{
         if(result == 1){
             dest.getOwner().removeProvince(dest);
             py.addProvince(dest);
+            return true;
         }
+        return false;
 
     }
     public boolean setTax(Player py, Province pro, int level){
@@ -172,5 +175,12 @@ public class GameController{
         }
         pro.setTax(level);
         return true;
-    }   
+    }  
+    
+    public void removeFromProvince(ArrayList<Unit> Army){
+        Province temp = Army.get(0).getLocation();
+        for(Unit temp1: Army){
+            temp.removeUnit(temp1);
+        }
+    }
 }
