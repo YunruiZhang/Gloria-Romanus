@@ -19,7 +19,7 @@ public class Province implements Observer{
     private double buidingPrice = 2000;
     private double buildingUpgrade = 1000; 
 
-    public Province(String name, String faction) {
+    public Province(String name, String faction, Player owner) {
         this.soldierTraining = new ArrayList<Object[]>();
         this.buildinConstruction = new ArrayList<Infrastructure>();
         this.units = new ArrayList<Unit>();
@@ -27,6 +27,7 @@ public class Province implements Observer{
         this.Name = name;
         this.faction = faction;
         this.taxRate = 15;
+        this.Owner = owner;
     }
 
     
@@ -303,6 +304,10 @@ public class Province implements Observer{
 
     public void constructNBuilding(Infrastructure temp) {
         buildinConstruction.add(temp);
+    }
+
+    public ArrayList<Infrastructure> getBBBB() {
+        return buildinConstruction;
     }
 
     public void decreaseBBTime() {
