@@ -43,7 +43,8 @@ public class GameController{
     }
 
     public Player setPlayer(String faction){
-        Player temp = new Player(faction);
+        GoalSystem newsystem = new GoalSystem();
+        Player temp = new Player(faction, newsystem);
         player.add(temp);
         this.turn.attach(temp);
         for(Province temp1: this.provinces){
