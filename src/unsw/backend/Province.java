@@ -73,6 +73,10 @@ public class Province implements Observer{
         return units;
     }
     
+    public void removeUnit(Unit ut){
+        this.units.remove(ut);
+    }
+
     /**
      * @param unit adds a unit to the unit list.
      */
