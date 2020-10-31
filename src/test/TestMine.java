@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -138,6 +140,9 @@ public class TestMine {
         Province v = newGame.getProvinceFromString("V");
         Province vi = newGame.getProvinceFromString("VI");
         Unit x = newGame.createUnit("V", "Spearman", "sps");
+        newGame.bulid(temp, "TroopProduction", v);
         newGame.addsolider(temp, "V", x, 5);
+        ArrayList<Object[]> trains = v.getSoldierTraining();
+        assertEquals(v.getSoldierTraining().size(), 0);
     }
 }
