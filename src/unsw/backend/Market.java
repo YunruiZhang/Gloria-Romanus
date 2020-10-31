@@ -1,6 +1,6 @@
 package unsw.backend;
 
-public class Market extends Infrastructure{
+public class Market extends Infrastructure implements Observer{
     //static private int buildTime = 3;
     static private String type = "Market";
     static private int maxUpgrade = 5;
@@ -9,6 +9,11 @@ public class Market extends Infrastructure{
 
     public Market(Province province) {
         super(3, maxUpgrade, type, province);
+    }
+
+    public void update (Object o){
+        setBuildingUpgrade();
+        setBuidingPrice();
     }
 
     /**
@@ -35,5 +40,21 @@ public class Market extends Infrastructure{
 
     public String getType() {
         return type;
+    }
+
+    /**
+     * sets the upgraded discounted building price every turn according to available markets
+     */
+    public void setBuildingUpgrade() {
+        Province p = super.getProvince();
+        p.setBuildingUpgrade(discountedPrice());
+    }
+
+    /**
+     * sets the upgraded discounted building price every turn according to available markets
+     */
+    public void setBuidingPrice() {
+        Province p = super.getProvince();
+        p.setBuidingPrice(discountedPriceBase());
     }
 }

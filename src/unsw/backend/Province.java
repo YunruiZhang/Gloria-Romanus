@@ -11,7 +11,7 @@ public class Province implements Observer{
     private ArrayList<Infrastructure> buildings;
     private double provinceWealth;
     private double taxRate;
-    private double recruitmentCost = 200;
+    private double recruitmentCost = 50;
     private ArrayList<Object[]> soldierTraining;
     private ArrayList<Infrastructure> buildinConstruction;
     private int turn;
@@ -32,11 +32,8 @@ public class Province implements Observer{
 
     public void update (Object o){
         this.turn = (int) o;
-        trainSoldier();
         decreaseBBTime();
-        setBuildingUpgrade();
         setRecruitmentCost();
-        setBuidingPrice();
         calculateWealth();
         Owner.addGold(this.getTax());
     }
@@ -182,58 +179,30 @@ public class Province implements Observer{
         }
     }
 
-
-    public boolean generateTroop(String type, String uName) {
-        for (Unit j: units) {
-            if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
-                if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
-                    Owner.subGold(recruitmentCost);
-                    findProductionBuilding(type, uName);
-                    return true;
-                } else {
-                    return false;
-                    //System.out.println("Request denied"); //JAVAFX+++++++++++++++++++++++++++++++
-                }
+    public boolean generateTroops(String type, String uName, int num) {
+        for (Infrastructure i: buildings) {
+            if (i instanceof TroopProduction && doesUnitExist(type, uName)) {
+                TroopProduction k = (TroopProduction) i;
+                boolean check = k.soldierCreator(recruitmentCost, num, type, uName);
+                return check;
             }
         }
         return false;
     }
 
-    public void addToSchool(String type, int num, String uName) {
-        Object[] soldier = new Object[3];
-        soldier[0] = num;
-        soldier[1] = uName;
-        soldier[2] = trainTime(type);
+    public boolean doesUnitExist(String type, String uName) {
+        for (Unit j : units) {
+            if (j.getName().equals(uName) && j.getType().equals(type)) return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Object[]> getSoldierTraining(){
+        return soldierTraining;
+    }
+
+    public void soldierTrainingadd(Object[] soldier) {
         soldierTraining.add(soldier);
-    }
-
-    public boolean cfsProductionBuilding() {
-        for (Infrastructure i: buildings) {
-            if (i instanceof TroopProduction) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void findProductionBuilding(String type, String uName) {
-        for (Infrastructure i: buildings) {
-            if (i instanceof TroopProduction) {
-                TroopProduction temp = (TroopProduction) i;
-                addToSchool(type, temp.generate(type), uName);
-            }
-        }
-    }
-
-    public int findFarm() {
-        int j = 10;
-        for (Infrastructure i: buildings) {
-            if (i instanceof Farm) {
-                Farm temp = (Farm) i;
-                j = temp.getProductionRate();
-            }
-        }
-        return j;
     }
 
     public boolean checkIfRoman() {
@@ -241,50 +210,6 @@ public class Province implements Observer{
             return true;
         } else {
             return false;
-        }
-    }
-
-    public int trainTime(String type) {
-        int traintime = 0;
-        String[] a = {"Cannon", "Chariot", "Crossbowman", "Lancer"};
-        String[] b = {"Hopitle", "NetFighter", "Elephant", "Javelin", "MissileMan"};
-        String[] c = {"Pikeman", "Spearman", "Trebuchet", "Berserker"};
-        String[] d = {"HorseArcher", "Camel", "Swordsman", "Druid", "legionary"};
-        if (Arrays.stream(a).anyMatch(type::equals)) {
-            traintime = 1; 
-        } else if (Arrays.stream(b).anyMatch(type::equals)) {
-            traintime = 2; 
-        } else if (Arrays.stream(c).anyMatch(type::equals)) {
-            traintime = 3; 
-        } else if (Arrays.stream(d).anyMatch(type::equals)){
-            traintime = 4; 
-        }
-        return traintime;
-    }
-
-    public void trainSoldier() {
-        try {
-            Object[] slotA = soldierTraining.get(0);
-            if ((int)slotA[2] != 0) {
-                decreaseTrainTime(0);
-            } else {
-                addToUnit(slotA);
-            }
-        } catch (Exception e){
-            //no soldiers currently being trained.
-            return;
-        }
-
-        try {
-            Object[] slotB = soldierTraining.get(1);
-            if ((int)slotB[2] != 0) {
-                decreaseTrainTime(1);
-            } else {
-                addToUnit(slotB);
-            }
-        } catch (Exception e){
-            //no soldiers currently being trained.
-            return;
         }
     }
 
@@ -327,7 +252,6 @@ public class Province implements Observer{
         }
     }
     
-   
     /**
      * sets the discounted soldier creation price every turn according to available markets
      */
@@ -352,14 +276,7 @@ public class Province implements Observer{
     /**
      * sets the upgraded discounted building price every turn according to available markets
      */
-    public void setBuidingPrice() {
-        double priceR = buidingPrice;
-        for (Infrastructure i: buildings) {
-            if (i instanceof Market) {
-                Market temp = (Market) i;
-                priceR = temp.discountedPriceBase();
-            }
-        }
+    public void setBuidingPrice(double priceR) {
         this.buidingPrice = priceR;
     }
 
@@ -373,15 +290,8 @@ public class Province implements Observer{
     /**
      * sets the upgraded discounted building price every turn according to available markets
      */
-    public void setBuildingUpgrade() {
-        double priceR = buildingUpgrade;
-        for (Infrastructure i: buildings) {
-            if (i instanceof Market) {
-                Market temp = (Market) i;
-                priceR = temp.discountedPrice();
-            }
-        }
-        this.buildingUpgrade = priceR;
+    public void setBuildingUpgrade(double price) {
+        this.buildingUpgrade = price;
     }
 
     public boolean checkIfBuildingExistsA(String type) {

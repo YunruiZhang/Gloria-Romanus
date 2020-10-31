@@ -136,7 +136,7 @@ public class GameController{
         if(!pro.getOwner().equals(py)){
             return false;
         }
-        if(!pro.generateTroop(unit.getType(), unit.getName())){
+        if(!pro.generateTroops(unit.getType(), unit.getName(), num)){
             return false;
         }else{
             return true;
