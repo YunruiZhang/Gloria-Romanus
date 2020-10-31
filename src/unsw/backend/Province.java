@@ -30,8 +30,6 @@ public class Province implements Observer{
         this.Owner = owner;
     }
 
-    
-
     public void update (Object o){
         this.turn = (int) o;
         trainSoldier();
@@ -41,6 +39,10 @@ public class Province implements Observer{
         setBuidingPrice();
         calculateWealth();
         Owner.addGold(this.getTax());
+    }
+
+    public int getCurrTurn() {
+        return turn;
     }
 
     public String getName() {
@@ -185,7 +187,7 @@ public class Province implements Observer{
         for (Unit j: units) {
             if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
                 if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
-                    Owner.subGold(100);
+                    Owner.subGold(recruitmentCost);
                     findProductionBuilding(type, uName);
                     return true;
                 } else {
@@ -224,7 +226,7 @@ public class Province implements Observer{
     }
 
     public int findFarm() {
-        int j = 0;
+        int j = 10;
         for (Infrastructure i: buildings) {
             if (i instanceof Farm) {
                 Farm temp = (Farm) i;
@@ -235,7 +237,7 @@ public class Province implements Observer{
     }
 
     public boolean checkIfRoman() {
-        if (Owner.getFaction().equals("Roman")) {
+        if (Owner.getFaction().equals("Rome")) {
             return true;
         } else {
             return false;
@@ -306,7 +308,7 @@ public class Province implements Observer{
         buildinConstruction.add(temp);
     }
 
-    public ArrayList<Infrastructure> getBBBB() {
+    public ArrayList<Infrastructure> getBuildinCons() {
         return buildinConstruction;
     }
 
@@ -314,7 +316,7 @@ public class Province implements Observer{
         Iterator<Infrastructure> itr = buildinConstruction.iterator();
         while (itr.hasNext()) {
             Infrastructure infra = itr.next();
-            if (infra.getBuildTime() == 0) {
+            if (infra.getBuildTime() == 1) {
                 buildings.add(infra);
                 itr.remove();
                 //once building has been built, it contributes to the economy.

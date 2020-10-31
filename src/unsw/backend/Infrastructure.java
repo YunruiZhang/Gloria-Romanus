@@ -13,11 +13,11 @@ public class Infrastructure {
         this.maxUpgradable = maxUpgradable;
         this.type = type;
         this.province = province;
-        int time = 3 - province.getBTime();
+        int time = buildTime - province.getBTime();
         if (time < 1) {
             time = 1;
         }
-        buildTime = time;
+        this.buildTime = time;
     }
 
     public int getLevel() {
