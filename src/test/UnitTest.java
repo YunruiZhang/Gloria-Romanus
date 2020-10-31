@@ -18,8 +18,8 @@ public class UnitTest{
     @Test
     public void basic(){
         GameController newGame = new GameController();
-        newGame.setPlayer("Rome");
-        newGame.createUnit("Lugdunensis", "NetFighter", "suck my balls");
+        //newGame.setPlayer("Rome");
+        //newGame.createUnit("Lugdunensis", "NetFighter", "suck my balls");
         
 
     }
