@@ -2,16 +2,16 @@ package unsw.backend;
 
 public class ConstructionFactory {
 
-    public boolean constructNewBuilding(String type, Province p, Player player) {
+    public Observer constructNewBuilding(String type, Province p, Player player) {
         switch(type) {
             case "TroopProduction":
                 if(player.CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
                     TroopProduction temp = new TroopProduction(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return temp;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -20,9 +20,9 @@ public class ConstructionFactory {
                     Farm temp = new Farm(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -31,9 +31,9 @@ public class ConstructionFactory {
                     Market temp = new Market(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return temp;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -42,9 +42,9 @@ public class ConstructionFactory {
                     Port temp = new Port(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -53,9 +53,9 @@ public class ConstructionFactory {
                     Road temp = new Road(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -64,9 +64,9 @@ public class ConstructionFactory {
                     Smith temp = new Smith(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
 
@@ -75,9 +75,9 @@ public class ConstructionFactory {
                     Wall temp = new Wall(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
             
@@ -86,14 +86,14 @@ public class ConstructionFactory {
                     Mine temp = new Mine(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return true;
+                    return null;
                 } else {
-                    return false;
+                    return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
             
         }
-        return false;
+        return null;
     }
 
     public boolean upgradeBuilding(String type, Province p, Player player) {
