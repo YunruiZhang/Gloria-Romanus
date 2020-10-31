@@ -13,6 +13,7 @@ import unsw.backend.GameController;
 import unsw.backend.Infrastructure;
 import unsw.backend.Player;
 import unsw.backend.Province;
+import unsw.backend.Unit;
 import unsw.gloriaromanus.*;
 
 public class TestMine {
@@ -136,6 +137,7 @@ public class TestMine {
         Player temp = newGame.setPlayer("Rome");
         Province v = newGame.getProvinceFromString("V");
         Province vi = newGame.getProvinceFromString("VI");
-        newGame.createUnit("V", "Spearman", "sps");
+        Unit x = newGame.createUnit("V", "Spearman", "sps");
+        newGame.addsolider(temp, "V", x, num)
     }
 }

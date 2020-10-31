@@ -226,7 +226,7 @@ public class Province implements Observer{
     }
 
     public int findFarm() {
-        int j = 0;
+        int j = 10;
         for (Infrastructure i: buildings) {
             if (i instanceof Farm) {
                 Farm temp = (Farm) i;
