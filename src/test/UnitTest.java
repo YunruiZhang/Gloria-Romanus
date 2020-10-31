@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import unsw.gloriaromanus.*;
+import unsw.backend.*;
 
 public class UnitTest{
     @Test
@@ -15,9 +16,17 @@ public class UnitTest{
     }
     
     @Test
-    public void blahTest2(){
-        Unit u = new Unit();
-        assertEquals(u.getNumTroops(), 50);
+    public void basic(){
+        GameController newGame = new GameController();
+        newGame.setPlayer("Rome");
+        newGame.createUnit("Lugdunensis", "NetFighter", "suck my balls");
+        
+
+    }
+
+    public GameController setup(){
+        GameController newGame = new GameController();
+        newGame.setPlayer("Roman");
     }
 }
 

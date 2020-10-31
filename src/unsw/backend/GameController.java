@@ -77,7 +77,18 @@ public class GameController{
         }
     }
 
-    public void createUnit(Province pro, String type, String name){
+    public void createUnit(String province, String type, String name){
+        Province pro = null;
+        for(Province temp: provinces){
+            if(temp.getName().equals(province)){
+                pro = temp;
+                break;
+            }
+        }
+        if(pro == null){
+            System.out.println("province does not exist");
+            return;
+        }   
         switch (type){
             case "Hopitle":
             case "NetFighter":
