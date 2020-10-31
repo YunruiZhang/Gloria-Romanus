@@ -175,7 +175,7 @@ public class GameController{
         if(!pro.getOwner().equals(py)){
             return false;
         }
-        if(factory.upgradeBuilding(type, pro, py)){
+        if(!factory.upgradeBuilding(type, pro, py)){
             return false;
         }else{
             return true;

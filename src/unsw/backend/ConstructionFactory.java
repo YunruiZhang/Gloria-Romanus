@@ -80,6 +80,18 @@ public class ConstructionFactory {
                     return false;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
                 }
+            
+            case "Mine":
+                if(player.CheckIfGoldAvailable(p.getBuidingPrice()) && !p.checkIfBuildingExistsA(type) && !p.checkIfBuildingExistsB(type)) {
+                    Mine temp = new Mine(p);
+                    player.subGold(p.getBuidingPrice());
+                    p.constructNBuilding(temp);
+                    return true;
+                } else {
+                    return false;
+                    //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++
+                }
+            
         }
         return false;
     }
