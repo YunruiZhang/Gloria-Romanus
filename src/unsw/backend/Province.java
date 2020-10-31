@@ -105,6 +105,10 @@ public class Province implements Observer{
         return provinceWealth;
     }
 
+    public void provinceWealthAdder(double money) {
+        provinceWealth += money;
+    }
+
     /**
      * changes the wealth every turn according to the tax rate.
      */
@@ -213,22 +217,6 @@ public class Province implements Observer{
         }
     }
 
-    public void addToUnit(Object[] troop) {
-        for (Unit i: units) {
-            if (i.getName().equals((String)troop[1])) {
-                i.addSoldiers((int)troop[0]);
-                provinceWealth += ((int)troop[0]*5);    //each troop adds 5 gold to the economy.
-                soldierTraining.remove(troop);
-            }
-        }
-    }
-
-    public void decreaseTrainTime(int index) {
-        int temp = (int)soldierTraining.get(index)[2];
-        temp -= 1;
-        soldierTraining.get(index)[2] = (Object)temp;
-    }
-
     public void constructNBuilding(Infrastructure temp) {
         buildinConstruction.add(temp);
     }
@@ -256,7 +244,7 @@ public class Province implements Observer{
      * sets the discounted soldier creation price every turn according to available markets
      */
     public void setRecruitmentCost() {
-        double priceR = buidingPrice;
+        double priceR = recruitmentCost;
         for (Infrastructure i: buildings) {
             if (i instanceof Mine) {
                 Mine temp = (Mine) i;
