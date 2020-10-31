@@ -40,7 +40,7 @@ public class Province implements Observer{
         setRecruitmentCost();
         setBuidingPrice();
         calculateWealth();
-        Owner.addGold(getTax());
+        Owner.addGold(this.getTax());
     }
 
     public String getName() {

@@ -34,7 +34,7 @@ public class GameController{
                 for(int i = 0; i < temparray.length(); i++){
                     Province temp = new Province(temparray.getString(i), key, null);
                     provinces.add(temp);
-                    this.turn.attach(temp);
+                   
                 } 
             }
         }catch (IOException e) {
@@ -50,6 +50,7 @@ public class GameController{
             if(temp1.getFaction().equals(faction)){
                 temp1.changeOwner(temp);
                 temp.addProvince(temp1);
+                this.turn.attach(temp1);
             }
         }
         return temp;
