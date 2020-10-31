@@ -145,7 +145,9 @@ public class GameController{
     }
 
     public boolean bulid(Player py, String type, String province){
+        //get num in constructing
         Province pro = getProvinceFromString(province);
+        int num = pro.getBuildinCons().size();
         if(pro == null){
             System.out.println("province does not exist");
             return false;
@@ -154,16 +156,18 @@ public class GameController{
         if(!pro.getOwner().equals(py)){
             return false;
         }
-        if (!factory.constructNewBuilding(type, pro, py)){
-            return false;
-        } else {
+        Observer newbuilding = factory.constructNewBuilding(type, pro, py);
+        if (newbuilding != null){
+            turn.attach(newbuilding);
             return true;
+        } else {
+            if(pro.getBuildinCons().size() != num){
+                return true;
+            }else{
+                return false;
+            }
         }
-        // if(!player.constructNewBuilding(type, pro)){
-        //     return false;
-        // }else{
-        //     return true;
-        // }
+        // check if num exist
     }
 
     public boolean upgrade(Player py, String type, String province){
