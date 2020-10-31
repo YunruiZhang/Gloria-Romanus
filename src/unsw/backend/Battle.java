@@ -15,11 +15,15 @@ public class Battle {
     private int enemyloss;
     private ArrayList<Unit> cowardfriend;
     private ArrayList<Unit> cowardenemy;
+    private Province targetProvince;
+    private Province myprovince;
 
     public Battle(ArrayList<Unit> MyArmy, ArrayList<Unit> OppositionArmy) {
         this.MyArmy = MyArmy;
         this.OppositionArmy = OppositionArmy;
         this.engagementCounter = 0;
+        this.targetProvince = OppositionArmy.get(0).getLocation();
+        this.myprovince = MyArmy.get(0).getLocation();
         cowardfriend = new ArrayList<Unit>();
         cowardenemy = new ArrayList<Unit>();
     }
@@ -32,8 +36,20 @@ public class Battle {
             Unit enemy = OppositionArmy.get(oppositionIndex);
             startSkirmish(friend, enemy);
         }
-        if (draw || (MyArmy.size() <= 0 && OppositionArmy.size() <= 0)) return 0;   //nobody won
-        if (MyArmy.size() <= 0) return 2;   //opposition won
+        if (draw || (MyArmy.size() <= 0 && OppositionArmy.size() <= 0)) {
+            myprovince.getUnits().addAll(MyArmy);
+            myprovince.getUnits().addAll(cowardfriend);
+            targetProvince.getUnits().addAll(cowardenemy);
+            return 0;   //nobody won
+        }
+        if (MyArmy.size() <= 0) {
+            myprovince.getUnits().addAll(cowardfriend);
+            targetProvince.getUnits().addAll(cowardenemy);
+            return 2;   //opposition won
+        }
+        targetProvince.getUnits().clear();
+        targetProvince.getUnits().addAll(MyArmy);
+        targetProvince.getUnits().addAll(cowardfriend);
         return 1; //We won!
     }
 

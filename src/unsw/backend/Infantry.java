@@ -14,5 +14,6 @@ public class Infantry extends Unit implements Observer{
     public void move(Province dest, int point){
         super.setLocation(dest);
         super.SubtractPoint(point);
+        dest.addUnits(this);
     }
 }
