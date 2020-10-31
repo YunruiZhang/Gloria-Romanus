@@ -187,7 +187,7 @@ public class Province implements Observer{
         for (Unit j: units) {
             if (j.getName().equals(uName) && j.getType().equals(type) && cfsProductionBuilding()) {
                 if (Owner.CheckIfGoldAvailable(recruitmentCost)) {
-                    Owner.subGold(100);
+                    Owner.subGold(recruitmentCost);
                     findProductionBuilding(type, uName);
                     return true;
                 } else {
