@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * class to do all the battle stuff
+ */
 public class Battle {
     private ArrayList<Unit> MyArmy;
     private ArrayList<Unit> OppositionArmy;
@@ -18,6 +21,11 @@ public class Battle {
     private Province targetProvince;
     private Province myprovince;
 
+    /**
+     * constructor
+     * @param MyArmy the attacker's Army
+     * @param OppositionArmy All the units in dest province
+     */
     public Battle(ArrayList<Unit> MyArmy, ArrayList<Unit> OppositionArmy) {
         this.MyArmy = MyArmy;
         this.OppositionArmy = OppositionArmy;
@@ -28,6 +36,10 @@ public class Battle {
         cowardenemy = new ArrayList<Unit>();
     }
 
+    /**
+     * method to start the battle
+     * @return 0 for draw 1 for win 2 for loss
+     */
     public int StartBattle() {
         while (!MyArmy.isEmpty() && !OppositionArmy.isEmpty() && !draw) {
             int myIndex = ThreadLocalRandom.current().nextInt(0, MyArmy.size());
@@ -53,6 +65,11 @@ public class Battle {
         }
     }
 
+    /**
+     * method to start skirmish (many skirmish in one battle)
+     * @param friend the player's unit
+     * @param enemy enemy's unit
+     */
     public void startSkirmish(Unit friend, Unit enemy) {
         int x = Boolean.compare(friend.getMelee(), enemy.getMelee());
         boolean resolve = true;
@@ -75,6 +92,12 @@ public class Battle {
         return;
     }
 
+    /**
+     * the method to caculate the actual damage after all the special effect
+     * @param a the player's unit
+     * @param b enemy's unit
+     * @return the discounted damage
+     */
     public double discountedDamage(Unit a, Unit b) {
         //gets the damage that the b has on a.
         double damage = b.getAttackDamage();
@@ -87,6 +110,13 @@ public class Battle {
 
     }
 
+    /**
+     * method to start enagements (many enagements in one skirmish)
+     * @param range whether it is a range engagement
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     * @return whether if one unit is distoried
+     */
     public boolean startEngagement(boolean range, Unit friend, Unit enemy){
         mysize = friend.getSoldiers();
         enemysize = enemy.getSoldiers();
@@ -113,6 +143,12 @@ public class Battle {
         return distory;
     }
 
+    /**
+     * choose whether the engagement is ranged or not according to the fomular
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     * @return whether the engagement is ranged or not
+     */
     public boolean EngagementChanceCalculator(Unit friend, Unit enemy) {
         double increaseMeleeChance;
         if (friend.getMelee()) {
@@ -127,6 +163,12 @@ public class Battle {
         }  
     }
 
+    /**
+     * do the engagements for long range
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     * @return whether a unit is destoried(if yes return false)
+     */
     public boolean getDestroyedLongRange(Unit friend, Unit enemy) {
         Random r = new Random();
         if (friend.getMelee()) {
@@ -150,6 +192,12 @@ public class Battle {
         }
     }
 
+    /**
+     * do the engagements for short range
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     * @return whether a unit is destoried(if yes return false)
+     */
     public boolean getDestroyedShortRange(Unit friend, Unit enemy) {
         Random r = new Random();
         double insert = (1+r.nextGaussian());
@@ -169,6 +217,11 @@ public class Battle {
         }
     }
 
+    /**
+     * remove the unit with 0 solider from army
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     */
     public void removeFromArmy(Unit friend, Unit enemy) {
         if (friend.getSoldiers() <= 0) {
             MyArmy.remove(friend);
@@ -178,6 +231,11 @@ public class Battle {
         }
     }
 
+    /**
+     *  caculate the flee chance of the two units after engaement and flee.
+     * @param friend player's unit
+     * @param enemy enemy's unit
+     */
     public void FleaCalculator(Unit friend, Unit enemy) {
         double friendFleaBase = -1;
         double enemyFleaBase = -1;
@@ -226,6 +284,11 @@ public class Battle {
 
     }
 
+    /**
+     * do the random stuff helper
+     * @param chance the change for random
+     * @return flee or not
+     */
     public boolean FleeChanceCaculater (double chance){
         if (new Random().nextDouble() <= chance) {
             return true;
@@ -234,6 +297,12 @@ public class Battle {
         }  
     }
 
+    /**
+     * Route the unit after flee do engagements until routing success
+     * @param coward the unit fleeing
+     * @param chaseing the unit chasing
+     * @return Routing success or not
+     */
     public boolean Routing(Unit coward, Unit chaseing){
         boolean flee = CanTheyEscape(chaseing, coward);
         if(flee){
@@ -253,6 +322,12 @@ public class Battle {
         return flee;
     }
 
+    /**
+     * helper for random
+     * @param police chaser
+     * @param flee coward
+     * @return success or not
+     */
     public boolean CanTheyEscape(Unit police, Unit flee){
         double chance = 0.5 + (0.1*(flee.GetSpeed() - police.GetSpeed()));
         return FleeChanceCaculater(chance);

@@ -9,6 +9,11 @@ public class Player implements Observer{
     private int turn;
     GoalSystem goalsystem;
 
+    /**
+     * constructor
+     * @param faction the fraction of the player
+     * @param goalsystem the random generated goal system
+     */
     public Player(String faction, GoalSystem goalsystem){
         this.provinces = new ArrayList<Province>();
         this.gold = 10000;
@@ -16,6 +21,9 @@ public class Player implements Observer{
         this.goalsystem = goalsystem;
     }
 
+    /**
+     * observer method for checking goals
+     */
     public void update (Object o){
         this.turn = (int) o;
         if(goalsystem.checkMeet(this)){
@@ -23,6 +31,10 @@ public class Player implements Observer{
         }
     }
 
+    /**
+     * get the current turn 
+     * @return the current turn
+     */
     public int getCurrentTurn() {
         return turn;
     }
@@ -58,6 +70,10 @@ public class Player implements Observer{
         this.provinces = provinces;
     }
 
+    /**
+     * add a province unser the player's name
+     * @param newP the province
+     */
     public void addProvince(Province newP){
         this.provinces.add(newP);
     }
@@ -90,6 +106,11 @@ public class Player implements Observer{
         this.gold -= numGold;
     }
 
+    /**
+     * check whether the gold is avaiable for x amount
+     * @param x the amount
+     * @return true or false
+     */
     public boolean CheckIfGoldAvailable(double x) {
         if (gold >= x) {
             return true;

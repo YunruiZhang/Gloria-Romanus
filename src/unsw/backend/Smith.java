@@ -1,10 +1,17 @@
 package unsw.backend;
 
+/**
+ * class for smith extend Infrastructure
+ */
 public class Smith extends Infrastructure{
     static private int buildTime = 3;
     static private String type = "Smith";
     static private int maxUpgrade = 4;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public Smith(Province province) {
         super(buildTime, maxUpgrade, type, province);
     }
@@ -30,6 +37,10 @@ public class Smith extends Infrastructure{
         }
     }
 
+    /**
+     * make a unit receive the armour bonus
+     * @param unit the unit to receive the bonus
+     */
     public void receiveArmourBonus(Unit unit) {
         switch(super.getLevel()) {
 
@@ -55,6 +66,10 @@ public class Smith extends Infrastructure{
         }
     }
 
+     /**
+     * make a unit receive the weapon bonus
+     * @param unit the unit to receive the bonus
+     */
     public void receiveWeaponBonus(Unit unit) {
         switch(super.getLevel()) {
             case 1:
@@ -79,6 +94,9 @@ public class Smith extends Infrastructure{
         }
     }
 
+    /**
+     * get the type of the builing (smith)
+     */
     public String getType() {
         return type;
     }

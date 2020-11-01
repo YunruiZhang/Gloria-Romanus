@@ -1,18 +1,32 @@
 package unsw.backend;
 
+/**
+ * class for farm extend Infrastructure
+ */
 public class Farm extends Infrastructure{
     static private int buildTime = 3;
     static private String type = "Farm";
     static private int maxUpgrade = 5;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public Farm(Province province) {
         super(buildTime, maxUpgrade, type, province);
     }
 
+    /**
+     * get the type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * get the max number of solider the province can produce 
+     * @return the number
+     */
     public int getProductionRate() {
         int rate = 0;
         switch(super.getLevel()) {

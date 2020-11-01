@@ -4,6 +4,10 @@ public class Tax {
     private int taxRate;
     private Province province;
     
+    /**
+     * constructor
+     * @param province the province
+     */
     public Tax(Province province) {
         this.province = province;
         this.taxRate = 15;
