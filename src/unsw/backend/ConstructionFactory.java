@@ -86,7 +86,7 @@ public class ConstructionFactory {
                     Mine temp = new Mine(p);
                     player.subGold(p.getBuidingPrice());
                     p.constructNBuilding(temp);
-                    return null;
+                    return temp;
                 } else {
                     return null;
                     //System.out.println("not enough gold available or building exists");//JAVAFX+++++++++++++++++++++

@@ -7,7 +7,6 @@ public class Player implements Observer{
     private  ArrayList<Province> provinces;
     private double gold;
     private int turn;
-    //private int total_wealth;
     GoalSystem goalsystem;
 
     public Player(String faction, GoalSystem goalsystem){
