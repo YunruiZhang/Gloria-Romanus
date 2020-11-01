@@ -296,5 +296,14 @@ public class TestMine {
         assertEquals(trains.size(), 4);
         assertEquals(x.getSoldiers(), 7);
         newGame.nextTurn();
+        assertEquals(trains.size(), 2);
+        newGame.nextTurn();
+        newGame.nextTurn();
+        assertEquals(trains.size(), 0);
+        assertEquals(x.getSoldiers(), 7);
+        assertEquals(xi.getSoldiers(), 2);
+        assertEquals(xii.getSoldiers(), 4);
+        assertEquals(xiii.getSoldiers(), 5);
+        assertEquals(xiv.getSoldiers(), 1);
     }
 }

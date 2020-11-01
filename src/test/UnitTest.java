@@ -17,21 +17,12 @@ public class UnitTest{
     
     @Test
     public void basic(){
-        /*GameController newGame = new GameController();
-        Player player1 = newGame.setPlayer("Rome");
-        Player player2 = newGame.setPlayer("Gaul");
-        Unit py1unit = newGame.createUnit("Lugdunensis", "NetFighter", "suck my balls");
-        Unit py2unit = newGame.createUnit("Achaia", "NetFighter", "SF1000");
-        newGame.bulid(player1, "TroopProduction", "Lugdunensis");
-        newGame.bulid(player2, "TroopProduction", "Achaia");
-        newGame.addsolider(player1, "Lugdunensis", py1unit, 100);
-        newGame.addsolider(player2, "Achaia", py1unit, 100);*/
         GameController newGame = new GameController();
         //set up the Rome 
         Player temp = newGame.setPlayer("Rome");
         Province MS = newGame.getProvinceFromString("Moesia Superior");
-        Unit x = newGame.createUnit("Moesia Superior", "Crossbowman", "sps");
-        Unit y = newGame.createUnit("Moesia Superior", "Druid", "meep");
+        Unit x = newGame.createUnit("Moesia Superior", "Crossbowman", "my1");
+        Unit y = newGame.createUnit("Moesia Superior", "Druid", "my2");
         newGame.bulid(temp, "TroopProduction", "Moesia Superior");
         newGame.nextTurn();
         newGame.nextTurn();
@@ -59,7 +50,6 @@ public class UnitTest{
         newGame.nextTurn();
 
         // test move
-
         ArrayList<Unit> Army = new ArrayList<Unit>();
         Army.add(x);
         Army.add(y);
@@ -69,8 +59,8 @@ public class UnitTest{
         //add gual
         Player temp1 = newGame.setPlayer("Gaul");
         Province BEP = newGame.getProvinceFromString("Bithynia et Pontus");
-        Unit x1 = newGame.createUnit("Bithynia et Pontus", "Crossbowman", "sps1");
-        Unit y1 = newGame.createUnit("Bithynia et Pontus", "Druid", "meep1");
+        Unit x1 = newGame.createUnit("Bithynia et Pontus", "Crossbowman", "enemy1");
+        Unit y1 = newGame.createUnit("Bithynia et Pontus", "Druid", "enemy2");
         newGame.bulid(temp1, "TroopProduction", "Bithynia et Pontus");
         newGame.nextTurn();
         newGame.nextTurn();
@@ -91,7 +81,7 @@ public class UnitTest{
         assertEquals(trains1.size(), 0);
         assertEquals(y1.getSoldiers(), 0);
         newGame.upgrade(temp1, "TroopProduction", "Bithynia et Pontus");
-        newGame.addsolider(temp1, "Bithynia et Pontus", y1, 6);
+        newGame.addsolider(temp1, "Bithynia et Pontus", y1, 4);
         assertEquals(trains1.size(), 1);
         assertEquals(y1.getSoldiers(), 0);
         newGame.nextTurn();
@@ -99,12 +89,13 @@ public class UnitTest{
         newGame.nextTurn();
         newGame.nextTurn();
         assertEquals(trains1.size(), 0);
-        assertEquals(y1.getSoldiers(), 6);
-
+        assertEquals(y1.getSoldiers(), 4);
 
 
         if(newGame.Battle(temp, Army, "Thracia", "Bithynia et Pontus")){
-            System.out.println("yoyoyoyoyoyoyoy");
+            System.out.println("WE WON THE BATTLE HOORRRAAAAYYYYY :) :) :) :) :) :) :) :) :) :) :) :) ");
+        } else {
+            System.out.println("FUCK MAN WE LOST THE BATTLE FML :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( ");
         }
 
         //atteck Bithynia et Pontus
