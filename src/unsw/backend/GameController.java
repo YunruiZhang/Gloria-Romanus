@@ -216,12 +216,12 @@ public class GameController{
         }
         Battle newbt = new Battle(Army, dest.getUnits());
         int result = newbt.StartBattle();
-        System.out.println(result);
         if(result == 1){
             dest.getOwner().removeProvince(dest);
             py.addProvince(dest);
             return true;
         }
+        
         return false;
 
     }
