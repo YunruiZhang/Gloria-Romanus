@@ -10,7 +10,6 @@ public class Province implements Observer{
     private ArrayList<Unit> units;
     private ArrayList<Infrastructure> buildings;
     private double provinceWealth;
-    private double taxRate;
     private double recruitmentCost = 50;
     private ArrayList<Object[]> soldierTraining;
     private ArrayList<Infrastructure> buildinConstruction;
@@ -18,6 +17,7 @@ public class Province implements Observer{
     private String faction;
     private double buidingPrice = 2000;
     private double buildingUpgrade = 1000; 
+    private Tax tax;
 
     public Province(String name, String faction, Player owner) {
         this.soldierTraining = new ArrayList<Object[]>();
@@ -26,14 +26,13 @@ public class Province implements Observer{
         this.buildings = new ArrayList<Infrastructure>();
         this.Name = name;
         this.faction = faction;
-        this.taxRate = 15;
         this.Owner = owner;
+        this.tax = new Tax(this);
     }
 
     public void update (Object o){
         this.turn = (int) o;
         decreaseBBTime();
-        setRecruitmentCost();
         calculateWealth();
         Owner.addGold(this.getTax());
     }
@@ -106,81 +105,47 @@ public class Province implements Observer{
     }
 
     public void provinceWealthAdder(double money) {
-        provinceWealth += money;
+        this.provinceWealth += money;
+    }
+
+    public void setWealthprov(double money) {
+        this.provinceWealth = 0;
     }
 
     /**
      * changes the wealth every turn according to the tax rate.
      */
     public void calculateWealth() {
-        if (taxRate == 10) {
-            provinceWealth += 10;
-        } else if (taxRate == 15) {
-            provinceWealth += 0;
-        } else if (taxRate == 20) {
-            if (provinceWealth-10 < 0) {
-                provinceWealth = 0;
-            } else {
-                provinceWealth -= 10;
-            }
-        } else if (taxRate == 25) {
-            if (provinceWealth-30 < 0) {
-                provinceWealth = 0;
-            } else {
-                provinceWealth -= 30;
-            }
-            decreaseAllMorale();
-        }
+        tax.CalculateWealth();
     }
 
     /**
      * @return double return the taxRate
      */
     public double getTaxRate() {
-        return taxRate;
+        return tax.GetTaxRate();
     }
 
     /**
      * the taxRate to set
      */
     public void increaseTaxRate() {
-        if (taxRate < 25) {
-            taxRate += 5;
-        } else {
-            //System.out.println("tax rate has reached its limit");
-        }
+        tax.IncreaseTaxRate();
     }
 
     /**
      * the taxRate to set
      */
     public void decreaseTaxRate() {
-        if (taxRate > 10) {
-            taxRate -= 5;
-        } else {
-            //System.out.println("tax rate is already minimum");
-        }
+        tax.DecreaseTaxRate();
     }
 
     public double getTax() {
-        return provinceWealth*taxRate*0.01;
+        return provinceWealth*getTaxRate()*0.01;
     }
 
     public void setTax(int level){
-        switch(level){
-            case 1:
-                taxRate = 10;
-                break;
-            case 2:
-                taxRate = 15;
-                break;
-            case 3: 
-                taxRate = 20;
-                break;
-            case 4:
-                taxRate = 25;
-                break;
-        }
+        tax.SetTax(level);
     }
 
     public boolean generateTroops(String type, String uName, int num) {
@@ -209,14 +174,6 @@ public class Province implements Observer{
         soldierTraining.add(soldier);
     }
 
-    public boolean checkIfRoman() {
-        if (Owner.getFaction().equals("Rome")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void constructNBuilding(Infrastructure temp) {
         buildinConstruction.add(temp);
     }
@@ -243,15 +200,12 @@ public class Province implements Observer{
     /**
      * sets the discounted soldier creation price every turn according to available markets
      */
-    public void setRecruitmentCost() {
-        double priceR = recruitmentCost;
-        for (Infrastructure i: buildings) {
-            if (i instanceof Mine) {
-                Mine temp = (Mine) i;
-                priceR = temp.discountedSoldierPrice();
-            }
-        }
-        this.recruitmentCost = priceR;
+    public void setRecruitmentCost(double cost) {
+        this.recruitmentCost = cost;
+    }
+
+    public double getRecruitCost() {
+        return recruitmentCost;
     }
 
     /**
@@ -322,8 +276,7 @@ public class Province implements Observer{
         for (Infrastructure i: buildings) {
             if (i.getType().equals(type)) {
                 i.upgradeInfrastructure();
-                //once building has been upgraded, it contributes to the economy.
-                provinceWealth += 300;
+                provinceWealth += 300;    //once building has been upgraded, it contributes to the economy.
             }
         }
     }
