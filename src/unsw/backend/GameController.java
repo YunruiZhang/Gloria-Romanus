@@ -91,6 +91,13 @@ public class GameController{
     }
 
     public Unit createUnit(String province, String type, String name){
+        for(Province tmp: provinces){
+            for(Unit tmp1: tmp.getUnits()){
+                if(tmp1.getName().equals(name)){
+                    return null;
+                }
+            }
+        }
         Province pro = getProvinceFromString(province);
         if(pro == null){
             System.out.println("province does not exist");
@@ -214,6 +221,7 @@ public class GameController{
         }
         Battle newbt = new Battle(Army, dest.getUnits());
         int result = newbt.StartBattle();
+        System.out.println(result);
         if(result == 1){
             dest.getOwner().removeProvince(dest);
             py.addProvince(dest);
