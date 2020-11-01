@@ -1,7 +1,17 @@
 package unsw.backend;
 
+/**
+ * factory design patten for building infustructure
+ */
 public class ConstructionFactory {
 
+    /**
+     * build the new building
+     * @param type the type of the building
+     * @param p the province to build in
+     * @param player the palyer who want to build 
+     * @return return the observer to attech
+     */
     public Observer constructNewBuilding(String type, Province p, Player player) {
         switch(type) {
             case "TroopProduction":
@@ -96,6 +106,13 @@ public class ConstructionFactory {
         return null;
     }
 
+    /**
+     * upgrade a existing building 
+     * @param type the type of the building
+     * @param p the province
+     * @param player the player who want to upgrade
+     * @return false for can not upgrade or buiding is not built yet
+     */
     public boolean upgradeBuilding(String type, Province p, Player player) {
         if(!p.checkIfBuildingExistsB(type)) {
             return false;

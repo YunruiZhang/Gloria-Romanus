@@ -11,11 +11,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import org.json.*;
-
+/**
+ * calss to check adjacent and find shortest path
+ */
 public class Adjacent {
 
     private JSONObject matrix;
-
+    /**
+     * constructor to read matrix
+     */
     public Adjacent() {
         try {
             String content = Files.readString(Paths.get("src/unsw/gloriaromanus/province_adjacency_matrix_fully_connected.json"));
@@ -28,6 +32,12 @@ public class Adjacent {
        
     }
 
+    /**
+     * check whether two provinces are adj
+     * @param a province a
+     * @param b province b
+     * @return boolean
+     */
     public boolean Check_adj(Province a, Province b){
         String nameA = a.getName();
         String nameB = b.getName();
@@ -40,6 +50,14 @@ public class Adjacent {
         
     }
 
+    /**
+     * Function to call dfs to find shortest path
+     * @param a province a
+     * @param b province b
+     * @param player 
+     * @param All
+     * @return the point needed
+     */
     public int ShortestPath(Province a, Province b, Player player, ArrayList<Province> All){
        String faction = player.getFaction();
        ArrayList<Province> visited = new ArrayList<Province>();
@@ -47,7 +65,15 @@ public class Adjacent {
     }
 
 
-
+    /**
+     * dfs to find the shortest path
+     * @param faction faction
+     * @param curr the curr province
+     * @param dest the dest province
+     * @param visited for dfs
+     * @param ALL all the provinces
+     * @return the point
+     */
     public int FindPath(String faction, Province curr, Province dest, ArrayList<Province> visited, ArrayList<Province> ALL){
         if(curr.equals(dest)){
             return 0;
@@ -88,6 +114,12 @@ public class Adjacent {
 
     }
 
+    /**
+     * helper function convert string to province
+     * @param pro
+     * @param allp
+     * @return the province
+     */
     public Province convert(String pro, ArrayList<Province> allp){
         for(Province temp : allp){
             if(temp.getName().equals(pro)){

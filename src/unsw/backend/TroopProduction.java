@@ -3,26 +3,44 @@ package unsw.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * class for Troopproduction building extend Infrastructure
+ */
 public class TroopProduction extends Infrastructure implements Observer{
     static private String type = "TroopProduction";
     static private int BuildTime = 3;
     static private int maxUpgrade = 3;
     private Province province;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public TroopProduction (Province province) {
         super(BuildTime, maxUpgrade, type, province);
         this.province = province;
     }
 
+    /**
+     * for observer train the solider at the biginning of the turn
+     */
     public void update (Object o){
         TrainSoldier(1);
         TrainSoldier(0);
     }
 
+    /**
+     * get the type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * get the solider number can produce
+     * @param type the type of the solider
+     * @return the number of the solider it can produce
+     */
     public int generate(String type) {
         int totalTroopsProvided = 0;
         String[] level1 = {"HorseArcher", "Camel", "Cannon", "Chariot", "Crossbowman", "Elephant", "Hopitle"};
@@ -57,6 +75,14 @@ public class TroopProduction extends Infrastructure implements Observer{
         return totalTroopsProvided;
     }
 
+    /**
+     * create the solider
+     * @param cost the cost per solider
+     * @param num num of silider to create
+     * @param type type of the solider
+     * @param uName the unit name to add in
+     * @return success or not
+     */
     public boolean soldierCreator(double cost, int num, String type, String uName) {
         Player owner = province.getOwner();
         if (owner.CheckIfGoldAvailable(cost*num) && (num <= generate(type))) {
@@ -73,6 +99,11 @@ public class TroopProduction extends Infrastructure implements Observer{
         }
     }
 
+    /**
+     * the train time getter
+     * @param type the type of the solider
+     * @return the turns require
+     */
     public int trainTime(String type) {
         int traintime = 0;
         String[] a = {"Cannon", "Chariot", "Crossbowman", "Lancer"};
@@ -90,7 +121,11 @@ public class TroopProduction extends Infrastructure implements Observer{
         }
         return traintime;
     }
-
+    
+    /**
+     * helper to get the fram production rate
+     * @return the fram production rate
+     */
     public int findFarmRate() {
         int j = 10;
         for (Infrastructure i: province.getBuildings()) {
@@ -102,6 +137,10 @@ public class TroopProduction extends Infrastructure implements Observer{
         return j;
     }
 
+    /**
+     * train the solider
+     * @param position the position of the solider on the waiting list
+     */
     public void TrainSoldier(int position) {
         ArrayList<Object[]> soldierTraining = province.getSoldierTraining();
         try {
@@ -116,6 +155,10 @@ public class TroopProduction extends Infrastructure implements Observer{
         }
     }
 
+    /**
+     * helper function to decreaseTrainTime
+     * @param index index on the waiting list
+     */
     public void decreaseTrainTime(int index) {
         ArrayList<Object[]> soldierTraining = province.getSoldierTraining();
         int temp = (int)soldierTraining.get(index)[2];
@@ -123,6 +166,10 @@ public class TroopProduction extends Infrastructure implements Observer{
         soldierTraining.get(index)[2] = (Object)temp;
     }
 
+    /**
+     * add troop into unit
+     * @param troop the troop
+     */
     public void addToUnit(Object[] troop) {
         for (Unit i: province.getUnits()) {
             if (i.getName().equals((String)troop[1])) {
