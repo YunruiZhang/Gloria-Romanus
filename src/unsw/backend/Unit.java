@@ -8,8 +8,8 @@ abstract public class Unit {
     private Province location;
     private String type;
     private boolean melee;
-    private double reduceEnemyDamage;//??????????????????????
-    private double reduceEnemyDamagePercent;//???????????????
+    private double reduceEnemyDamage;
+    private double reduceEnemyDamagePercent;
     private Morale morale;
     private AttackDamage attackDamage;
     private Armour armour;
