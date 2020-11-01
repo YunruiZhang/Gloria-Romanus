@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for shield and all the initial info (unit contain this)
+ */
 public class Shield {
     private double shield;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public Shield(String type) {
         String[] a = {"Berserker", "NetFighter"};
         String[] b = {"Hopitle", "Spearman", "Trebuchet", "Crossbowman", "Lancer"};

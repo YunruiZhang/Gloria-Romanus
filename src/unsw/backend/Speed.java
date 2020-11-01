@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for speed and all the initial info (unit contain this)
+ */
 public class Speed {
     private double speed;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public Speed(String type) {
         String[] a = {"MissileMan", "Cannon", "Trebuchet", "Crossbowman"};
         String[] b = {"Hopitle", "Swordsman"};

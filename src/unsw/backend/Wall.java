@@ -1,5 +1,8 @@
 package unsw.backend;
 
+/**
+ * class for wall extend Infrastructure
+ */
 public class Wall extends Infrastructure{
     //these provide buffers to all troops defending a province. 
     //They have a random chance of causing damage to attacking troops 
@@ -9,6 +12,10 @@ public class Wall extends Infrastructure{
     static private int BuildTime = 4;
     static private int maxUpgrade = 3;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public Wall (Province province) {
         super(BuildTime, maxUpgrade, type, province);
     }

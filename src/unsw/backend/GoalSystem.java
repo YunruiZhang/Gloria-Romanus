@@ -3,8 +3,14 @@ package unsw.backend;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * the goal system with composite design patten
+ */
 public class GoalSystem implements GoalComponent{
     GoalComponent goal; 
+    /**
+     * constructor random choose goal/goals
+     */
     public GoalSystem(){
         Random random = new Random();
         int num =  random.nextInt(2 - 1 + 1) + 1;
@@ -22,6 +28,10 @@ public class GoalSystem implements GoalComponent{
         }
     }
 
+    /**
+     * helper to randomly choose one goal
+     * @return
+     */
     public GoalComponent chooseOneGoal(){
         Random random = new Random();
         int num1 =  random.nextInt(3 - 1 + 1) + 1;
@@ -35,6 +45,9 @@ public class GoalSystem implements GoalComponent{
         
     }
 
+    /**
+     * call this method to cheek whether the condition is met
+     */
     public boolean checkMeet(Player player){
         return goal.checkMeet(player);
     }

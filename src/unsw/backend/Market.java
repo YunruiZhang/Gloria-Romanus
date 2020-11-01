@@ -1,11 +1,18 @@
 package unsw.backend;
 
+/**
+ * class for market extend Infrastructure
+ */
 public class Market extends Infrastructure implements Observer{
     static private String type = "Market";
     static private int maxUpgrade = 5;
     private double d = 1000;
     private double build = 2000;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public Market(Province province) {
         super(3, maxUpgrade, type, province);
     }

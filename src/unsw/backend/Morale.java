@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for morale and all the initial info (unit contain this)
+ */
 public class Morale {
     private double morale;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public Morale(String type) {
         String[] a = {"Camel", "Pikeman"};
         String[] b = {"Hopitle", "NetFighter", "Spearman", "Trebuchet"};
@@ -56,6 +63,10 @@ public class Morale {
         this.morale -= num;
     }
 
+    /**
+     * increase the morale for a percentage
+     * @param perCent the percentage
+     */
     public void percentIncrease(double perCent) {
         double moral = morale + (morale * perCent);
         if (morale < 9) {
