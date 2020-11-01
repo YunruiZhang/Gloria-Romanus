@@ -29,7 +29,8 @@ public class Battle {
     }
 
     public int StartBattle() {
-        while (MyArmy.size() > 0 && OppositionArmy.size() > 0 && !draw) {
+        while (!MyArmy.isEmpty() && !OppositionArmy.isEmpty() && !draw) {
+            System.out.println("yoyoyoyoyoy");
             int myIndex = ThreadLocalRandom.current().nextInt(0, MyArmy.size());
             int oppositionIndex = ThreadLocalRandom.current().nextInt(0, OppositionArmy.size());
             Unit friend = MyArmy.get(myIndex);
@@ -37,6 +38,8 @@ public class Battle {
             startSkirmish(friend, enemy);
         }
         if (draw || (MyArmy.size() <= 0 && OppositionArmy.size() <= 0)) {
+            System.out.println(MyArmy.get(0).getSoldiers());
+            System.out.println(OppositionArmy.get(0).getSoldiers());
             myprovince.getUnits().addAll(MyArmy);
             myprovince.getUnits().addAll(cowardfriend);
             targetProvince.getUnits().addAll(cowardenemy);
@@ -56,7 +59,7 @@ public class Battle {
     public void startSkirmish(Unit friend, Unit enemy) {
         int x = Boolean.compare(friend.getMelee(), enemy.getMelee());
         boolean resolve = true;
-        while (resolve) {
+        while(resolve == true) {
             if (x == 0) {
                 if(friend.getMelee() == true){
                     resolve = startEngagement(false, friend, enemy);
@@ -72,6 +75,7 @@ public class Battle {
                 }
             }
         }
+        return;
     }
 
     public double discountedDamage(Unit a, Unit b) {
@@ -93,13 +97,13 @@ public class Battle {
             draw = true;
             return false;
         }
-        boolean ashesh;
+        boolean distory;
         if (range) {
-            ashesh = getDestroyedLongRange(friend, enemy);
+            distory = getDestroyedLongRange(friend, enemy);
         } else {
-            ashesh = getDestroyedShortRange(friend, enemy);
+            distory = getDestroyedShortRange(friend, enemy);
         }
-        if (!ashesh) {
+        if (!distory) {
             if (MyArmy.contains(friend)) {
                 FleaCalculator(friend, null);
             } else {
@@ -109,7 +113,7 @@ public class Battle {
         } else { 
             FleaCalculator(friend, enemy);
         }
-        return ashesh;
+        return distory;
     }
 
     public boolean EngagementChanceCalculator(Unit friend, Unit enemy) {
@@ -142,7 +146,9 @@ public class Battle {
         if (friend.getSoldiers() <= 0 || enemy.getSoldiers() <= 0) {
             removeFromArmy(friend, enemy);
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     public boolean getDestroyedShortRange(Unit friend, Unit enemy) {
@@ -157,7 +163,9 @@ public class Battle {
         if (friend.getSoldiers() <= 0 || enemy.getSoldiers() <= 0) {
             removeFromArmy(friend, enemy);
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     public void removeFromArmy(Unit friend, Unit enemy) {
@@ -182,10 +190,6 @@ public class Battle {
         }
         if(enemyloss == 0) enemyloss = 1;
         if(myloss == 0) myloss = 1;
-        System.out.println(myloss);
-        System.out.println(mysize);
-        System.out.println(enemyloss);
-        System.out.println(enemysize);
         if (friendFleaBase != -1 && enemy != null) friendFleaBase += (((myloss/mysize)/(enemyloss/enemysize))*(0.1));
         if (enemyFleaBase != -1&& friend != null) enemyFleaBase += (((enemyloss/enemysize)/(myloss/mysize))*(0.1));
         if(friendFleaBase != -1){
@@ -196,8 +200,7 @@ public class Battle {
                     cowardfriend.add(friend);
                 }else{
                     MyArmy.remove(friend);
-                    boolean temp = Routing(friend, enemy);
-                    if(temp = true){
+                    if(Routing(friend, enemy)){
                         cowardfriend.add(friend);
                     }
                 }
@@ -212,8 +215,7 @@ public class Battle {
                 }else{
                     OppositionArmy.remove(enemy);
                     Routing(enemy, friend);
-                    boolean temp = Routing(enemy, friend);
-                    if(temp = true){
+                    if(Routing(enemy, friend)){
                         cowardenemy.add(enemy);
                     }
                 }
