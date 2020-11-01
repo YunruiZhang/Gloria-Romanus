@@ -171,4 +171,36 @@ public class TestMine {
         assertEquals(trains.size(), 0);
         assertEquals(y.getSoldiers(), 6);
     }
+
+    @Test
+    public void taxTest() {
+        GameController newGame = new GameController();
+        Player temp = newGame.setPlayer("Rome");
+        Province v = newGame.getProvinceFromString("V");
+        Province vi = newGame.getProvinceFromString("VI");
+        Unit x = newGame.createUnit("V", "Crossbowman", "sps");
+        Unit y = newGame.createUnit("V", "Druid", "meep");
+        newGame.bulid(temp, "TroopProduction", "V");
+        assertEquals(v.getProvinceWealth(), 0);
+        assertEquals(v.getTaxRate(), 15);
+        newGame.nextTurn();
+        v.decreaseTaxRate();
+        assertEquals(v.getTaxRate(), 10);
+        newGame.nextTurn();
+        assertEquals(v.getProvinceWealth(), 10);
+        newGame.nextTurn();
+        assertEquals(v.getProvinceWealth(), 720);
+        v.increaseTaxRate();
+        assertEquals(v.getTaxRate(), 15);
+        newGame.addsolider(temp, "V", x, 7);
+        newGame.addsolider(temp, "V", x, 2);
+        newGame.addsolider(temp, "V", x, 4);
+        newGame.nextTurn();
+        assertEquals(v.getProvinceWealth(), 765);
+        v.increaseTaxRate();
+        assertEquals(v.getTaxRate(), 20);
+        newGame.nextTurn();
+        assertEquals(v.getProvinceWealth(), 775);
+
+    }
 }

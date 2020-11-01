@@ -28,9 +28,6 @@ public class UnitTest{
 
     }
 
-    public GameController setup(){
-        GameController newGame = new GameController();
-        newGame.setPlayer("Roman");
-    }
+    
 }
 
