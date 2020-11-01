@@ -18,7 +18,9 @@ public class Player implements Observer{
 
     public void update (Object o){
         this.turn = (int) o;
-        goalsystem.checkMeet(this);
+        if(goalsystem.checkMeet(this)){
+            System.out.println("Victory!!!");
+        }
     }
 
     public int getCurrentTurn() {
