@@ -13,10 +13,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import unsw.backend.ConstructionFactory;
 import unsw.backend.GameController;
 import unsw.backend.Infrastructure;
+import unsw.backend.Market;
+import unsw.backend.Mine;
 import unsw.backend.Player;
 import unsw.backend.Province;
+import unsw.backend.TroopProduction;
 import unsw.backend.Unit;
-import unsw.gloriaromanus.*;
+//import unsw.gloriaromanus.*;
 
 public class TestMine {
     @Test
@@ -138,7 +141,6 @@ public class TestMine {
         GameController newGame = new GameController();
         Player temp = newGame.setPlayer("Rome");
         Province v = newGame.getProvinceFromString("V");
-        Province vi = newGame.getProvinceFromString("VI");
         Unit x = newGame.createUnit("V", "Crossbowman", "sps");
         Unit y = newGame.createUnit("V", "Druid", "meep");
         newGame.bulid(temp, "TroopProduction", "V");
@@ -178,9 +180,7 @@ public class TestMine {
         Player temp = newGame.setPlayer("Rome");
         assertEquals(temp.getGold(), 10000);
         Province v = newGame.getProvinceFromString("V");
-        Province vi = newGame.getProvinceFromString("VI");
         Unit x = newGame.createUnit("V", "Crossbowman", "sps");
-        Unit y = newGame.createUnit("V", "Druid", "meep");
         newGame.bulid(temp, "TroopProduction", "V");
         assertEquals(temp.getGold(), 8000); 
         assertEquals(v.getProvinceWealth(), 0);
@@ -218,6 +218,83 @@ public class TestMine {
 
     @Test
     public void testMarketUpgrade() {
-        
+        GameController newGame = new GameController();
+        Player temp = newGame.setPlayer("Rome");
+        assertEquals(temp.getGold(), 10000);
+        Province v = newGame.getProvinceFromString("V");
+        newGame.bulid(temp, "Market", "V");
+        assertEquals(temp.getGold(), 8000); 
+        assertEquals(v.getProvinceWealth(), 0);
+        newGame.nextTurn();
+        newGame.nextTurn();
+        newGame.nextTurn();
+        assertEquals(v.getProvinceWealth(), 700);
+        assertEquals(temp.getGold(), 8105);
+        assertFalse(newGame.bulid(temp, "Market", "V"));
+        newGame.bulid(temp, "Mine", "V");
+        assertEquals(temp.getGold(), 6305); 
+        newGame.nextTurn();
+        assertEquals(temp.getGold(), 6410); 
+        newGame.nextTurn();
+        assertEquals(temp.getGold(), 6620); 
+        assertEquals(v.getProvinceWealth(), 1400);
+        newGame.upgrade(temp, "Market", "V");
+        assertEquals(v.getProvinceWealth(), 1700);
+        assertEquals(temp.getGold(), 5720); 
+        newGame.nextTurn();
+        assertEquals(temp.getGold(), 5975); 
+        newGame.upgrade(temp, "Mine", "V");
+        assertEquals(temp.getGold(), 5175);
+        newGame.upgrade(temp, "Market", "V");
+        assertEquals(temp.getGold(), 4375);
+        for (Infrastructure i : v.getBuildings()) {
+            if (i instanceof Market) {
+                assertEquals(i.getLevel(), 3);
+            }
+        }
+    }
+
+    @Test
+    public void testShieldsNstuff() {
+        GameController newGame = new GameController();
+        Player temp = newGame.setPlayer("Rome");
+        assertEquals(temp.getGold(), 10000);
+        Province v = newGame.getProvinceFromString("V");
+        Unit x = newGame.createUnit("V", "Crossbowman", "sps");
+        Unit xi = newGame.createUnit("V", "NetFighter", "sppp");
+        Unit xii = newGame.createUnit("V", "Chariot", "sas");
+        Unit xiii = newGame.createUnit("V", "Elephant", "aa");
+        Unit xiv = newGame.createUnit("V", "MissileMan", "ss");
+        newGame.bulid(temp, "TroopProduction", "V");
+        newGame.nextTurn();
+        newGame.nextTurn();
+        newGame.nextTurn();
+        assertEquals(v.getBuildings().size(), 1);
+        newGame.upgrade(temp, "TroopProduction", "V");
+        newGame.upgrade(temp, "TroopProduction", "V");
+        newGame.upgrade(temp, "TroopProduction", "V");
+        newGame.upgrade(temp, "TroopProduction", "V");
+        newGame.upgrade(temp, "TroopProduction", "V");
+        for (Infrastructure i : v.getBuildings()) {
+            if (i.getType().equals("Mine")) assertEquals(i.getLevel(), 99);
+        }
+        System.out.println(temp.getGold() + " t1");
+        assertTrue(newGame.addsolider(temp, "V", x, 7));
+        System.out.println(temp.getGold() + " t2");
+        assertTrue(newGame.addsolider(temp, "V", xi, 2));
+        System.out.println(temp.getGold() + " t3");
+        assertTrue(newGame.addsolider(temp, "V", xii, 4));
+        System.out.println(temp.getGold() + " t4");
+        assertTrue(newGame.addsolider(temp, "V", xiii, 5));
+        System.out.println(temp.getGold() + " t5");
+        assertTrue(newGame.addsolider(temp, "V", xiv, 1));
+        System.out.println(temp.getGold() + " t6");
+        ArrayList<Object[]> trains = v.getSoldierTraining();
+        assertEquals(trains.size(), 5);
+        assertEquals(x.getSoldiers(), 0);
+        newGame.nextTurn();
+        assertEquals(trains.size(), 4);
+        assertEquals(x.getSoldiers(), 7);
+        newGame.nextTurn();
     }
 }
