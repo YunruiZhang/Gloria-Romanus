@@ -10,7 +10,6 @@ public class Province implements Observer{
     private ArrayList<Unit> units;
     private ArrayList<Infrastructure> buildings;
     private double provinceWealth;
-    private double taxRate;
     private double recruitmentCost = 50;
     private ArrayList<Object[]> soldierTraining;
     private ArrayList<Infrastructure> buildinConstruction;
@@ -27,7 +26,6 @@ public class Province implements Observer{
         this.buildings = new ArrayList<Infrastructure>();
         this.Name = name;
         this.faction = faction;
-        this.taxRate = 15;
         this.Owner = owner;
         this.tax = new Tax(this);
     }
@@ -119,74 +117,36 @@ public class Province implements Observer{
      * changes the wealth every turn according to the tax rate.
      */
     public void calculateWealth() {
-        if (taxRate == 10) {
-            provinceWealth += 10;
-        } else if (taxRate == 15) {
-            provinceWealth += 0;
-        } else if (taxRate == 20) {
-            if (provinceWealth-10 < 0) {
-                provinceWealth = 0;
-            } else {
-                provinceWealth -= 10;
-            }
-        } else if (taxRate == 25) {
-            if (provinceWealth-30 < 0) {
-                provinceWealth = 0;
-            } else {
-                provinceWealth -= 30;
-            }
-            decreaseAllMorale();
-        }
+        tax.CalculateWealth();
     }
 
     /**
      * @return double return the taxRate
      */
     public double getTaxRate() {
-        return taxRate;
+        return tax.GetTaxRate();
     }
 
     /**
      * the taxRate to set
      */
     public void increaseTaxRate() {
-        if (taxRate < 25) {
-            taxRate += 5;
-        } else {
-            //System.out.println("tax rate has reached its limit");
-        }
+        tax.IncreaseTaxRate();
     }
 
     /**
      * the taxRate to set
      */
     public void decreaseTaxRate() {
-        if (taxRate > 10) {
-            taxRate -= 5;
-        } else {
-            //System.out.println("tax rate is already minimum");
-        }
+        tax.DecreaseTaxRate();
     }
 
     public double getTax() {
-        return provinceWealth*taxRate*0.01;
+        return provinceWealth*getTaxRate()*0.01;
     }
 
     public void setTax(int level){
-        switch(level){
-            case 1:
-                taxRate = 10;
-                break;
-            case 2:
-                taxRate = 15;
-                break;
-            case 3: 
-                taxRate = 20;
-                break;
-            case 4:
-                taxRate = 25;
-                break;
-        }
+        tax.SetTax(level);
     }
 
     public boolean generateTroops(String type, String uName, int num) {

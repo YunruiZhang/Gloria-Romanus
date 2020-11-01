@@ -176,31 +176,43 @@ public class TestMine {
     public void taxTest() {
         GameController newGame = new GameController();
         Player temp = newGame.setPlayer("Rome");
+        assertEquals(temp.getGold(), 10000);
         Province v = newGame.getProvinceFromString("V");
         Province vi = newGame.getProvinceFromString("VI");
         Unit x = newGame.createUnit("V", "Crossbowman", "sps");
         Unit y = newGame.createUnit("V", "Druid", "meep");
         newGame.bulid(temp, "TroopProduction", "V");
+        assertEquals(temp.getGold(), 8000); 
         assertEquals(v.getProvinceWealth(), 0);
         assertEquals(v.getTaxRate(), 15);
         newGame.nextTurn();
+        assertEquals(temp.getGold(), 8000);
+        assertEquals(v.getProvinceWealth(), 0);
         v.decreaseTaxRate();
         assertEquals(v.getTaxRate(), 10);
         newGame.nextTurn();
         assertEquals(v.getProvinceWealth(), 10);
+        assertEquals(temp.getGold(), 8001); 
         newGame.nextTurn();
         assertEquals(v.getProvinceWealth(), 720);
+        assertEquals(temp.getGold(), 8073); 
         v.increaseTaxRate();
-        assertEquals(v.getTaxRate(), 15);
+        assertEquals(v.getTaxRate(), 15); 
         newGame.addsolider(temp, "V", x, 7);
         newGame.addsolider(temp, "V", x, 2);
         newGame.addsolider(temp, "V", x, 4);
+        assertEquals(temp.getGold(), 7423);
+        assertEquals(v.getProvinceWealth(), 720);
         newGame.nextTurn();
         assertEquals(v.getProvinceWealth(), 765);
+        assertEquals(v.getTaxRate(), 15); 
+        //assertEquals(temp.getGold(), 7537.75);
+        assertEquals(temp.getGold(), 7531);
         v.increaseTaxRate();
         assertEquals(v.getTaxRate(), 20);
         newGame.nextTurn();
         assertEquals(v.getProvinceWealth(), 775);
-
+        newGame.upgrade(temp, "TroopProduction", "V");
+        assertEquals(v.getProvinceWealth(), 1075);
     }
 }
