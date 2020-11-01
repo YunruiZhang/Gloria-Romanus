@@ -18,6 +18,7 @@ public class Province implements Observer{
     private String faction;
     private double buidingPrice = 2000;
     private double buildingUpgrade = 1000; 
+    private Tax tax;
 
     public Province(String name, String faction, Player owner) {
         this.soldierTraining = new ArrayList<Object[]>();
@@ -28,6 +29,7 @@ public class Province implements Observer{
         this.faction = faction;
         this.taxRate = 15;
         this.Owner = owner;
+        this.tax = new Tax(this);
     }
 
     public void update (Object o){
@@ -106,7 +108,11 @@ public class Province implements Observer{
     }
 
     public void provinceWealthAdder(double money) {
-        provinceWealth += money;
+        this.provinceWealth += money;
+    }
+
+    public void setWealthprov(double money) {
+        this.provinceWealth = 0;
     }
 
     /**

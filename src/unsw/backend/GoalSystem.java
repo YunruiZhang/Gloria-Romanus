@@ -7,7 +7,7 @@ public class GoalSystem implements GoalComponent{
     GoalComponent goal; 
     public GoalSystem(){
         Random random = new Random();
-        int num =  random.nextInt(3 - 1 + 1) + 1;
+        int num =  random.nextInt(2 - 1 + 1) + 1;
         switch (num){
             case 1:
                 goal =  chooseOneGoal();
