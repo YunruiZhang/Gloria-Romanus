@@ -30,30 +30,27 @@ public class Battle {
 
     public int StartBattle() {
         while (!MyArmy.isEmpty() && !OppositionArmy.isEmpty() && !draw) {
-            System.out.println("yoyoyoyoyoy");
             int myIndex = ThreadLocalRandom.current().nextInt(0, MyArmy.size());
             int oppositionIndex = ThreadLocalRandom.current().nextInt(0, OppositionArmy.size());
             Unit friend = MyArmy.get(myIndex);
             Unit enemy = OppositionArmy.get(oppositionIndex);
             startSkirmish(friend, enemy);
         }
-        if (draw || (MyArmy.size() <= 0 && OppositionArmy.size() <= 0)) {
-            System.out.println(MyArmy.get(0).getSoldiers());
-            System.out.println(OppositionArmy.get(0).getSoldiers());
+        if (draw == true || (MyArmy.size() <= 0 && OppositionArmy.size() <= 0)) {
             myprovince.getUnits().addAll(MyArmy);
             myprovince.getUnits().addAll(cowardfriend);
             targetProvince.getUnits().addAll(cowardenemy);
             return 0;   //nobody won
-        }
-        if (MyArmy.size() <= 0) {
+        } else if (MyArmy.size() <= 0) {
             myprovince.getUnits().addAll(cowardfriend);
             targetProvince.getUnits().addAll(cowardenemy);
             return 2;   //opposition won
+        } else {
+            targetProvince.getUnits().clear();
+            targetProvince.getUnits().addAll(MyArmy);
+            targetProvince.getUnits().addAll(cowardfriend);
+            return 1; //We won!
         }
-        targetProvince.getUnits().clear();
-        targetProvince.getUnits().addAll(MyArmy);
-        targetProvince.getUnits().addAll(cowardfriend);
-        return 1; //We won!
     }
 
     public void startSkirmish(Unit friend, Unit enemy) {
@@ -66,7 +63,7 @@ public class Battle {
                 }else{
                     resolve = startEngagement(true, friend, enemy);
                 }
-            }else{
+            } else {
                 boolean temp = EngagementChanceCalculator(friend, enemy);
                 if (temp) {
                     resolve = startEngagement(false, friend, enemy);
@@ -94,7 +91,7 @@ public class Battle {
         mysize = friend.getSoldiers();
         enemysize = enemy.getSoldiers();
         if (engagementCounter++ > 200) {
-            draw = true;
+            this.draw = true;
             return false;
         }
         boolean distory;
@@ -134,11 +131,13 @@ public class Battle {
         Random r = new Random();
         if (friend.getMelee()) {
             double damage  = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield()))*(1 + r.nextGaussian());
+            damage = Math.ceil(damage);
             friend.soliders_die((int)damage);
             myloss = (int)damage;
             enemyloss = 0;
         } else {
             double damagee  = (enemy.getSoldiers() * 0.1)*(discountedDamage(enemy, friend)/(enemy.GetArmour() + enemy.GetShield()))*(1 + r.nextGaussian());
+            damagee = Math.ceil(damagee);
             enemy.soliders_die((int)damagee);
             enemyloss = (int)damagee;
             myloss = 0;
@@ -153,9 +152,11 @@ public class Battle {
 
     public boolean getDestroyedShortRange(Unit friend, Unit enemy) {
         Random r = new Random();
-        
-        double damA = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield() + friend.getCSkill()))*(1 + r.nextGaussian());
+        double insert = (1+r.nextGaussian());
+        double damA = (friend.getSoldiers() * 0.1)*(discountedDamage(friend, enemy)/(friend.GetArmour() + friend.GetShield() + friend.getCSkill()))*(insert);
+        damA = Math.ceil(damA);
         double damB = (enemy.getSoldiers() * 0.1)*(discountedDamage(enemy, friend)/(enemy.GetArmour() + enemy.GetShield() + enemy.getCSkill()))*(1 + r.nextGaussian());
+        damB = Math.ceil(damB);
         friend.soliders_die((int)damA);
         enemy.soliders_die((int)damB);
         myloss = (int)damA;
