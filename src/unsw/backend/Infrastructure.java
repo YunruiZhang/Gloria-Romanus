@@ -55,7 +55,7 @@ public class Infrastructure {
             if (level < 2) {
                 level += 1;
             }
-            if (level == 2 && province.checkIfRoman()) {
+            if (level == 2 && checkIfRoman()) {
                 level += 1;
             }
         } else {
@@ -67,6 +67,15 @@ public class Infrastructure {
 
     public boolean checkifmax() {
         if (level == maxUpgradable) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkIfRoman() {
+        Player p = province.getOwner();
+        if (p.getFaction().equals("Rome")) {
             return true;
         } else {
             return false;

@@ -1,6 +1,6 @@
 package unsw.backend;
 
-public class Mine extends Infrastructure{
+public class Mine extends Infrastructure implements Observer{
     static private int buildTime = 2;
     static private String type = "Mine";
     static private int maxUpgrade = 3;
@@ -8,6 +8,10 @@ public class Mine extends Infrastructure{
 
     public Mine(Province province) {
         super(buildTime, maxUpgrade, type, province);
+    }
+
+    public void update (Object o){
+        SetRecruitmentCost();
     }
 
     public String getType() {
@@ -23,5 +27,13 @@ public class Mine extends Infrastructure{
         level = 100 - (level*10);
         double ret = (soldierCost*level)/100;
         return ret;
+    }
+
+    /**
+     * sets the discounted soldier creation price every turn according to available markets
+     */
+    public void SetRecruitmentCost() {
+        Province p = super.getProvince();
+        p.setRecruitmentCost(discountedSoldierPrice());
     }
 }

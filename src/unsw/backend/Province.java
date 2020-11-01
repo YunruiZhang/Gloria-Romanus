@@ -33,7 +33,6 @@ public class Province implements Observer{
     public void update (Object o){
         this.turn = (int) o;
         decreaseBBTime();
-        setRecruitmentCost();
         calculateWealth();
         Owner.addGold(this.getTax());
     }
@@ -175,14 +174,6 @@ public class Province implements Observer{
         soldierTraining.add(soldier);
     }
 
-    public boolean checkIfRoman() {
-        if (Owner.getFaction().equals("Rome")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void constructNBuilding(Infrastructure temp) {
         buildinConstruction.add(temp);
     }
@@ -209,15 +200,12 @@ public class Province implements Observer{
     /**
      * sets the discounted soldier creation price every turn according to available markets
      */
-    public void setRecruitmentCost() {
-        double priceR = recruitmentCost;
-        for (Infrastructure i: buildings) {
-            if (i instanceof Mine) {
-                Mine temp = (Mine) i;
-                priceR = temp.discountedSoldierPrice();
-            }
-        }
-        this.recruitmentCost = priceR;
+    public void setRecruitmentCost(double cost) {
+        this.recruitmentCost = cost;
+    }
+
+    public double getRecruitCost() {
+        return recruitmentCost;
     }
 
     /**
@@ -288,8 +276,7 @@ public class Province implements Observer{
         for (Infrastructure i: buildings) {
             if (i.getType().equals(type)) {
                 i.upgradeInfrastructure();
-                //once building has been upgraded, it contributes to the economy.
-                provinceWealth += 300;
+                provinceWealth += 300;    //once building has been upgraded, it contributes to the economy.
             }
         }
     }

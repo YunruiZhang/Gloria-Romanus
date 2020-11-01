@@ -215,4 +215,9 @@ public class TestMine {
         newGame.upgrade(temp, "TroopProduction", "V");
         assertEquals(v.getProvinceWealth(), 1075);
     }
+
+    @Test
+    public void testMarketUpgrade() {
+        
+    }
 }
