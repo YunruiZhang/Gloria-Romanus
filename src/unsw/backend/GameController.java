@@ -115,6 +115,7 @@ public class GameController{
             case "legionary":
                 Infantry inf = new Infantry(name, pro, type);
                 pro.addUnits(inf);
+                turn.attach(inf);
                 return inf;
             case "Trebuchet":
             case "MissileMan":
@@ -122,6 +123,7 @@ public class GameController{
             case "Cannon":
                 Artillery art = new Artillery(name, pro, type);
                 pro.addUnits(art);
+                turn.attach(art);
                 return art;
             case "HorseArcher":
             case "Elephant":
@@ -129,6 +131,7 @@ public class GameController{
             case "Lancer":
                 Cavalry cav = new Cavalry(name, pro, type);
                 pro.addUnits(cav);
+                turn.attach(cav);
                 return cav;
         }
         return null;
