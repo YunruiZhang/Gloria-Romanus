@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for Combatskill and all the initial info (unit contain this)
+ */
 public class CombatSkill {
     private double skill;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public CombatSkill(String type) {
         String[] a = {"Cannon", "MissileMan", "HorseArcher", "Trebuchet", "Javelin", "Crossbowman"};
         String[] b = {"Hopitle", "Berserker", "Camel"};

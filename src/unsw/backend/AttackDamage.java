@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for Attack damage and all the initial info (unit contain this)
+ */
 public class AttackDamage {
     private double damage;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public AttackDamage(String type) {
         String[] a = {"Chariot", "Lancer"};
         String[] b = {"Hopitle", "NetFighter", "Camel"};
@@ -40,6 +47,10 @@ public class AttackDamage {
         this.damage = damage;
     }
 
+    /**
+     * increase the attack damage
+     * @param perCent the percentage he want to increase
+     */
     public void increaseAttackDamage(double perCent) {
         double dam = damage + (damage * perCent); 
         if (dam < 5) { //5 is the maximum attack damage

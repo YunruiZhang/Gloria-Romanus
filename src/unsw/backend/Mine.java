@@ -1,11 +1,18 @@
 package unsw.backend;
 
+/**
+ * class for mine extend Infrastructure
+ */
 public class Mine extends Infrastructure implements Observer{
     static private int buildTime = 2;
     static private String type = "Mine";
     static private int maxUpgrade = 3;
     private double soldierCost = 50;
 
+    /**
+     * constructor
+     * @param province the province to build in
+     */
     public Mine(Province province) {
         super(buildTime, maxUpgrade, type, province);
     }

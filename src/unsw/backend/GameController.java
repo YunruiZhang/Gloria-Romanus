@@ -15,6 +15,9 @@ import org.json.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+/**
+ * the class control the whole game
+ */
 public class GameController{
     private ArrayList<Player> player;
     private ArrayList<Province> provinces;
@@ -42,6 +45,11 @@ public class GameController{
         }
     }
 
+    /**
+     * Set the player according to faction
+     * @param faction the faction
+     * @return
+     */
     public Player setPlayer(String faction){
         GoalSystem newsystem = new GoalSystem();
         Player temp = new Player(faction, newsystem);
@@ -57,11 +65,20 @@ public class GameController{
         return temp;
 
     }
-
+    /**
+     * next turn call observer
+     */
     public void nextTurn(){
-        this.turn.Notify();
+        this.turn.incTurn();
     }
 
+    /**
+     * Move the unit in the shortest path, if no path of move point not enough print error
+     * @param py The player
+     * @param Army the list of Units
+     * @param source the start province
+     * @param destt the dest province
+     */
     public void MoveUnit(Player py, ArrayList<Unit> Army, String source, String destt){
         Province src = getProvinceFromString(source);
         if(src == null){
@@ -90,6 +107,13 @@ public class GameController{
         }
     }
 
+    /**
+     * create a unit
+     * @param province the province to put in the unit
+     * @param type the type of the unit
+     * @param name the name of the unit no puplicate
+     * @return the new unit
+     */
     public Unit createUnit(String province, String type, String name){
         for(Province tmp: provinces){
             for(Unit tmp1: tmp.getUnits()){
@@ -138,6 +162,14 @@ public class GameController{
 
     }
 
+    /**
+     * add solider to the unit
+     * @param py the player who want to add solider
+     * @param province the province to add
+     * @param unit the unit
+     * @param num the number of unit to add
+     * @return success or not
+     */
     public boolean addsolider(Player py, String province, Unit unit, int num){
         Province pro = getProvinceFromString(province);
         if(pro == null){
@@ -155,6 +187,13 @@ public class GameController{
         
     }
 
+    /**
+     * build a new building
+     * @param py the player who want to build
+     * @param type the type of the building
+     * @param province the province want to build in
+     * @return success or not
+     */
     public boolean bulid(Player py, String type, String province){
         //get num in constructing
         Province pro = getProvinceFromString(province);
@@ -181,6 +220,13 @@ public class GameController{
         // check if num exist
     }
 
+    /**
+     * upgrade a existing building
+     * @param py the player who want to add
+     * @param type the type of the building
+     * @param province the province to add
+     * @return success or not
+     */
     public boolean upgrade(Player py, String type, String province){
         Province pro = getProvinceFromString(province);
         if(pro == null){
@@ -196,13 +242,17 @@ public class GameController{
         }else{
             return true;
         }
-        // if(player.upgradeBuilding(type, pro)){
-        //     return false;
-        // }else{
-        //     return true;
-        // }
+        
     }
 
+    /**
+     * Start a battle all the units in destt are in enemy army
+     * @param py The player who want to start the battle
+     * @param Army the player's army
+     * @param source atteck from here
+     * @param destt atteck here
+     * @return success or not
+     */
     public boolean Battle(Player py, ArrayList<Unit>Army, String source, String destt){
         Province src = getProvinceFromString(source);
         if(src == null){
@@ -228,6 +278,14 @@ public class GameController{
         return false;
 
     }
+
+    /**
+     * set the tax rate on a province
+     * @param py the player who want to set the tax rate
+     * @param province the province to set
+     * @param level the level we want to set
+     * @return success or not
+     */
     public boolean setTax(Player py, String province, int level){
         Province pro = getProvinceFromString(province);
         if(pro == null){
@@ -241,6 +299,10 @@ public class GameController{
         return true;
     }  
     
+    /**
+     * helper to remove units from a province
+     * @param Army the units
+     */
     public void removeFromProvince(ArrayList<Unit> Army){
         Province temp = Army.get(0).getLocation();
         for(Unit temp1: Army){
@@ -248,6 +310,11 @@ public class GameController{
         }
     }
 
+    /**
+     * helper to convert string to province
+     * @param province the string
+     * @return the province
+     */
     public Province getProvinceFromString(String province){
         Province pro = null;
         for(Province temp: provinces){

@@ -2,6 +2,9 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * class for Unit
+ */
 abstract public class Unit {
     private int soldiers;
     private String name;
@@ -19,6 +22,15 @@ abstract public class Unit {
     private int movementPoint;
 
     public abstract void move(Province dest, int point);
+
+    /**
+     * constructor
+     * @param name name of the unit
+     * @param location location of the unit 
+     * @param type type of the unit
+     * @param ClassName same as type
+     * @param MovePoint the initial movepoint
+     */
     public Unit(String name, Province location, String type, String ClassName, int MovePoint){
         this.name = name;
         this.location = location;
@@ -40,18 +52,43 @@ abstract public class Unit {
         }
         this.movementPoint = MovePoint;
     }
+
+    /**
+     * set the move point
+     * @param point the point
+     */
     public void setMovePoint(int point){
         this.movementPoint = point;
     }
+
+    /**
+     * subtract the movepoint
+     * @param point the point to subtract
+     */
     public void SubtractPoint(int point){
         this.movementPoint -= point;
     }
+
+    /**
+     * get the movement point left
+     * @return
+     */
     public int getPoint(){
         return this.movementPoint;
     }
+
+    /**
+     * get the name of the unit
+     * @return
+     */
     public String getName(){
         return name;
     }
+
+    /**
+     * subtract the number of solider
+     * @param num the number
+     */
     public void soliders_die(int num){
         soldiers -= num;
     }

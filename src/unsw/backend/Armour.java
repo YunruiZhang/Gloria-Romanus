@@ -2,9 +2,16 @@ package unsw.backend;
 
 import java.util.Arrays;
 
+/**
+ * the class for armour all the initial info
+ */
 public class Armour {
     private double armour;
 
+    /**
+     * constructor
+     * @param type the type of the unit
+     */
     public Armour(String type) {
         String[] a = {"Chariot", "Berserker"};
         String[] b = {"Hopitle", "NetFighter", "Spearman", "Trebuchet"};
