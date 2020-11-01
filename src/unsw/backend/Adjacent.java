@@ -57,11 +57,9 @@ public class Adjacent {
         // Recur for all the vertices adjacent to this vertex 
 
         JSONObject adj = matrix.getJSONObject(curr.getName());
-        System.out.println(adj);
         Iterator<String> keys = adj.keys();
         while (keys.hasNext()) { 
             String key = keys.next();
-            System.out.println(key);
             if(adj.getBoolean(key) == true && convert(key, ALL).getFaction().equals(faction) && !visited.contains(convert(key, ALL))){
                 int currpath = FindPath(faction, convert(key, ALL), dest, visited, ALL);
                 if(currpath < 9999){
