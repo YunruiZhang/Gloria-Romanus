@@ -32,7 +32,7 @@ public class Adjacent {
         String nameA = a.getName();
         String nameB = b.getName();
         JSONObject provinceA = matrix.getJSONObject(nameA);
-        if(provinceA.getString(nameB).equals("true")){
+        if(provinceA.getBoolean(nameB) == true){
             return true;
         }else{
             return false;
@@ -57,10 +57,12 @@ public class Adjacent {
         // Recur for all the vertices adjacent to this vertex 
 
         JSONObject adj = matrix.getJSONObject(curr.getName());
+        System.out.println(adj);
         Iterator<String> keys = adj.keys();
         while (keys.hasNext()) { 
             String key = keys.next();
-            if(adj.getString(key).equals("true") && convert(key, ALL).getFaction().equals(faction) && !visited.contains(convert(key, ALL))){
+            System.out.println(key);
+            if(adj.getBoolean(key) == true && convert(key, ALL).getFaction().equals(faction) && !visited.contains(convert(key, ALL))){
                 int currpath = FindPath(faction, convert(key, ALL), dest, visited, ALL);
                 if(currpath < 9999){
                     Province temp = convert(key, ALL);

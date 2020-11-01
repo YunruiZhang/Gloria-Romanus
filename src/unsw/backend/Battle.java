@@ -9,10 +9,10 @@ public class Battle {
     private ArrayList<Unit> OppositionArmy;
     private int engagementCounter;
     private boolean draw = false;
-    private int mysize;
-    private int enemysize;
-    private int myloss;
-    private int enemyloss;
+    private double mysize;
+    private double enemysize;
+    private double myloss;
+    private double enemyloss;
     private ArrayList<Unit> cowardfriend;
     private ArrayList<Unit> cowardenemy;
     private Province targetProvince;
@@ -30,8 +30,8 @@ public class Battle {
 
     public int StartBattle() {
         while (MyArmy.size() > 0 && OppositionArmy.size() > 0 && !draw) {
-            int myIndex = ThreadLocalRandom.current().nextInt(0, MyArmy.size() + 1);
-            int oppositionIndex = ThreadLocalRandom.current().nextInt(0, OppositionArmy.size() + 1);
+            int myIndex = ThreadLocalRandom.current().nextInt(0, MyArmy.size());
+            int oppositionIndex = ThreadLocalRandom.current().nextInt(0, OppositionArmy.size());
             Unit friend = MyArmy.get(myIndex);
             Unit enemy = OppositionArmy.get(oppositionIndex);
             startSkirmish(friend, enemy);
@@ -180,8 +180,14 @@ public class Battle {
             if ((1 - (enemy.getMorale() * 0.1)) < 0.05) enemyFleaBase = 0.05;
             else enemyFleaBase = 1 - (enemy.getMorale() * 0.1);
         }
-        if (friendFleaBase != -1) friendFleaBase += (((myloss/mysize)/(enemyloss/enemysize))*(0.1));
-        if (enemyFleaBase != -1) enemyFleaBase += (((enemyloss/enemysize)/(myloss/mysize))*(0.1));
+        if(enemyloss == 0) enemyloss = 1;
+        if(myloss == 0) myloss = 1;
+        System.out.println(myloss);
+        System.out.println(mysize);
+        System.out.println(enemyloss);
+        System.out.println(enemysize);
+        if (friendFleaBase != -1 && enemy != null) friendFleaBase += (((myloss/mysize)/(enemyloss/enemysize))*(0.1));
+        if (enemyFleaBase != -1&& friend != null) enemyFleaBase += (((enemyloss/enemysize)/(myloss/mysize))*(0.1));
         if(friendFleaBase != -1){
             boolean friendHasFlee = FleeChanceCaculater(friendFleaBase);
             if(friendHasFlee == true){
