@@ -34,6 +34,46 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
-        getParent().clickedInvadeButton(e);
+        //getParent().clickedInvadeButton(e, 1);
+    }
+
+    @FXML
+    public void clickedInvadeButton2(ActionEvent e) throws IOException {
+        //getParent().clickedInvadeButton(e, 2);
+    }
+
+    @FXML
+    public void movep1(ActionEvent e) throws IOException {
+        //getParent().moveArmy(e, 1);
+    }
+
+    @FXML
+    public void movep2(ActionEvent e) throws IOException {
+        //getParent().moveArmy(e, 2);
+    }
+
+    @FXML
+    public void nextTurnButton(ActionEvent e) throws IOException {
+        //getParent().nextTurnClick(e);
+    }
+
+    @FXML
+    public void attackCombo1(ActionEvent e) throws IOException {
+        //getParent().
+    }
+
+    @FXML
+    public void attackCombo2(ActionEvent e) throws IOException {
+        //getParent().
+    }
+
+    @FXML
+    public void moveCombo1(ActionEvent e) throws IOException {
+        //getParent().
+    }
+
+    @FXML
+    public void moveCombo2(ActionEvent e) throws IOException {
+        //getParent().
     }
 }
