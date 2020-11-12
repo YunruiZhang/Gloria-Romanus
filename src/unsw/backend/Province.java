@@ -57,6 +57,13 @@ public class Province implements Observer{
         this.faction = faction;
     }
 
+    public int totalSolider(){
+        int result = 0;
+        for(Unit temp: units){
+            result += temp.getSoldiers();
+        }
+        return result;
+    }
     /**
      * this changes the owner of the provice when the territoy is concured.
      * @param dude

@@ -325,4 +325,19 @@ public class GameController{
         }
         return pro;
     }
+
+    public Unit getUnitFromString(String name){
+        for(Province temp: provinces){
+            for(Unit temp1: temp.getUnits()){
+                if(temp1.getName().equals(name)){
+                    return temp1;
+                }
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Province> getAllPovinces(){
+        return provinces;
+    }
 }
