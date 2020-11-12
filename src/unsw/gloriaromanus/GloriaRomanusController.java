@@ -56,6 +56,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.util.Pair;
+import unsw.backend.*;
 
 public class GloriaRomanusController{
 
@@ -80,17 +81,23 @@ public class GloriaRomanusController{
   private Feature currentlySelectedEnemyProvince;
 
   private FeatureLayer featureLayer_provinces;
+  private GameController thegame;
+  private Player romeplayer;
+  private Player gaulplayer;
 
   @FXML
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
+    thegame = new GameController();
     provinceToOwningFactionMap = getProvinceToOwningFactionMap();
-
     provinceToNumberTroopsMap = new HashMap<String, Integer>();
-    Random r = new Random();
-    for (String provinceName : provinceToOwningFactionMap.keySet()) {
-      provinceToNumberTroopsMap.put(provinceName, r.nextInt(500));
+    for(String provinceName : provinceToOwningFactionMap.keySet()){
+      provinceToNumberTroopsMap.put(provinceName, 0);
     }
+    romeplayer = thegame.setPlayer("Rome");
+    gaulplayer = thegame.setPlayer("Gaul");
+    //shall we give units to them??
+
 
     // TODO = load this from a configuration file you create (user should be able to
     // select in loading screen)
@@ -121,32 +128,123 @@ public class GloriaRomanusController{
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
-        // TODO = have better battle resolution than 50% chance of winning
-        Random r = new Random();
-        int choice = r.nextInt(2);
-        if (choice == 0){
-          // human won. Transfer 40% of troops of human over. No casualties by human, but enemy loses all troops
-          int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
-          provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
-          provinceToOwningFactionMap.put(enemyProvince, humanFaction);
+        Province temp = thegame.getProvinceFromString(humanProvince);
+        Province temp1 = thegame.getProvinceFromString(enemyProvince);
+        Boolean battle_result = thegame.Battle(temp.getOwner(), temp.getUnits(), humanProvince, enemyProvince);
+        if(battle_result){
           printMessageToTerminal("Won battle!");
+        }else{
+          printMessageToTerminal("loss battle!");
         }
-        else{
-          // enemy won. Human loses 60% of soldiers in the province
-          int numTroopsLost = provinceToNumberTroopsMap.get(humanProvince)*3/5;
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsLost);
-          printMessageToTerminal("Lost battle!");
-        }
+        provinceToNumberTroopsMap.put(humanProvince, temp.totalSolider());
+        provinceToNumberTroopsMap.put(enemyProvince, temp1.totalSolider());
         resetSelections();  // reset selections in UI
         addAllPointGraphics(); // reset graphics
-      }
-      else{
+      }else{
         printMessageToTerminal("Provinces not adjacent, cannot invade!");
       }
 
     }
   }
+  public void buyInfraButton(ActionEvent e, String building, int index) throws IOException {
+    if(currentlySelectedEnemyProvince != null && index == 2){
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(enemyProvince);
+      if(!thegame.bulid(temp.getOwner(), building, enemyProvince)){
+        printMessageToTerminal("fail to build the building");
+      }
+    }else if(currentlySelectedHumanProvince != null && index == 1){
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      if(!thegame.bulid(temp.getOwner(), building, myProvince)){
+        printMessageToTerminal("fail to build the building");
+      }
+    }else{
+      printMessageToTerminal("no province selected");
+    }
+  }
+
+  public ArrayList<String> retriveUnitName(int index){
+    if(index == 1 && currentlySelectedHumanProvince != null){
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      ArrayList<Unit> allUnits = temp.getUnits();
+      ArrayList<String> names = new ArrayList<String>();
+      for(Unit tmp: allUnits){
+        names.add(tmp.getName());
+      }
+      return names;
+    }else if(index == 2 && currentlySelectedEnemyProvince != null){
+      String EnemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(EnemyProvince);
+      ArrayList<Unit> allUnits = temp.getUnits();
+      ArrayList<String> names = new ArrayList<String>();
+      for(Unit tmp: allUnits){
+        names.add(tmp.getName());
+      }
+      return names;
+    }else{
+      printMessageToTerminal("no province selected");
+      return null;
+    }
+  }
+
+  public void upgradeInfraButton(ActionEvent e, String building, int index) throws IOException {
+    if(currentlySelectedEnemyProvince != null && index == 2){
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(enemyProvince);
+      if(!thegame.upgrade(temp.getOwner(), building, enemyProvince)){
+        printMessageToTerminal("fail to build the building");
+      }
+    }else if(currentlySelectedHumanProvince != null && index == 1){
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      if(!thegame.upgrade(temp.getOwner(), building, myProvince)){
+        printMessageToTerminal("fail to build the building");
+      }
+    }else{
+      printMessageToTerminal("no province selected");
+    }
+  }
+
+  public void buyTroopButton(ActionEvent e, String unitname, int index, int qty) throws IOException {
+    if(currentlySelectedEnemyProvince != null && index == 2){
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(enemyProvince);
+      Unit tempUnit = thegame.getUnitFromString(unitname);
+      if(!thegame.addsolider(temp.getOwner(), enemyProvince, tempUnit, qty)){
+        printMessageToTerminal("fail to add solider");
+      }
+    }else if(currentlySelectedHumanProvince != null && index == 1){
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      Unit tempUnit = thegame.getUnitFromString(unitname);
+      if(!thegame.addsolider(temp.getOwner(),myProvince, tempUnit, qty)){
+        printMessageToTerminal("fail to add solider");
+      }
+    }else{
+      printMessageToTerminal("no province selected");
+    }
+  }
+
+  public void createUnitButton(ActionEvent e, String unitType, int index, String name) throws IOException {
+    if(currentlySelectedEnemyProvince != null && index == 2){
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+     
+      if(thegame.createUnit(enemyProvince, unitType, name) == null){
+        printMessageToTerminal("fail to create the unit");
+      }
+    }else if(currentlySelectedHumanProvince != null && index == 1){
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+
+      if(thegame.createUnit(myProvince, unitType, name) == null){
+        printMessageToTerminal("fail to create the unit");
+      }
+    }else{
+      printMessageToTerminal("no province selected");
+    }
+  }
+
 
   /**
    * run this initially to update province owner, change feature in each
@@ -321,10 +419,14 @@ public class GloriaRomanusController{
   }
 
   private Map<String, String> getProvinceToOwningFactionMap() throws IOException {
-    String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
-    JSONObject ownership = new JSONObject(content);
+    //String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
+    ArrayList<Province> all = thegame.getAllPovinces();
+    //JSONObject ownership = new JSONObject(content);
     Map<String, String> m = new HashMap<String, String>();
-    for (String key : ownership.keySet()) {
+    for(Province temp: all){
+      m.put(temp.getName(), temp.getFaction());
+    }
+    /*for (String key : ownership.keySet()) {
       // key will be the faction name
       JSONArray ja = ownership.getJSONArray(key);
       // value is province name
@@ -332,7 +434,7 @@ public class GloriaRomanusController{
         String value = ja.getString(i);
         m.put(value, key);
       }
-    }
+    }*/
     return m;
   }
 
@@ -376,7 +478,10 @@ public class GloriaRomanusController{
   private void printMessageToTerminal(String message){
     if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
+    }else if(controllerParentPairs.get(0).getKey() instanceof BasicMenuController){
+      ((BasicMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
     }
+
   }
 
   /**
