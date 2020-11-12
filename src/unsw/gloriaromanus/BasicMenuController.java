@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,8 +69,6 @@ public class BasicMenuController extends MenuController{
         trooop.add("Chariot"); trooop.add("Elephant"); trooop.add("Swordsman"); trooop.add("Spearman"); trooop.add("Lancer");
         trooop.add("NetFighter"); trooop.add("Druid"); trooop.add("legionary"); 
         unitTypeMenu.getItems().addAll(trooop);
-        //trooptype.getItems().addAll(getParent().retriveUnitName());
-        //trooptype1.getItems().addAll(getParent().retriveUnitName());
 	}
 
     public void appendToTerminal(String message) {
@@ -118,12 +118,17 @@ public class BasicMenuController extends MenuController{
 
     @FXML
     public void createUnitButtonp2(ActionEvent e) throws IOException {
+        trooptype1.getItems().clear();
         getParent().createUnitButton(e, unitTypeMenu.getValue(), 2, unitName.getText());
+        if (getParent().retriveUnitName(2) != null) trooptype1.getItems().addAll(getParent().retriveUnitName(2));
     }
 
     @FXML
     public void createUnitButton(ActionEvent e) throws IOException {
+        trooptype.getItems().clear();
         getParent().createUnitButton(e, unitTypeMenu.getValue(), 1, unitName.getText());
+        if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
     }
 
+    //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
 }

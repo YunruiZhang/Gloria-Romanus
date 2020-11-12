@@ -89,6 +89,11 @@ public class GloriaRomanusController{
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
     thegame = new GameController();
+    provinceToOwningFactionMap = getProvinceToOwningFactionMap();
+    provinceToNumberTroopsMap = new HashMap<String, Integer>();
+    for(String provinceName : provinceToOwningFactionMap.keySet()){
+      provinceToNumberTroopsMap.put(provinceName, 0);
+    }
     romeplayer = thegame.setPlayer("Rome");
     gaulplayer = thegame.setPlayer("Gaul");
     //shall we give units to them??

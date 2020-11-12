@@ -94,6 +94,6 @@
          <Button mnemonicParsing="false" onAction="#buyTroopButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <TextArea prefHeight="200.0" prefWidth="200.0" />
+   <TextArea fx:id="out_terminal" prefHeight="200.0" prefWidth="200.0" />
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
 </VBox>
