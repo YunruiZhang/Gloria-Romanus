@@ -7,4 +7,3 @@ hs_err_pid*
 /.gradle/
 /resources/
 /jniLibs/
-/.vscode/

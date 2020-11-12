@@ -59,21 +59,21 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void attackCombo1(ActionEvent e) throws IOException {
-        //getParent().
+        
     }
 
     @FXML
     public void attackCombo2(ActionEvent e) throws IOException {
-        //getParent().
+        
     }
 
     @FXML
     public void moveCombo1(ActionEvent e) throws IOException {
-        //getParent().
+        
     }
 
     @FXML
     public void moveCombo2(ActionEvent e) throws IOException {
-        //getParent().
+        
     }
 }
