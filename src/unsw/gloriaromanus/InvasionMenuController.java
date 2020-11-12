@@ -34,7 +34,7 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
-        //getParent().clickedInvadeButton(e, 1);
+        getParent().clickedInvadeButton(e, 1);
     }
 
     @FXML
@@ -54,7 +54,7 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void nextTurnButton(ActionEvent e) throws IOException {
-        //getParent().nextTurnClick(e);
+        getParent().nextTurnClick(e);
     }
 
     @FXML

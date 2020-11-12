@@ -60,7 +60,7 @@ public class BasicMenuController extends MenuController{
 	public void initialize() {
         ArrayList<String> infra = new ArrayList<String>();
         //getParent().getBuildCost();
-        infra.add("Troop Production Building"); infra.add("Market"); infra.add("Mine"); infra.add("Port");
+        infra.add("TroopProduction"); infra.add("Market"); infra.add("Mine"); infra.add("Port");
         infra.add("Road"); infra.add("Smiths"); infra.add("Wall"); infra.add("Farm");
         Infrabuymenu.getItems().addAll(infra);
         infraupgrademenu.getItems().addAll(infra);
