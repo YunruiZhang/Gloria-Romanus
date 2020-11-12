@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="377.0" prefHeight="514.0" prefWidth="377.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="unsw.gloriaromanus.BasicMenuController">
+<VBox maxWidth="403.0" prefHeight="514.0" prefWidth="403.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -29,85 +29,71 @@
             </fills>
         </Background>
     </background>
-   <Label prefHeight="40.0" prefWidth="364.0" text="        INFRASTRUCTURE" textAlignment="CENTER" textFill="#ca00ff">
+   <Label prefHeight="40.0" prefWidth="364.0" text="                  INFRASTRUCTURE" textAlignment="CENTER" textFill="#ca00ff">
       <font>
-         <Font name="Chalkboard SE Light" size="25.0" />
+         <Font name="Chalkboard SE Light" size="16.0" />
       </font>
    </Label>
    <HBox prefHeight="52.0" prefWidth="279.0">
       <children>
-         <Label text="  BUY :       ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
+         <Label text="  BUY :    " />
          <ChoiceBox fx:id="Infrabuymenu" prefWidth="150.0" />
-         <Button fx:id="Ibuybutton" mnemonicParsing="false" text="Confirm" />
+         <Button mnemonicParsing="false" onAction="#buyInfraButton" text="Confirm P1" />
+         <Button mnemonicParsing="false" onAction="#buyInfraButtonp2" text="Confirm P2" />
       </children>
    </HBox>
    <HBox prefHeight="51.0" prefWidth="279.0">
       <children>
-         <Label text="  UPGRADE:    ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
+         <Label text="  UPGRADE:  " />
          <ChoiceBox fx:id="infraupgrademenu" prefWidth="150.0" />
-         <Button fx:id="Iupgradebutton" mnemonicParsing="false" text="Confirm" />
+         <Button mnemonicParsing="false" onAction="#upgradeInfraButton" text="Confirm P1" />
+         <Button mnemonicParsing="false" onAction="#upgradeInfraButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <Label prefHeight="40.0" prefWidth="357.0" text="        BUY TROOPS" textAlignment="CENTER" textFill="#bd1ddd">
+   <Label prefHeight="17.0" prefWidth="280.0" text="                  CREATE UNITS" textAlignment="CENTER" textFill="#bd1ddd">
       <font>
-         <Font name="Chalkboard SE Light" size="25.0" />
+         <Font name="Chalkboard SE Light" size="16.0" />
       </font>
    </Label>
    <HBox prefHeight="32.0" prefWidth="357.0">
       <children>
-         <Label text="  QUANTITY:       ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
+         <Label text="  ENTER UNIT NAME:       " />
+         <TextField fx:id="unitName" prefHeight="27.0" prefWidth="125.0" />
+      </children>
+   </HBox>
+   <HBox prefHeight="37.0" prefWidth="357.0">
+      <children>
+         <Label text="  UNIT TYPE:  " />
+         <ChoiceBox fx:id="unitTypeMenu" prefWidth="150.0" />
+         <Button mnemonicParsing="false" onAction="#createUnitButton" text="Confirm P1" />
+         <Button mnemonicParsing="false" onAction="#createUnitButtonp2" text="Confirm P2" />
+      </children>
+   </HBox>
+   <Label prefHeight="40.0" prefWidth="357.0" text="                  BUY TROOPS" textAlignment="CENTER" textFill="#bd1ddd">
+      <font>
+         <Font name="Chalkboard SE Light" size="16.0" />
+      </font>
+   </Label>
+   <HBox prefHeight="32.0" prefWidth="357.0">
+      <children>
+         <Label text="  QUANTITY:       " />
          <TextField fx:id="troopqty" prefHeight="27.0" prefWidth="125.0" />
       </children>
    </HBox>
    <HBox prefHeight="52.0" prefWidth="279.0">
       <children>
-         <Label text="  BUY :       ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
+         <Label text="  BUY (Player 1 Units) :       " />
          <ChoiceBox fx:id="trooptype" prefWidth="150.0" />
-         <Button fx:id="troopbutton" mnemonicParsing="false" text="Confirm" />
+         <Button mnemonicParsing="false" onAction="#buyTroopButton" text="Confirm P1" />
       </children>
    </HBox>
-   <Label prefHeight="17.0" prefWidth="280.0" text="        CREATE UNITS" textAlignment="CENTER" textFill="#bd1ddd">
-      <font>
-         <Font name="Chalkboard SE Light" size="25.0" />
-      </font>
-   </Label>
-   <HBox prefHeight="32.0" prefWidth="357.0">
+   <HBox prefHeight="52.0" prefWidth="279.0">
       <children>
-         <Label text="  ENTER UNIT NAME:       ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
-         <TextField fx:id="unitNameBox" prefHeight="27.0" prefWidth="125.0" />
+         <Label text="  BUY (Player 2 Units) :       " />
+         <ChoiceBox fx:id="trooptype1" prefWidth="150.0" />
+         <Button mnemonicParsing="false" onAction="#buyTroopButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <HBox prefHeight="37.0" prefWidth="357.0">
-      <children>
-         <Label text="  UNIT TYPE:     ">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Label>
-         <ChoiceBox fx:id="unitTypeMenu" prefWidth="150.0" />
-         <Button fx:id="UnitCButton" mnemonicParsing="false" text="Confirm" />
-      </children>
-   </HBox>
-   <TextArea fx:id="BUYnSELL" prefHeight="200.0" prefWidth="200.0" />
+   <TextArea prefHeight="200.0" prefWidth="200.0" />
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
 </VBox>
