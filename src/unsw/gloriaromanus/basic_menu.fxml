@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -29,7 +30,7 @@
             </fills>
         </Background>
     </background>
-   <Label prefHeight="40.0" prefWidth="364.0" text="                  INFRASTRUCTURE" textAlignment="CENTER" textFill="#ca00ff">
+   <Label prefHeight="40.0" prefWidth="364.0" text="                   INFRASTRUCTURE" textAlignment="CENTER" textFill="#ca00ff">
       <font>
          <Font name="Chalkboard SE Light" size="16.0" />
       </font>
@@ -50,7 +51,7 @@
          <Button mnemonicParsing="false" onAction="#upgradeInfraButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <Label prefHeight="17.0" prefWidth="280.0" text="                  CREATE UNITS" textAlignment="CENTER" textFill="#bd1ddd">
+   <Label prefHeight="17.0" prefWidth="280.0" text="                    CREATE UNITS" textAlignment="CENTER" textFill="#bd1ddd">
       <font>
          <Font name="Chalkboard SE Light" size="16.0" />
       </font>
@@ -69,7 +70,7 @@
          <Button mnemonicParsing="false" onAction="#createUnitButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <Label prefHeight="40.0" prefWidth="357.0" text="                  BUY TROOPS" textAlignment="CENTER" textFill="#bd1ddd">
+   <Label prefHeight="40.0" prefWidth="357.0" text="                     BUY TROOPS" textAlignment="CENTER" textFill="#bd1ddd">
       <font>
          <Font name="Chalkboard SE Light" size="16.0" />
       </font>
@@ -83,14 +84,14 @@
    <HBox prefHeight="52.0" prefWidth="279.0">
       <children>
          <Label text="  BUY (Player 1 Units) :       " />
-         <ChoiceBox fx:id="trooptype" prefWidth="150.0" />
+         <ComboBox fx:id="trooptype" onAction="#TroopTypesInit" prefWidth="150.0" />
          <Button mnemonicParsing="false" onAction="#buyTroopButton" text="Confirm P1" />
       </children>
    </HBox>
    <HBox prefHeight="52.0" prefWidth="279.0">
       <children>
          <Label text="  BUY (Player 2 Units) :       " />
-         <ChoiceBox fx:id="trooptype1" prefWidth="150.0" />
+         <ComboBox fx:id="trooptype1" onAction="#TroopTypesInit1" prefWidth="150.0" />
          <Button mnemonicParsing="false" onAction="#buyTroopButtonp2" text="Confirm P2" />
       </children>
    </HBox>

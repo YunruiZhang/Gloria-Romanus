@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -44,10 +45,10 @@ public class BasicMenuController extends MenuController{
     private ChoiceBox<String> infraupgrademenu;
 
     @FXML
-    private ChoiceBox<String> trooptype;
+    private ComboBox<String> trooptype;
 
     @FXML
-    private ChoiceBox<String> trooptype1;
+    private ComboBox<String> trooptype1;
 
     @FXML
     private ChoiceBox<String> unitTypeMenu;
@@ -128,6 +129,18 @@ public class BasicMenuController extends MenuController{
         trooptype.getItems().clear();
         getParent().createUnitButton(e, unitTypeMenu.getValue(), 1, unitName.getText());
         if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
+    }
+
+    @FXML
+    public void TroopTypesInit (ActionEvent e) throws IOException {
+        trooptype.getItems().clear();
+        if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
+    }
+
+    @FXML
+    public void TroopTypesInit1 (ActionEvent e) throws IOException {
+        trooptype.getItems().clear();
+        if (getParent().retriveUnitName(2) != null) trooptype.getItems().addAll(getParent().retriveUnitName(2));
     }
 
     //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
