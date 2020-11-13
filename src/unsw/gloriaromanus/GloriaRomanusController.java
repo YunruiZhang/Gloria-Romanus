@@ -168,8 +168,10 @@ public class GloriaRomanusController{
         printMessageToTerminal("Won battle!");
       }
     }
+    provinceToNumberTroopsMap.put(humanProvince, mine.totalSolider()); 
+    provinceToNumberTroopsMap.put(enemyProvince, enemy.totalSolider());
+    addAllPointGraphics();
     resetSelections();  // reset selections in UI
-    addAllPointGraphics(); // reset graphics
   }
   
   public void buyInfraButton(ActionEvent e, String building, int index) throws IOException {
