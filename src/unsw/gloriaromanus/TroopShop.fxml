@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="376.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label prefHeight="40.0" prefWidth="357.0" text="                     BUY TROOPS" textAlignment="CENTER" textFill="#bd1ddd">
@@ -27,18 +26,18 @@
       <HBox prefHeight="52.0" prefWidth="279.0">
          <children>
             <Label text="  BUY (Player 1 Units) :       " />
-            <ComboBox fx:id="trooptype" onAction="#TroopTypesInit" prefWidth="150.0" />
+            <ComboBox fx:id="trooptype" onAction="#TroopTypesInit" prefWidth="150.0" promptText="choose unit" />
             <Button mnemonicParsing="false" onAction="#buyTroopButton" text="Confirm P1" />
          </children>
       </HBox>
       <HBox prefHeight="52.0" prefWidth="279.0">
          <children>
             <Label text="  BUY (Player 2 Units) :       " />
-            <ComboBox fx:id="trooptype1" onAction="#TroopTypesInit1" prefWidth="150.0" />
+            <ComboBox fx:id="trooptype1" onAction="#TroopTypesInit1" prefWidth="150.0" promptText="choose unit" />
             <Button mnemonicParsing="false" onAction="#buyTroopButtonp2" text="Confirm P2" />
          </children>
       </HBox>
-      <TextArea fx:id="out_terminal" prefHeight="105.0" prefWidth="209.0" />
+      <TextArea fx:id="out_terminal1" prefHeight="105.0" prefWidth="209.0" />
       <Pane prefHeight="39.0" prefWidth="376.0">
          <children>
             <Button layoutX="145.0" layoutY="6.0" mnemonicParsing="false" onAction="#exitTroopShop" text="Exit shop" />
