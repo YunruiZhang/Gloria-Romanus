@@ -239,6 +239,35 @@ public class GloriaRomanusController{
     }
   }
 
+  public ArrayList<String> retriveOwnedProvinces(int index){
+    if(index == 1){
+      if(currentlySelectedHumanProvince == null){
+        return null;
+      }
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      ArrayList<Province> romepp = romeplayer.getProvinces();
+      ArrayList<String> romeppstring = new ArrayList<String>();
+      for(Province temppp : romepp){
+        if(!myProvince.equals(temppp.getName())){
+          romeppstring.add(temppp.getName());
+        } 
+      }
+      return romeppstring;
+    }else{
+      if(currentlySelectedEnemyProvince == null){
+        return null;
+      }
+      String EnemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      ArrayList<Province> gaulpp = romeplayer.getProvinces();
+      ArrayList<String> gaulppstring = new ArrayList<String>();
+      for(Province temppp : gaulpp){
+        if(!EnemyProvince.equals(temppp.getName())){
+          gaulppstring.add(temppp.getName());
+        } 
+      }
+      return gaulppstring;
+    }
+  }
 
   public ArrayList<String> retriveUnitName(int index){
     if(index == 1 && currentlySelectedHumanProvince != null){
