@@ -79,16 +79,16 @@ public class GameController{
      * @param source the start province
      * @param destt the dest province
      */
-    public void MoveUnit(Player py, ArrayList<Unit> Army, String source, String destt){
+    public boolean MoveUnit(Player py, ArrayList<Unit> Army, String source, String destt){
         Province src = getProvinceFromString(source);
         if(src == null){
             System.out.println("province does not exist");
-            return;
+            return false;
         }
         Province dest = getProvinceFromString(destt);
         if(dest == null){
             System.out.println("province does not exist");
-            return;
+            return false;
         }    
         int avaiablePoint = 9999;
         for(Unit temp : Army){
@@ -99,12 +99,13 @@ public class GameController{
         int point = adj.ShortestPath(src, dest, py, provinces);
         if(point > avaiablePoint){
             System.out.println("Can't move the army");
-            return;
+            return false;
         }
         removeFromProvince(Army);
         for(Unit tmp: Army){
             tmp.move(dest, point);
         }
+        return true;
     }
 
     /**

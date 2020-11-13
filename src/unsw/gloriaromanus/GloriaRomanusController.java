@@ -171,6 +171,7 @@ public class GloriaRomanusController{
     resetSelections();  // reset selections in UI
     addAllPointGraphics(); // reset graphics
   }
+  
   public void buyInfraButton(ActionEvent e, String building, int index) throws IOException {
     if(currentlySelectedEnemyProvince != null && index == 2){
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
@@ -196,6 +197,48 @@ public class GloriaRomanusController{
   public void nextTurnClick(ActionEvent e){
     thegame.nextTurn();
   }
+
+  public void moveArmy(ActionEvent e, ArrayList<String> unilist, int index, String province)throws IOException{
+    if(unilist.size() == 0){
+      printMessageToTerminal("no unit selected");
+      return;
+    }
+    ArrayList<Unit> units = new ArrayList<Unit>();
+    for(String temp: unilist){
+      units.add(thegame.getUnitFromString(temp));
+    }
+
+    if(index == 1){
+      if(currentlySelectedHumanProvince != null){
+        String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+        Province mypp = thegame.getProvinceFromString(myProvince);
+        if(!thegame.MoveUnit(mypp.getOwner(), units, myProvince, province)){
+          printMessageToTerminal("can not move the units");
+        }else{
+          Province mypp1 = thegame.getProvinceFromString(province);
+          provinceToNumberTroopsMap.put(myProvince, mypp.totalSolider()); 
+          provinceToNumberTroopsMap.put(province, mypp1.totalSolider());
+          printMessageToTerminal("Units are moved!!!");
+          addAllPointGraphics();
+        }
+      }
+    }else{
+      if(currentlySelectedEnemyProvince != null){
+        String EnemyProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+        Province Enemypp = thegame.getProvinceFromString(EnemyProvince);
+        if(!thegame.MoveUnit(Enemypp.getOwner(), units, EnemyProvince, province)){
+          printMessageToTerminal("can not move the units");
+        }else{
+          Province Enemypp1 = thegame.getProvinceFromString(province);
+          provinceToNumberTroopsMap.put(EnemyProvince, Enemypp.totalSolider()); 
+          provinceToNumberTroopsMap.put(province, Enemypp1.totalSolider());
+          printMessageToTerminal("Units are moved!!!");
+          addAllPointGraphics();
+        }
+      }
+    }
+  }
+
 
   public ArrayList<String> retriveUnitName(int index){
     if(index == 1 && currentlySelectedHumanProvince != null){
