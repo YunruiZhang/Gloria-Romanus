@@ -130,7 +130,7 @@ public class Battle {
         } else {
             distory = getDestroyedShortRange(friend, enemy);
         }
-        if (!distory) {
+        /*if (!distory) {
             if (MyArmy.contains(friend)) {
                 FleaCalculator(friend, null);
             } else {
@@ -139,7 +139,7 @@ public class Battle {
             }
         } else { 
             FleaCalculator(friend, enemy);
-        }
+        }*/
         return distory;
     }
 
