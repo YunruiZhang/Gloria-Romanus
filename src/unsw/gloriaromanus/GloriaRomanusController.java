@@ -168,6 +168,8 @@ public class GloriaRomanusController{
         printMessageToTerminal("Won battle!");
       }
     }
+    resetSelections();  // reset selections in UI
+    addAllPointGraphics(); // reset graphics
   }
   public void buyInfraButton(ActionEvent e, String building, int index) throws IOException {
     if(currentlySelectedEnemyProvince != null && index == 2){
@@ -251,7 +253,11 @@ public class GloriaRomanusController{
         printMessageToTerminal("fail to add solider");
       }else{
         printMessageToTerminal(qty + "soliders added to" + enemyProvince);
-        provinceToNumberTroopsMap.put(enemyProvince, qty);
+        provinceToNumberTroopsMap.put(enemyProvince, provinceToNumberTroopsMap.get(enemyProvince) + qty);
+        //initializeProvinceLayers();
+        //resetSelections();  // reset selections in UI
+        addAllPointGraphics(); // reset graphics
+        
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
@@ -261,7 +267,10 @@ public class GloriaRomanusController{
         printMessageToTerminal("fail to add solider");
       }else{
         printMessageToTerminal(qty + "soliders added to" + myProvince);
-        provinceToNumberTroopsMap.put(myProvince, qty);
+        provinceToNumberTroopsMap.put(myProvince, provinceToNumberTroopsMap.get(myProvince) + qty);
+        //initializeProvinceLayers();
+        //resetSelections();  // reset selections in UI
+        addAllPointGraphics(); // reset graphics
       }
     }else{
       printMessageToTerminal("no province selected");
