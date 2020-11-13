@@ -5,6 +5,9 @@ import java.net.URL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -15,6 +18,15 @@ public class InvasionMenuController extends MenuController{
     private TextField opponent_province;
     @FXML
     private TextArea output_terminal;
+    @FXML
+    private MenuButton attackCombo1fxid;
+    @FXML
+    private MenuButton attackCombo2fxid;
+    @FXML
+    private MenuButton movecombo1fxid;
+    @FXML
+    private MenuButton movecombo2fxid;
+
 
     // https://stackoverflow.com/a/30171444
     @FXML
@@ -39,7 +51,7 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedInvadeButton2(ActionEvent e) throws IOException {
-        //getParent().clickedInvadeButton(e, 2);
+        getParent().clickedInvadeButton(e, 2);
     }
 
     @FXML
@@ -75,5 +87,44 @@ public class InvasionMenuController extends MenuController{
     @FXML
     public void moveCombo2(ActionEvent e) throws IOException {
         //getParent().
+    }
+
+    @FXML 
+    public void refresh_invade(ActionEvent e) throws IOException {
+        attackCombo1fxid.getItems().clear();
+        if (getParent().retriveUnitName(1) != null) {
+            for (String s : getParent().retriveUnitName(1)) {
+                CheckBox newbox = new CheckBox(s);
+                CustomMenuItem  item0 = new CustomMenuItem(newbox);
+                attackCombo1fxid.getItems().add(item0);
+            }
+        }
+        attackCombo2fxid.getItems().clear();
+        if (getParent().retriveUnitName(2) != null) {
+            for (String s : getParent().retriveUnitName(2)) {
+                CheckBox newbox = new CheckBox(s);
+                CustomMenuItem  item0 = new CustomMenuItem(newbox);
+                attackCombo2fxid.getItems().add(item0);
+            }
+        }
+
+        movecombo1fxid.getItems().clear();
+        if (getParent().retriveUnitName(1) != null) {
+            for (String s : getParent().retriveUnitName(1)) {
+                CheckBox newbox = new CheckBox(s);
+                CustomMenuItem  item0 = new CustomMenuItem(newbox);
+                movecombo1fxid.getItems().add(item0);
+            }
+        }
+
+        movecombo2fxid.getItems().clear();
+        if (getParent().retriveUnitName(2) != null) {
+            for (String s : getParent().retriveUnitName(2)) {
+                CheckBox newbox = new CheckBox(s);
+                CustomMenuItem  item0 = new CustomMenuItem(newbox);
+                movecombo2fxid.getItems().add(item0);
+            }
+        }
+        
     }
 }
