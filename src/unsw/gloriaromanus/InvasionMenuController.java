@@ -65,11 +65,13 @@ public class InvasionMenuController extends MenuController{
     @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
         getParent().clickedInvadeButton(e, 1);
+        refresherCall();
     }
 
     @FXML
     public void clickedInvadeButton2(ActionEvent e) throws IOException {
         getParent().clickedInvadeButton(e, 2);
+        refresherCall();
     }
 
     @FXML
@@ -82,6 +84,7 @@ public class InvasionMenuController extends MenuController{
             System.out.println(selectedStuff.get(i));
         }
         getParent().moveArmy(e, toOut, 1, movecombo1fxid.getValue());
+        refresherCall();
     }
 
     @FXML
@@ -94,6 +97,7 @@ public class InvasionMenuController extends MenuController{
             System.out.println(selectedStuff.get(i));
         }
         getParent().moveArmy(e, toOutt, 2, movecombo2fxid.getValue());
+        refresherCall();
     }
 
     @FXML
@@ -123,6 +127,10 @@ public class InvasionMenuController extends MenuController{
 
     @FXML 
     public void refresh_invade(ActionEvent e) throws IOException {
+        refresherCall();
+    }
+
+    public void refresherCall() {
         attackCombo1fxid.getItems().clear();
         if (getParent().retriveUnitName(1) != null) {
             for (String s : getParent().retriveUnitName(1)) {
@@ -159,6 +167,6 @@ public class InvasionMenuController extends MenuController{
         if (getParent().retriveOwnedProvinces(2) != null) {
             movecombo2fxid.getItems().addAll(getParent().retriveOwnedProvinces(2));
         }
-        
+
     }
 }
