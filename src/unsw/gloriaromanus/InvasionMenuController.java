@@ -2,7 +2,10 @@ package unsw.gloriaromanus;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Observable;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -10,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -38,6 +42,14 @@ public class InvasionMenuController extends MenuController{
     @FXML
     private URL location; // has to be called location
 
+    @FXML
+    public void initialize() {
+        attackCombo1fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        attackCombo2fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        moveUnitsel1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        moveUnitsel12.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
     public void setInvadingProvince(String p) {
         invading_province.setText(p);
     }
@@ -62,12 +74,26 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void movep1(ActionEvent e) throws IOException {
-        //getParent().moveArmy(e, ArrayList<String>, 1, dest_prov);
+        ObservableList<Integer> selectedIndices = moveUnitsel1.getSelectionModel().getSelectedIndices();
+        ObservableList<String> selectedStuff = moveUnitsel1.getItems();
+        ArrayList<String> toOut = new ArrayList<String>();
+        for (int i : selectedIndices) {
+            toOut.add(selectedStuff.get(i));
+            System.out.println(selectedStuff.get(i));
+        }
+        getParent().moveArmy(e, toOut, 1, movecombo1fxid.getValue());
     }
 
     @FXML
     public void movep2(ActionEvent e) throws IOException {
-       // getParent().moveArmy(e, ArrayList<String>, 2, dest_prov);
+        ObservableList<Integer> selectedIndices = moveUnitsel12.getSelectionModel().getSelectedIndices();
+        ObservableList<String> selectedStuff = moveUnitsel12.getItems();
+        ArrayList<String> toOutt = new ArrayList<String>();
+        for (int i : selectedIndices) {
+            toOutt.add(selectedStuff.get(i));
+            System.out.println(selectedStuff.get(i));
+        }
+        getParent().moveArmy(e, toOutt, 2, movecombo2fxid.getValue());
     }
 
     @FXML
