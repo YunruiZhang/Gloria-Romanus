@@ -131,17 +131,17 @@ public class BasicMenuController extends MenuController{
         if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
     }
 
-    /*@FXML
+    @FXML
     public void TroopTypesInit (ActionEvent e) throws IOException {
-        trooptype.getItems().clear();
-        if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
+        //trooptype.getItems().clear();
+        //if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
     }
 
     @FXML
     public void TroopTypesInit1 (ActionEvent e) throws IOException {
-        trooptype.getItems().clear();
-        if (getParent().retriveUnitName(2) != null) trooptype.getItems().addAll(getParent().retriveUnitName(2));
-    }*/
+        //trooptype.getItems().clear();
+        //if (getParent().retriveUnitName(2) != null) trooptype.getItems().addAll(getParent().retriveUnitName(2));
+    }
 
     //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
 }
