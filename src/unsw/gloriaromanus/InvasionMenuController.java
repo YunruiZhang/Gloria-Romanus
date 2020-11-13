@@ -56,12 +56,12 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void movep1(ActionEvent e) throws IOException {
-        //getParent().moveArmy(e, 1);
+        getParent().moveArmy(e, ArrayList<String>, 1, dest_prov);
     }
 
     @FXML
     public void movep2(ActionEvent e) throws IOException {
-        //getParent().moveArmy(e, 2);
+        getParent().moveArmy(e, ArrayList<String>, 2, dest_prov);
     }
 
     @FXML
