@@ -214,6 +214,9 @@ public class GloriaRomanusController{
       Unit tempUnit = thegame.getUnitFromString(unitname);
       if(!thegame.addsolider(temp.getOwner(), enemyProvince, tempUnit, qty)){
         printMessageToTerminal("fail to add solider");
+      }else{
+        printMessageToTerminal(qty + "soliders added to" + enemyProvince);
+        provinceToNumberTroopsMap.put(enemyProvince, qty);
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
@@ -221,6 +224,9 @@ public class GloriaRomanusController{
       Unit tempUnit = thegame.getUnitFromString(unitname);
       if(!thegame.addsolider(temp.getOwner(),myProvince, tempUnit, qty)){
         printMessageToTerminal("fail to add solider");
+      }else{
+        printMessageToTerminal(qty + "soliders added to" + myProvince);
+        provinceToNumberTroopsMap.put(myProvince, qty);
       }
     }else{
       printMessageToTerminal("no province selected");
