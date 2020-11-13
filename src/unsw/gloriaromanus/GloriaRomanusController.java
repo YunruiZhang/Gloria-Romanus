@@ -252,6 +252,7 @@ public class GloriaRomanusController{
       }else{
         printMessageToTerminal(qty + "soliders added to" + enemyProvince);
         provinceToNumberTroopsMap.put(enemyProvince, qty);
+        initializeProvinceLayers();
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
@@ -262,6 +263,7 @@ public class GloriaRomanusController{
       }else{
         printMessageToTerminal(qty + "soliders added to" + myProvince);
         provinceToNumberTroopsMap.put(myProvince, qty);
+        initializeProvinceLayers();
       }
     }else{
       printMessageToTerminal("no province selected");
