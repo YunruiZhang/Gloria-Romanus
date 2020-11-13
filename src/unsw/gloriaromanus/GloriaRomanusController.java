@@ -152,12 +152,16 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(enemyProvince);
       if(!thegame.bulid(temp.getOwner(), building, enemyProvince)){
         printMessageToTerminal("fail to build the building");
+      }else{
+        printMessageToTerminal(building + "is built in" + enemyProvince);
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       if(!thegame.bulid(temp.getOwner(), building, myProvince)){
         printMessageToTerminal("fail to build the building");
+      }else{
+        printMessageToTerminal(building + "is built in" + myProvince);
       }
     }else{
       printMessageToTerminal("no province selected");
@@ -195,12 +199,16 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(enemyProvince);
       if(!thegame.upgrade(temp.getOwner(), building, enemyProvince)){
         printMessageToTerminal("fail to build the building");
+      }else{
+        printMessageToTerminal(building + "is upgraded in" + enemyProvince);
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       if(!thegame.upgrade(temp.getOwner(), building, myProvince)){
         printMessageToTerminal("fail to build the building");
+      }else{
+        printMessageToTerminal(building + "is upgraded in" + myProvince);
       }
     }else{
       printMessageToTerminal("no province selected");
