@@ -258,7 +258,7 @@ public class GloriaRomanusController{
         return null;
       }
       String EnemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      ArrayList<Province> gaulpp = romeplayer.getProvinces();
+      ArrayList<Province> gaulpp = gaulplayer.getProvinces();
       ArrayList<String> gaulppstring = new ArrayList<String>();
       for(Province temppp : gaulpp){
         if(!EnemyProvince.equals(temppp.getName())){
