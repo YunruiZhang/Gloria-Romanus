@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="403.0" prefHeight="514.0" prefWidth="403.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
+<VBox maxWidth="403.0" prefHeight="563.0" prefWidth="403.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -30,6 +30,12 @@
             </fills>
         </Background>
     </background>
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <Label text="                                                         " />
+         <Button mnemonicParsing="false" onAction="#refreshClicked" text="Refresh" />
+      </children>
+   </HBox>
    <Label prefHeight="40.0" prefWidth="364.0" text="                   INFRASTRUCTURE" textAlignment="CENTER" textFill="#ca00ff">
       <font>
          <Font name="Chalkboard SE Light" size="16.0" />
