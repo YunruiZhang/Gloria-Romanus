@@ -55,4 +55,9 @@ public class TroopShopController extends BasicMenuController{
         }
     }
 
+    @FXML
+    public void exitTroopShop(ActionEvent e) throws IOException {
+        //window.close();
+    }
+
 }
