@@ -255,7 +255,7 @@ public class GloriaRomanusController{
         printMessageToTerminal(qty + "soliders added to" + enemyProvince);
         provinceToNumberTroopsMap.put(enemyProvince, provinceToNumberTroopsMap.get(enemyProvince) + qty);
         //initializeProvinceLayers();
-        resetSelections();  // reset selections in UI
+        //resetSelections();  // reset selections in UI
         addAllPointGraphics(); // reset graphics
         
       }
@@ -269,7 +269,7 @@ public class GloriaRomanusController{
         printMessageToTerminal(qty + "soliders added to" + myProvince);
         provinceToNumberTroopsMap.put(myProvince, provinceToNumberTroopsMap.get(myProvince) + qty);
         //initializeProvinceLayers();
-        resetSelections();  // reset selections in UI
+        //resetSelections();  // reset selections in UI
         addAllPointGraphics(); // reset graphics
       }
     }else{
