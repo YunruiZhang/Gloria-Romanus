@@ -2,8 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Background?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="250" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="unsw.gloriaromanus.InvasionMenuController">
+<VBox maxWidth="250" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.InvasionMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -29,6 +30,12 @@
             </fills>
         </Background>
     </background>
+   <HBox prefHeight="0.0" prefWidth="230.0">
+      <children>
+         <Label text="                              " />
+         <Button mnemonicParsing="false" onAction="#refresh_invade" text="Refresh" />
+      </children>
+   </HBox>
    <Label prefHeight="0.0" prefWidth="230.0" text="         !!!!!! ATTACK !!!!!!" textAlignment="CENTER" textFill="#ca00ff">
       <font>
          <Font name="Chalkboard SE Light" size="16.0" />
@@ -41,7 +48,12 @@
                <Font size="14.0" />
             </font></Label>
             <TextField fx:id="invading_province" editable="false" text="" />
-         <ComboBox fx:id="attackCombo1fxid" onAction="#attackCombo1" prefWidth="150.0" />
+         <MenuButton fx:id="attackCombo1fxid" mnemonicParsing="false" onAction="#attackCombo1" text="MenuButton">
+           <items>
+             <MenuItem mnemonicParsing="false" text="Action 1" />
+             <MenuItem mnemonicParsing="false" text="Action 2" />
+           </items>
+         </MenuButton>
         </VBox>
         <VBox>
             <Label text="Player 2 province">
@@ -49,13 +61,18 @@
                <Font size="14.0" />
             </font></Label>
             <TextField fx:id="opponent_province" editable="false" text="" />
-         <ComboBox fx:id="attackCombo2fxid" onAction="#attackCombo2" prefWidth="150.0" />
+         <MenuButton fx:id="attackCombo2fxid" mnemonicParsing="false" onAction="#attackCombo2" text="MenuButton">
+           <items>
+             <MenuItem mnemonicParsing="false" text="Action 1" />
+             <MenuItem mnemonicParsing="false" text="Action 2" />
+           </items>
+         </MenuButton>
         </VBox>
     </HBox>
    <HBox prefHeight="4.0" prefWidth="230.0">
       <children>
          <Button onAction="#clickedInvadeButton" text="Invade Player 2" />
-         <Label text="          " />
+         <Label text="        " />
           <Button onAction="#clickedInvadeButton2" text="Invade Player 1" />
       </children>
    </HBox>
@@ -73,7 +90,12 @@
                      <Font size="14.0" />
                   </font>
                </Label>
-               <ComboBox fx:id="movecombo1fxid" onAction="#moveCombo1" prefWidth="150.0" />
+               <MenuButton fx:id="movecombo1fxid" mnemonicParsing="false" onAction="#moveCombo1" text="MenuButton">
+                 <items>
+                   <MenuItem mnemonicParsing="false" text="Action 1" />
+                   <MenuItem mnemonicParsing="false" text="Action 2" />
+                 </items>
+               </MenuButton>
             </children>
          </VBox>
          <VBox prefHeight="100.0" prefWidth="111.0">
@@ -83,7 +105,12 @@
                      <Font size="14.0" />
                   </font>
                </Label>
-               <ComboBox fx:id="movecombo2fxid" onAction="#moveCombo2" prefWidth="150.0" />
+               <MenuButton fx:id="movecombo2fxid" mnemonicParsing="false" onAction="#moveCombo2" text="MenuButton">
+                 <items>
+                   <MenuItem mnemonicParsing="false" text="Action 1" />
+                   <MenuItem mnemonicParsing="false" text="Action 2" />
+                 </items>
+               </MenuButton>
             </children>
          </VBox>
       </children>
@@ -95,7 +122,7 @@
                <Font size="14.0" />
             </font>
          </Button>
-         <Label text="                               " />
+         <Label text="                           " />
          <Button mnemonicParsing="false" onAction="#movep2" text="Move P2">
             <font>
                <Font size="14.0" />
