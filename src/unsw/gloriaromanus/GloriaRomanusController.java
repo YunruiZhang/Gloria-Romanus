@@ -251,7 +251,7 @@ public class GloriaRomanusController{
         printMessageToTerminal("fail to add solider");
       }else{
         printMessageToTerminal(qty + "soliders added to" + enemyProvince);
-        provinceToNumberTroopsMap.put(enemyProvince, qty);
+        provinceToNumberTroopsMap.put(enemyProvince, provinceToNumberTroopsMap.get(enemyProvince) + qty);
         initializeProvinceLayers();
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
@@ -262,7 +262,7 @@ public class GloriaRomanusController{
         printMessageToTerminal("fail to add solider");
       }else{
         printMessageToTerminal(qty + "soliders added to" + myProvince);
-        provinceToNumberTroopsMap.put(myProvince, qty);
+        provinceToNumberTroopsMap.put(myProvince, provinceToNumberTroopsMap.get(myProvince) + qty);
         initializeProvinceLayers();
       }
     }else{
