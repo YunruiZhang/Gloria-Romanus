@@ -55,5 +55,4 @@ public class GoalSystem implements GoalComponent{
     public String getType(){
         return goal.getType();
     }
-
 }

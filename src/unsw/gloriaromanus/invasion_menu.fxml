@@ -116,11 +116,8 @@
         <Label text="Output from interactions" />
         <TextArea fx:id="output_terminal" editable="false" prefHeight="158.0" prefWidth="230.0" text="" />
     </VBox>
-   <HBox prefHeight="0.0" prefWidth="230.0">
-      <children>
-         <Button mnemonicParsing="false" onAction="#nextTurnButton" text="Next Turn!" />
-         <Label text="                      " />
-          <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
-      </children>
-   </HBox>
+   <Button mnemonicParsing="false" onAction="#nextTurnButton" prefHeight="27.0" prefWidth="324.0" text="Next Turn!" />
+    <Button onAction="#clickedSwitchMenuinvasive" prefHeight="27.0" prefWidth="231.0" text="Main Menu" />
+   <Button mnemonicParsing="false" onAction="#visshop123" prefHeight="27.0" prefWidth="243.0" text="Visit Shop" />
+   <Button mnemonicParsing="false" onAction="#visATO" prefHeight="27.0" prefWidth="285.0" text="Visit Tax Office" />
 </VBox>

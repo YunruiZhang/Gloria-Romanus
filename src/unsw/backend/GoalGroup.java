@@ -31,7 +31,6 @@ public class GoalGroup implements GoalComponent{
             return goal1.checkMeet(player) || goal2.checkMeet(player);
         }
     }
-
     public String getType(){
 
         return goal1.getType() + " " + goal2.getType();

@@ -7,57 +7,53 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public class TroopShopController extends BasicMenuController{
-    @FXML
-    private TextField troopqty;
+public class TroopShopController extends MenuController {
+    //static private TroopShopController controller;
+    //static private Scene scene;
 
-    @FXML
-    private ComboBox<String> trooptype;
+    public static void displayTroopShop(String title, String message) throws IOException{
+        Stage window = new Stage();
 
-    @FXML
-    private ComboBox<String> trooptype1;
-
-    @FXML
-    private TextArea out_terminal1;
-
-
-    public TroopShopController () {
-        trooptype.getItems().clear();
-        if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
-        trooptype1.getItems().clear();
-        if (getParent().retriveUnitName(2) != null) trooptype1.getItems().addAll(getParent().retriveUnitName(2));
-    }
-
-    @FXML
-    public void buyTroopButtonp2(ActionEvent e) throws IOException {
-        try {
-            int qty = Integer.parseInt(troopqty.getText());
-            getParent().buyTroopButton(e, trooptype1.getValue(), 2, qty);
-        } catch (NumberFormatException g) {
-            out_terminal1.appendText("Text entered should be a number");
-        }
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+        /*
+        controller = new TroopShopController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TroopShop.fxml"));
         
-    }
+        loader.setController(controller);
 
-    @FXML
-    public void buyTroopButton(ActionEvent e) throws IOException {
-        try {
-            int qty = Integer.parseInt(troopqty.getText());
-            getParent().buyTroopButton(e, trooptype.getValue(), 1, qty);
-        } catch (NumberFormatException g) {
-            out_terminal1.appendText("Text entered should be a number");
-        }
-    }
+        // load into a Parent node called root
+        Parent root = loader.load();
+        scene = new Scene(root, 800, 600);
+        */
+        
+        Label label = new Label();
+        label.setText(message);
+        Button closeButton = new Button("Close this window");
+        closeButton.setOnAction(e -> window.close());
 
-    @FXML
-    public void exitTroopShop(ActionEvent e) throws IOException {
-        //window.close();
-    }
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, closeButton);
+        layout.setAlignment(Pos.CENTER);
 
+        Scene scene = new Scene(layout);
+        
+        window.setScene(scene);
+        window.showAndWait();
+    }
 }
