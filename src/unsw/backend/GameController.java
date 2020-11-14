@@ -252,31 +252,30 @@ public class GameController{
      * @param Army the player's army
      * @param source atteck from here
      * @param destt atteck here
-     * @return success or not
+     * @return 0 is draw 1 is win 2 is lose 3 is error
      */
-    public boolean Battle(Player py, ArrayList<Unit>Army, String source, String destt){
+    public int Battle(Player py, ArrayList<Unit>Army, String source, String destt){
         Province src = getProvinceFromString(source);
         if(src == null){
             System.out.println("province source does not exist");
-            return false;
+            return 3;
         } 
         Province dest = getProvinceFromString(destt);
         if(dest == null){
             System.out.println("province destt does not exist");
-            return false;
+            return 3;
         }   
         if(!adj.Check_adj(src, dest)){
-            return false;
+            return 3;
         }
-        Battle newbt = new Battle(Army, dest.getUnits());
+        BattleExtended newbt = new BattleExtended(Army, dest.getUnits(), src, dest);
         int result = newbt.StartBattle();
         if(result == 1){
             dest.getOwner().removeProvince(dest);
             py.addProvince(dest);
-            return true;
         }
         
-        return false;
+        return result;
 
     }
 

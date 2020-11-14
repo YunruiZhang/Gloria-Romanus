@@ -19,13 +19,13 @@ public class Shield {
         String[] d = {"HorseArcher", "Elephant", "Swordsman", "Camel", "Druid", "Cannon", "legionary"};
 
         if (Arrays.stream(a).anyMatch(type::equals)) {
-            this.shield = 0;
-        } else if (Arrays.stream(b).anyMatch(type::equals)) {
             this.shield = 1;
-        } else if (Arrays.stream(c).anyMatch(type::equals)) {
+        } else if (Arrays.stream(b).anyMatch(type::equals)) {
             this.shield = 2;
-        } else if (Arrays.stream(d).anyMatch(type::equals)){
+        } else if (Arrays.stream(c).anyMatch(type::equals)) {
             this.shield = 3;
+        } else if (Arrays.stream(d).anyMatch(type::equals)){
+            this.shield = 4;
         } 
     }
 
