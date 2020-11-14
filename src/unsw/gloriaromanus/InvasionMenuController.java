@@ -44,6 +44,10 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void initialize() {
+        attackCombo1fxid = new ListView<String>();
+        attackCombo2fxid = new ListView<String>();
+        moveUnitsel1 = new ListView<String>();
+        moveUnitsel12 = new ListView<String>();
         attackCombo1fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         attackCombo2fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         moveUnitsel1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
