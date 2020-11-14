@@ -57,6 +57,12 @@ public class BasicMenuController extends MenuController{
     private TextArea out_terminal;
 
     @FXML
+    private ComboBox getTax1;
+
+    @FXML
+    private ComboBox getTax2;
+
+    @FXML
 	public void initialize() {
         ArrayList<String> infra = new ArrayList<String>();
         //getParent().getBuildCost();
@@ -70,6 +76,11 @@ public class BasicMenuController extends MenuController{
         trooop.add("Chariot"); trooop.add("Elephant"); trooop.add("Swordsman"); trooop.add("Spearman"); trooop.add("Lancer");
         trooop.add("NetFighter"); trooop.add("Druid"); trooop.add("legionary"); 
         unitTypeMenu.getItems().addAll(trooop);
+        ArrayList<String> taxes = new ArrayList<String>();
+        taxes.add("10"); taxes.add("15"); taxes.add("20"); taxes.add("25");
+        getTax1.getItems().addAll(taxes);
+        getTax2.getItems().addAll(taxes);
+
 	}
 
     public void appendToTerminal(String message) {
@@ -148,5 +159,34 @@ public class BasicMenuController extends MenuController{
 
     }
 
+    @FXML
+    public void setTax1(ActionEvent e) throws IOException {
+        getParent().setTax(e, 1, getTax1.getValue());
+    }
+
+    @FXML
+    public void setTax2(ActionEvent e) throws IOException {
+        getParent().setTax(e, 2, getTax2.getValue());
+    }
+
+    @FXML
+    public void inc5p1(ActionEvent e) throws IOException {
+        getParent().changeTax(e, 1, 1);
+    }
+
+    @FXML
+    public void inc5p2(ActionEvent e) throws IOException {
+        getParent().changeTax(e, 2, 1);
+    }
+
+    @FXML
+    public void dec5p1(ActionEvent e) throws IOException {
+        getParent().changeTax(e, 1, 2);
+    }
+
+    @FXML
+    public void dec5p2(ActionEvent e) throws IOException {
+        getParent().changeTax(e, 2, 2);
+    }
     //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
 }
