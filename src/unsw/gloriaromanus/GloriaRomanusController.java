@@ -139,20 +139,20 @@ public class GloriaRomanusController{
     if(index == 1){
       int result = thegame.Battle(mine.getOwner(), Units, humanProvince, enemyProvince);
       if(result == 2){
-        printMessageToTerminal("loss battle!");
+        printMessageToTerminal("Lost battle!");
       }else if(result == 1){
         printMessageToTerminal("Won battle!");
       }else{
-        printMessageToTerminal("invalid input");
+        printMessageToTerminal("Invalid Input");
       }
     }else{
       int result = thegame.Battle(enemy.getOwner(), Units, enemyProvince, humanProvince);
       if(result == 2){
-        printMessageToTerminal("loss battle!");
+        printMessageToTerminal("Lost battle!");
       }else if(result == 1){
         printMessageToTerminal("Won battle!");
       }else{
-        printMessageToTerminal("invalid input");
+        printMessageToTerminal("Invalid Input");
       }
     }
     provinceToNumberTroopsMap.put(humanProvince, mine.totalSolider()); 
@@ -167,31 +167,31 @@ public class GloriaRomanusController{
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(enemyProvince);
       if(!thegame.bulid(temp.getOwner(), building, enemyProvince)){
-        printMessageToTerminal("fail to build the building");
+        printMessageToTerminal("Fail to start construction on the building");
       }else{
-        printMessageToTerminal(building + "is built in" + enemyProvince);
+        printMessageToTerminal(building + " is under construction in " + enemyProvince);
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       if(!thegame.bulid(temp.getOwner(), building, myProvince)){
-        printMessageToTerminal("fail to build the building");
+        printMessageToTerminal("Fail to start construction on the building");
       }else{
-        printMessageToTerminal(building + "is built in" + myProvince);
+        printMessageToTerminal(building + " is under construction in " + myProvince);
       }
     }else{
-      printMessageToTerminal("no province selected");
+      printMessageToTerminal("No province selected");
     }
   }
 
   public void nextTurnClick(ActionEvent e){
     thegame.nextTurn();
-    printMessageToTerminal("Next turn!!!!!");
+    printMessageToTerminal("Next turn !!");
   }
 
   public void moveArmy(ActionEvent e, ArrayList<String> unilist, int index, String province)throws IOException{
     if(unilist.size() == 0){
-      printMessageToTerminal("no unit selected");
+      printMessageToTerminal("No unit selected");
       return;
     }
     ArrayList<Unit> units = new ArrayList<Unit>();
@@ -204,12 +204,12 @@ public class GloriaRomanusController{
         String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
         Province mypp = thegame.getProvinceFromString(myProvince);
         if(!thegame.MoveUnit(mypp.getOwner(), units, myProvince, province)){
-          printMessageToTerminal("can not move the units");
+          printMessageToTerminal("Cannot move the units");
         }else{
           Province mypp1 = thegame.getProvinceFromString(province);
           provinceToNumberTroopsMap.put(myProvince, mypp.totalSolider()); 
           provinceToNumberTroopsMap.put(province, mypp1.totalSolider());
-          printMessageToTerminal("Units are moved!!!");
+          printMessageToTerminal("Units have been moved !!");
           addAllPointGraphics();
         }
       }
@@ -218,12 +218,12 @@ public class GloriaRomanusController{
         String EnemyProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
         Province Enemypp = thegame.getProvinceFromString(EnemyProvince);
         if(!thegame.MoveUnit(Enemypp.getOwner(), units, EnemyProvince, province)){
-          printMessageToTerminal("can not move the units");
+          printMessageToTerminal("Cannot move the units");
         }else{
           Province Enemypp1 = thegame.getProvinceFromString(province);
           provinceToNumberTroopsMap.put(EnemyProvince, Enemypp.totalSolider()); 
           provinceToNumberTroopsMap.put(province, Enemypp1.totalSolider());
-          printMessageToTerminal("Units are moved!!!");
+          printMessageToTerminal("Units have been moved !!");
           addAllPointGraphics();
         }
       }
@@ -296,7 +296,7 @@ public class GloriaRomanusController{
       }
       return names;
     }else{
-      printMessageToTerminal("no province selected");
+      printMessageToTerminal("No province has been selected.");
       return null;
     }
   }
@@ -306,20 +306,20 @@ public class GloriaRomanusController{
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(enemyProvince);
       if(!thegame.upgrade(temp.getOwner(), building, enemyProvince)){
-        printMessageToTerminal("fail to build the building");
+        printMessageToTerminal("Failed to upgrade the building");
       }else{
-        printMessageToTerminal(building + "is upgraded in" + enemyProvince);
+        printMessageToTerminal(building + " has been upgraded in "  + enemyProvince);
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       if(!thegame.upgrade(temp.getOwner(), building, myProvince)){
-        printMessageToTerminal("fail to build the building");
+        printMessageToTerminal("Failed to upgrade the building");
       }else{
-        printMessageToTerminal(building + "is upgraded in" + myProvince);
+        printMessageToTerminal(building + " has been upgraded in " + myProvince);
       }
     }else{
-      printMessageToTerminal("no province selected");
+      printMessageToTerminal("No province has been selected.");
     }
   }
 
@@ -383,9 +383,9 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(enemyProvince);
       Unit tempUnit = thegame.getUnitFromString(unitname);
       if(!thegame.addsolider(temp.getOwner(), enemyProvince, tempUnit, qty)){
-        printMessageToTerminal("fail to add solider");
+        printMessageToTerminal("Failed to add solider");
       }else{
-        printMessageToTerminal(qty + "soliders added to" + enemyProvince);
+        printMessageToTerminal(qty + " soliders added to " + enemyProvince);
         provinceToNumberTroopsMap.put(enemyProvince, provinceToNumberTroopsMap.get(enemyProvince) + qty);
         //initializeProvinceLayers();
         //resetSelections();  // reset selections in UI
@@ -397,16 +397,16 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(myProvince);
       Unit tempUnit = thegame.getUnitFromString(unitname);
       if(!thegame.addsolider(temp.getOwner(),myProvince, tempUnit, qty)){
-        printMessageToTerminal("fail to add solider");
+        printMessageToTerminal("Failed to add solider");
       }else{
-        printMessageToTerminal(qty + "soliders added to" + myProvince);
+        printMessageToTerminal(qty + " soliders added to " + myProvince);
         provinceToNumberTroopsMap.put(myProvince, provinceToNumberTroopsMap.get(myProvince) + qty);
         //initializeProvinceLayers();
         //resetSelections();  // reset selections in UI
         addAllPointGraphics(); // reset graphics
       }
     }else{
-      printMessageToTerminal("no province selected");
+      printMessageToTerminal("No province selected.");
     }
   }
 
@@ -415,16 +415,16 @@ public class GloriaRomanusController{
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
      
       if(thegame.createUnit(enemyProvince, unitType, name) == null){
-        printMessageToTerminal("fail to create the unit");
+        printMessageToTerminal("Failed to create the unit");
       }
     }else if(currentlySelectedHumanProvince != null && index == 1){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
 
       if(thegame.createUnit(myProvince, unitType, name) == null){
-        printMessageToTerminal("fail to create the unit");
+        printMessageToTerminal("Failed to create the unit");
       }
     }else{
-      printMessageToTerminal("no province selected");
+      printMessageToTerminal("No province selected");
     }
   }
 
