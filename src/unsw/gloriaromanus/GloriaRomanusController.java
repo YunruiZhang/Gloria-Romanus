@@ -129,40 +129,24 @@ public class GloriaRomanusController{
 
   }
 
-  public void clickedInvadeButton(ActionEvent e, int index) throws IOException {
-    /*if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
-      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      if(index == 1){
-        if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
-          Province temp = thegame.getProvinceFromString(humanProvince);
-          Province temp1 = thegame.getProvinceFromString(enemyProvince);
-          Boolean battle_result = thegame.Battle(temp.getOwner(), temp.getUnits(), humanProvince, enemyProvince);
-          if(battle_result){
-            printMessageToTerminal("Won battle!");
-          }else{
-            printMessageToTerminal("loss battle!");
-          }
-          provinceToNumberTroopsMap.put(humanProvince, temp.totalSolider());
-          provinceToNumberTroopsMap.put(enemyProvince, temp1.totalSolider());
-      }
-        resetSelections();  // reset selections in UI
-        addAllPointGraphics(); // reset graphics
-      }else{
-        printMessageToTerminal("Provinces not adjacent, cannot invade!");
-      }
+  public void clickedInvadeButton(ActionEvent e, int index, ArrayList<String> units) throws IOException {
 
-    }*/
     if(currentlySelectedHumanProvince == null || currentlySelectedEnemyProvince == null){
       printMessageToTerminal("Please select two provinces");
       return;
+    }
+    ArrayList<Unit> Units = new ArrayList<Unit>();
+    for(String temppp : units){
+      Unit tempunit = thegame.getUnitFromString(temppp);
+      Units.add(tempunit);
+
     }
     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
     String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
     Province mine = thegame.getProvinceFromString(humanProvince);
     Province enemy = thegame.getProvinceFromString(enemyProvince);
     if(index == 1){
-      int result = thegame.Battle(mine.getOwner(), mine.getUnits(), humanProvince, enemyProvince);
+      int result = thegame.Battle(mine.getOwner(), Units, humanProvince, enemyProvince);
       if(result == 2){
         printMessageToTerminal("loss battle!");
       }else if(result == 1){
@@ -171,7 +155,7 @@ public class GloriaRomanusController{
         printMessageToTerminal("invalid input");
       }
     }else{
-      int result = thegame.Battle(enemy.getOwner(), enemy.getUnits(), enemyProvince, humanProvince);
+      int result = thegame.Battle(enemy.getOwner(), Units, enemyProvince, humanProvince);
       if(result == 2){
         printMessageToTerminal("loss battle!");
       }else if(result == 1){
@@ -211,6 +195,7 @@ public class GloriaRomanusController{
 
   public void nextTurnClick(ActionEvent e){
     thegame.nextTurn();
+    printMessageToTerminal("Next turn!!!!!");
   }
 
   public void moveArmy(ActionEvent e, ArrayList<String> unilist, int index, String province)throws IOException{
