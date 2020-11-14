@@ -57,10 +57,10 @@ public class BasicMenuController extends MenuController{
     private TextArea out_terminal;
 
     @FXML
-    private ComboBox getTax1;
+    private ComboBox<String> getTax1;
 
     @FXML
-    private ComboBox getTax2;
+    private ComboBox<String> getTax2;
 
     @FXML
 	public void initialize() {
