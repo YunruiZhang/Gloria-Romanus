@@ -42,18 +42,6 @@ public class InvasionMenuController extends MenuController{
     @FXML
     private URL location; // has to be called location
 
-    @FXML
-    public void initialize() {
-        attackCombo1fxid = new ListView<String>();
-        attackCombo2fxid = new ListView<String>();
-        moveUnitsel1 = new ListView<String>();
-        moveUnitsel12 = new ListView<String>();
-        attackCombo1fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        attackCombo2fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        moveUnitsel1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        moveUnitsel12.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    }
-
     public void setInvadingProvince(String p) {
         invading_province.setText(p);
     }
@@ -145,6 +133,10 @@ public class InvasionMenuController extends MenuController{
     }
 
     public void refresherCall() {
+        attackCombo1fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        attackCombo2fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        moveUnitsel1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        moveUnitsel12.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         attackCombo1fxid.getItems().clear();
         if (getParent().retriveUnitName(1) != null) {
             for (String s : getParent().retriveUnitName(1)) {

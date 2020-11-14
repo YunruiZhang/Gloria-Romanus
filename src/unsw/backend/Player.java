@@ -122,5 +122,8 @@ public class Player implements Observer{
         }
     }
 
+    public String getGoal(){
+        return goalsystem.getType();
+    }
 }
 

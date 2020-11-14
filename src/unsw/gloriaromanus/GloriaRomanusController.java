@@ -106,7 +106,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"invasion_menu.fxml", "basic_menu.fxml"};
+    String []menus = {"GRCstartScreen.fxml","invasion_menu.fxml", "basic_menu.fxml", "TroopShop.fxml", "menuSelector.fxml", "TaxProv.fxml", "stats.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -116,15 +116,8 @@ public class GloriaRomanusController{
       menuController.setParent(this);
       controllerParentPairs.add(new Pair<MenuController, VBox>(menuController, root));
     }
-    FXMLLoader loader1 = new FXMLLoader(getClass().getResource("stats.fxml"));
-    VBox root1 = (VBox)loader1.load();
-    MenuController menuController1 = (MenuController)loader1.getController();
-    Pair<MenuController, VBox> statpair = new Pair<MenuController, VBox>(menuController1, root1);
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
-    stackPaneMain.getChildren().add(statpair.getValue());
-
     initializeProvinceLayers();
-
   }
 
   public void clickedInvadeButton(ActionEvent e, int index, ArrayList<String> units) throws IOException {
@@ -266,6 +259,7 @@ public class GloriaRomanusController{
       return gaulppstring;
     }
   }
+  
   public int getGoldAmount(ActionEvent e, int index){
     if(index == 1){
       return (int)romeplayer.getGold();
@@ -281,6 +275,7 @@ public class GloriaRomanusController{
       return gaulplayer.getGoal();
     }
   }
+
   public ArrayList<String> retriveUnitName(int index){
     if(index == 1 && currentlySelectedHumanProvince != null){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
@@ -668,8 +663,9 @@ public class GloriaRomanusController{
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
     }else if(controllerParentPairs.get(0).getKey() instanceof BasicMenuController){
       ((BasicMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
+    }else if(controllerParentPairs.get(0).getKey() instanceof TaxProvController){
+      ((TaxProvController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
     }
-
   }
 
   /**
@@ -682,10 +678,27 @@ public class GloriaRomanusController{
     }
   }
 
-  public void switchMenu() throws JsonParseException, JsonMappingException, IOException {
+  public void switchMenu(int a, int b) throws JsonParseException, JsonMappingException, IOException {
+    /*
     System.out.println("trying to switch menu");
     stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
     Collections.reverse(controllerParentPairs);
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
+    */
+    if (a == 0 && b == 4) {
+      stackPaneMain.getChildren().add(controllerParentPairs.get(6).getValue());
+    }
+    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).refresherCall();
+    }else if (controllerParentPairs.get(1).getKey() instanceof InvasionMenuController){
+        ((InvasionMenuController)controllerParentPairs.get(1).getKey()).refresherCall();
+    }
+    stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
+    Collections.swap(controllerParentPairs, 0, a);
+    Collections.swap(controllerParentPairs, 0, b);
+    stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
   }
+
 }
+
+
