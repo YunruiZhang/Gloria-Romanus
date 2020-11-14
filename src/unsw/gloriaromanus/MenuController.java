@@ -20,6 +20,27 @@ public abstract class MenuController {
 
     @FXML
     public void clickedSwitchMenu(ActionEvent e) throws Exception {
-        parent.switchMenu();
+        //parent.switchMenu();
+        TroopShopScreen.displayTroopShop("Title of Window", "Wow this alert box is awesome!");
+    }
+
+    @FXML
+    public void TroopShopSwitch(ActionEvent e) throws Exception {
+        parent.switchMenu("menuSelectortss");
+    }
+
+    @FXML
+    public void Startgameb(ActionEvent e) throws Exception {
+        parent.switchMenu("menuSelectorsgb");
+    }
+
+    @FXML
+    public void attackmenucalledb(ActionEvent e) throws Exception {
+        parent.switchMenu("invasion_menu");
+    }
+
+    @FXML
+    public void buildmenucalledb(ActionEvent e) throws Exception {
+        parent.switchMenu("basic_menu");
     }
 }

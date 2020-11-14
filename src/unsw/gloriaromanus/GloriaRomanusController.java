@@ -106,7 +106,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"invasion_menu.fxml", "basic_menu.fxml"};
+    String []menus = {"GRCstartScreen.fxml","invasion_menu.fxml", "basic_menu.fxml", "TroopShop.fxml", "menuSelector.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -618,10 +618,24 @@ public class GloriaRomanusController{
     }
   }
 
-  public void switchMenu() throws JsonParseException, JsonMappingException, IOException {
-    System.out.println("trying to switch menu");
-    stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
-    Collections.reverse(controllerParentPairs);
-    stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
+  public void switchMenu(String s) throws JsonParseException, JsonMappingException, IOException {
+    if (s.equals("menuSelectortss")) {
+      stackPaneMain.getChildren().remove(controllerParentPairs.get(3).getValue());
+      //Collections.reverse(controllerParentPairs);
+      stackPaneMain.getChildren().add(controllerParentPairs.get(4).getValue());
+    } else if (s.equals("menuSelectorsgb")) {
+      stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
+      //Collections.reverse(controllerParentPairs);
+      stackPaneMain.getChildren().add(controllerParentPairs.get(4).getValue());
+    } else if (s.equals("invasion_menu")) {
+      stackPaneMain.getChildren().remove(controllerParentPairs.get(4).getValue());
+      //Collections.reverse(controllerParentPairs);
+      stackPaneMain.getChildren().add(controllerParentPairs.get(1).getValue());
+    }
+    else if (s.equals("basic_menu")) {
+      stackPaneMain.getChildren().remove(controllerParentPairs.get(4).getValue());
+      //Collections.reverse(controllerParentPairs);
+      stackPaneMain.getChildren().add(controllerParentPairs.get(2).getValue());
+    } 
   }
 }

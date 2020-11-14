@@ -44,10 +44,12 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void initialize() {
+        /*
         attackCombo1fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         attackCombo2fxid.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         moveUnitsel1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         moveUnitsel12.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        */
     }
 
     public void setInvadingProvince(String p) {

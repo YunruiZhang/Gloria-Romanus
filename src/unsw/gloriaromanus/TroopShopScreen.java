@@ -1,36 +1,51 @@
 package unsw.gloriaromanus;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import java.io.IOException;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 public class TroopShopScreen {
 
-    private Stage stage;
-    private String title;
-    private TroopShopController controller;
-    private Scene scene;
+    //static private TroopShopController controller;
+    //static private Scene scene;
 
+    public static void displayTroopShop(String title, String message) throws IOException{
+        Stage window = new Stage();
 
-    public TroopShopScreen(Stage stage) throws IOException {
-        this.stage = stage;
-        title = "Troop Shop";
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
 
+        /*
         controller = new TroopShopController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TroopShop.fxml"));
         loader.setController(controller);
-
-        // load into a Parent node called root
         Parent root = loader.load();
         scene = new Scene(root, 800, 600);
-    }
+        */
+        
+        Label label = new Label();
+        label.setText(message);
+        Button closeButton = new Button("Close this window");
+        closeButton.setOnAction(e -> window.close());
 
-    public void start() {
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, closeButton);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        
+        window.setScene(scene);
+        window.showAndWait();
     }
 		
 }
