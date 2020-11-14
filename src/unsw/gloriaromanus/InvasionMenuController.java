@@ -64,13 +64,25 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
-        getParent().clickedInvadeButton(e, 1);
+        ObservableList<Integer> selectedIndices = attackCombo1fxid.getSelectionModel().getSelectedIndices();
+        ObservableList<String> selectedStuff = attackCombo1fxid.getItems();
+        ArrayList<String> toOut = new ArrayList<String>();
+        for (int i : selectedIndices) {
+            toOut.add(selectedStuff.get(i));
+        }
+        getParent().clickedInvadeButton(e, 1, toOut);
         refresherCall();
     }
 
     @FXML
     public void clickedInvadeButton2(ActionEvent e) throws IOException {
-        getParent().clickedInvadeButton(e, 2);
+        ObservableList<Integer> selectedIndices = attackCombo2fxid.getSelectionModel().getSelectedIndices();
+        ObservableList<String> selectedStuff = attackCombo2fxid.getItems();
+        ArrayList<String> toOut = new ArrayList<String>();
+        for (int i : selectedIndices) {
+            toOut.add(selectedStuff.get(i));
+        }
+        getParent().clickedInvadeButton(e, 2, toOut);
         refresherCall();
     }
 
@@ -81,7 +93,6 @@ public class InvasionMenuController extends MenuController{
         ArrayList<String> toOut = new ArrayList<String>();
         for (int i : selectedIndices) {
             toOut.add(selectedStuff.get(i));
-            System.out.println(selectedStuff.get(i));
         }
         getParent().moveArmy(e, toOut, 1, movecombo1fxid.getValue());
         refresherCall();
@@ -94,7 +105,6 @@ public class InvasionMenuController extends MenuController{
         ArrayList<String> toOutt = new ArrayList<String>();
         for (int i : selectedIndices) {
             toOutt.add(selectedStuff.get(i));
-            System.out.println(selectedStuff.get(i));
         }
         getParent().moveArmy(e, toOutt, 2, movecombo2fxid.getValue());
         refresherCall();

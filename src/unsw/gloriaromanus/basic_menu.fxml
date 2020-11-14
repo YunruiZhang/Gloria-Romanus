@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="403.0" prefHeight="563.0" prefWidth="403.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
+<VBox maxWidth="403.0" prefHeight="708.0" prefWidth="403.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -30,7 +30,7 @@
             </fills>
         </Background>
     </background>
-   <HBox prefHeight="100.0" prefWidth="200.0">
+   <HBox prefHeight="25.0" prefWidth="383.0">
       <children>
          <Label text="                                                         " />
          <Button mnemonicParsing="false" onAction="#refreshClicked" text="Refresh" />
@@ -101,6 +101,49 @@
          <Button mnemonicParsing="false" onAction="#buyTroopButtonp2" text="Confirm P2" />
       </children>
    </HBox>
-   <TextArea fx:id="out_terminal" prefHeight="200.0" prefWidth="200.0" />
+   <Label prefHeight="40.0" prefWidth="357.0" text="                     SET TAX" textAlignment="CENTER" textFill="#bd1ddd">
+      <font>
+         <Font name="Chalkboard SE Light" size="16.0" />
+      </font>
+   </Label>
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <VBox prefHeight="49.0" prefWidth="192.0">
+            <children>
+               <Label text="                              Player 1">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <ComboBox fx:id="getTax1" onAction="#setTax1" prefHeight="27.0" prefWidth="195.0" promptText="choose tax level" />
+               <Label text="                                      OR" />
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#inc5p1" prefHeight="27.0" prefWidth="101.0" text="increase 5%" />
+                     <Button mnemonicParsing="false" onAction="#dec5p1" prefHeight="27.0" prefWidth="91.0" text="decrease 5%" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+         <VBox prefHeight="49.0" prefWidth="191.0">
+            <children>
+               <Label text="                              Player 2">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <ComboBox fx:id="getTax2" onAction="#setTax2" prefHeight="27.0" prefWidth="192.0" promptText="choose tax level" />
+               <Label text="                                      OR" />
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#inc5p2" prefHeight="27.0" prefWidth="95.0" text="increase 5%" />
+                     <Button mnemonicParsing="false" onAction="#dec5p2" prefHeight="27.0" prefWidth="99.0" text="decrease 5%" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
+   <TextArea fx:id="out_terminal" prefHeight="96.0" prefWidth="383.0" />
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
 </VBox>
