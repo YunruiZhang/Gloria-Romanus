@@ -48,4 +48,14 @@ public abstract class MenuController {
     public void clickedSwitchMenuinvasive(ActionEvent e) throws Exception {
         parent.switchMenu(1, 4);
     }
+
+    @FXML
+    public void clickedSwitchMenufromTaxProv(ActionEvent e) throws Exception {
+        parent.switchMenu(6, 4);
+    }
+
+    @FXML 
+    public void taxretebuttionb(ActionEvent e) throws Exception {
+        parent.switchMenu(4, 6);
+    }
 }

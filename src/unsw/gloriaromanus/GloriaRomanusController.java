@@ -106,7 +106,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"GRCstartScreen.fxml","invasion_menu.fxml", "basic_menu.fxml", "TroopShop.fxml", "menuSelector.fxml", "stats.fxml"};
+    String []menus = {"GRCstartScreen.fxml","invasion_menu.fxml", "basic_menu.fxml", "TroopShop.fxml", "menuSelector.fxml", "stats.fxml", "TaxProv.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -647,8 +647,9 @@ public class GloriaRomanusController{
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
     }else if(controllerParentPairs.get(0).getKey() instanceof BasicMenuController){
       ((BasicMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
+    }else if(controllerParentPairs.get(0).getKey() instanceof TaxProvController){
+      ((BasicMenuController)controllerParentPairs.get(0).getKey()).appendToTerminal(message);
     }
-
   }
 
   /**
@@ -671,8 +672,10 @@ public class GloriaRomanusController{
     if (a == 0 && b == 4) {
       stackPaneMain.getChildren().add(controllerParentPairs.get(5).getValue());
     }
-    stackPaneMain.getChildren().remove(controllerParentPairs.get(a).getValue());
-    stackPaneMain.getChildren().add(controllerParentPairs.get(b).getValue());
+    stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
+    Collections.swap(controllerParentPairs, 0, a);
+    Collections.swap(controllerParentPairs, 0, b);
+    stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
   }
 
 }
