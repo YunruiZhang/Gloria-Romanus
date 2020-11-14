@@ -18,4 +18,8 @@ public class WealthGoal implements GoalComponent{
             return false;
         }
     }
+
+    public String getType(){
+        return "wealth";
+    }
 }

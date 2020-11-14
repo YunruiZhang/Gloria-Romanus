@@ -51,11 +51,41 @@ public abstract class MenuController {
 
     @FXML
     public void clickedSwitchMenufromTaxProv(ActionEvent e) throws Exception {
-        parent.switchMenu(6, 4);
+        parent.switchMenu(5, 4);
     }
 
     @FXML 
     public void taxretebuttionb(ActionEvent e) throws Exception {
-        parent.switchMenu(4, 6);
+        parent.switchMenu(4, 5);
+    }
+
+    @FXML 
+    public void darthvadar123(ActionEvent e) throws Exception {
+        parent.switchMenu(5, 2);
+    }
+
+    @FXML 
+    public void visshop123(ActionEvent e) throws Exception {
+        parent.switchMenu(1, 2);
+    }
+
+    @FXML 
+    public void visATO(ActionEvent e) throws Exception {
+        parent.switchMenu(1, 5);
+    }
+
+    @FXML 
+    public void bmamam(ActionEvent e) throws Exception {
+        parent.switchMenu(2, 1);
+    }
+
+    @FXML 
+    public void bmvto(ActionEvent e) throws Exception {
+        parent.switchMenu(2, 5);
+    }
+
+    @FXML 
+    public void stAMAMtax(ActionEvent e) throws Exception {
+        parent.switchMenu(5, 1);
     }
 }

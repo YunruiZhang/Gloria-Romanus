@@ -14,4 +14,8 @@ public class TreasuryGoal implements GoalComponent {
             return false;
         }
     }
+
+    public String getType(){
+        return "treasure";
+    }
 }

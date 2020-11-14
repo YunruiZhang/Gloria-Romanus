@@ -145,7 +145,11 @@ public class BasicMenuController extends MenuController{
         if (getParent().retriveUnitName(2) != null) trooptype1.getItems().addAll(getParent().retriveUnitName(2));
         trooptype.getItems().clear();
         if (getParent().retriveUnitName(1) != null) trooptype.getItems().addAll(getParent().retriveUnitName(1));
+    }
 
+    @FXML
+    public void bmNEXTturn(ActionEvent e) throws IOException {
+        getParent().nextTurnClick(e);
     }
     //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
 }
