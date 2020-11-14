@@ -52,4 +52,8 @@ public class GoalSystem implements GoalComponent{
         return goal.checkMeet(player);
     }
 
+    public String getType(){
+        return goal.getType();
+    }
+
 }
