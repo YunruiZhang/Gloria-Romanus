@@ -259,7 +259,7 @@ public class GloriaRomanusController{
       return gaulppstring;
     }
   }
-
+  
   public int getGoldAmount(ActionEvent e, int index){
     if(index == 1){
       return (int)romeplayer.getGold();

@@ -31,6 +31,9 @@ public class Player implements Observer{
         }
     }
 
+    public String getGoal(){
+        return goalsystem.getType();
+    }
     /**
      * get the current turn 
      * @return the current turn
