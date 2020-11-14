@@ -34,4 +34,9 @@
          <Font name="Rockwell" size="14.0" />
       </font>
    </Button>
+   <Button mnemonicParsing="false" onAction="#taxretebuttionb" prefHeight="99.0" prefWidth="250.0" text="SET TAX RATES" textFill="#9d40b8">
+      <font>
+         <Font name="Rockwell" size="14.0" />
+      </font>
+   </Button>
 </VBox>
