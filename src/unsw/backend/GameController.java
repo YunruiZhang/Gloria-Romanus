@@ -105,6 +105,7 @@ public class GameController{
         for(Unit tmp: Army){
             tmp.move(dest, point);
         }
+        //dest.getUnits().addAll(Army);
         return true;
     }
 
@@ -268,13 +269,20 @@ public class GameController{
         if(!adj.Check_adj(src, dest)){
             return 3;
         }
+        
         BattleExtended newbt = new BattleExtended(Army, dest.getUnits(), src, dest);
         int result = newbt.StartBattle();
         if(result == 1){
             dest.getOwner().removeProvince(dest);
             py.addProvince(dest);
+            for(Province tpp: provinces){
+                if(tpp.getName().equals(destt)){
+                    tpp.changeOwner(py);
+                    tpp.setFaction(py.getFaction());
+                }
+            }
         }
-        
+        src.getUnits().removeAll(Army);
         return result;
 
     }
