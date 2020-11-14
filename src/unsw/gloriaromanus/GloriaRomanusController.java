@@ -176,6 +176,7 @@ public class GloriaRomanusController{
     }
     provinceToNumberTroopsMap.put(humanProvince, mine.totalSolider()); 
     provinceToNumberTroopsMap.put(enemyProvince, enemy.totalSolider());
+    provinceToOwningFactionMap = getProvinceToOwningFactionMap();
     addAllPointGraphics();
     resetSelections();  // reset selections in UI
   }
