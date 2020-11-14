@@ -120,7 +120,7 @@
       <children>
          <Button mnemonicParsing="false" onAction="#nextTurnButton" text="Next Turn!" />
          <Label text="                      " />
-          <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
+          <Button onAction="#clickedSwitchMenuinvasive" text="Switch Menus" />
       </children>
    </HBox>
 </VBox>

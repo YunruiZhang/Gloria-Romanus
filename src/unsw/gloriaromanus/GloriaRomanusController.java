@@ -106,7 +106,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"invasion_menu.fxml", "basic_menu.fxml"};
+    String []menus = {"GRCstartScreen.fxml","invasion_menu.fxml", "basic_menu.fxml", "TroopShop.fxml", "menuSelector.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -668,10 +668,14 @@ public class GloriaRomanusController{
     }
   }
 
-  public void switchMenu() throws JsonParseException, JsonMappingException, IOException {
+  public void switchMenu(int a, int b) throws JsonParseException, JsonMappingException, IOException {
+    /*
     System.out.println("trying to switch menu");
     stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
     Collections.reverse(controllerParentPairs);
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
+    */
+    stackPaneMain.getChildren().remove(controllerParentPairs.get(a).getValue());
+    stackPaneMain.getChildren().add(controllerParentPairs.get(b).getValue());
   }
 }
