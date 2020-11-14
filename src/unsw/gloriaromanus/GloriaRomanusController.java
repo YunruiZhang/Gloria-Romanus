@@ -116,14 +116,12 @@ public class GloriaRomanusController{
       menuController.setParent(this);
       controllerParentPairs.add(new Pair<MenuController, VBox>(menuController, root));
     }
-    /*
     FXMLLoader loader1 = new FXMLLoader(getClass().getResource("stats.fxml"));
     VBox root1 = (VBox)loader1.load();
     MenuController menuController1 = (MenuController)loader1.getController();
     Pair<MenuController, VBox> statpair = new Pair<MenuController, VBox>(menuController1, root1);
-    */
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
-    //stackPaneMain.getChildren().add(statpair.getValue());
+    stackPaneMain.getChildren().add(statpair.getValue());
 
     initializeProvinceLayers();
 
