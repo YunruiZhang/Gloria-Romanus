@@ -29,13 +29,16 @@ public class Armour {
             this.armour = 4;
         } else if (Arrays.stream(e).anyMatch(type::equals)){
             this.armour = 5;
-        } 
+        } else {
+            this.armour = 1;
+        }
     }
 
     /**
      * @return double return the armour
      */
     public double getArmour() {
+        System.out.println("armour is -> "+armour);
         return armour;
     }
 
