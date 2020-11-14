@@ -59,5 +59,10 @@ public class TaxProvController extends MenuController {
     public void dec5p2(ActionEvent e) throws IOException {
         getParent().changeTax(e, 2, 2);
     }
+
+    @FXML
+    public void stnetrun(ActionEvent e) throws IOException {
+        getParent().nextTurnClick(e);
+    }
     
 }

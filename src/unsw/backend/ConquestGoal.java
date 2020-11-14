@@ -15,4 +15,7 @@ public class ConquestGoal implements GoalComponent{
         }
     }
     
+    public String getType(){
+        return "conquest";
+    }
 }

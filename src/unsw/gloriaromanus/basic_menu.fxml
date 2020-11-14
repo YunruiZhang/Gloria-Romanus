@@ -102,5 +102,8 @@
       </children>
    </HBox>
    <TextArea fx:id="out_terminal" prefHeight="96.0" prefWidth="383.0" />
-    <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
+   <Button mnemonicParsing="false" onAction="#bmNEXTturn" prefHeight="27.0" prefWidth="399.0" text="Next Turn" />
+    <Button onAction="#clickedSwitchMenu" prefHeight="27.0" prefWidth="395.0" text="Main Menu" />
+   <Button mnemonicParsing="false" onAction="#bmamam" prefHeight="27.0" prefWidth="443.0" text="Attack and Move Action Menu" />
+   <Button mnemonicParsing="false" onAction="#bmvto" prefHeight="27.0" prefWidth="391.0" text="Visit Tax Office" />
 </VBox>
