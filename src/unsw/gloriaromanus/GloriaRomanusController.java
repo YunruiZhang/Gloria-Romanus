@@ -669,6 +669,11 @@ public class GloriaRomanusController{
   }
 
   public void switchMenu() throws JsonParseException, JsonMappingException, IOException {
+    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).refresherCall();
+    }else if (controllerParentPairs.get(1).getKey() instanceof InvasionMenuController){
+        ((InvasionMenuController)controllerParentPairs.get(1).getKey()).refresherCall();
+    }
     System.out.println("trying to switch menu");
     stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
     Collections.reverse(controllerParentPairs);
