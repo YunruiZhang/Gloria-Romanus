@@ -325,6 +325,60 @@ public class GloriaRomanusController{
     }
   }
 
+  public void setTax(ActionEvent e, int index, String tax){
+    int level;
+    if(tax.equals("10")){
+      level = 1;
+    }else if(tax.equals("15")){
+      level = 2;
+    }else if(tax.equals("20")){
+      level = 3;
+    }else{
+      level = 4;
+    }
+    if(index == 1){
+      if(currentlySelectedHumanProvince == null){
+        printMessageToTerminal("Please select the province");
+      }
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      temp.setTax(level);
+    }else{
+      if(currentlySelectedEnemyProvince == null){
+        printMessageToTerminal("Please select the province");
+      }
+      String myProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      temp.setTax(level);
+    }
+  }
+//1 for increase 2 for decrease
+  public void changeTax(ActionEvent e, int index, int flag){
+    if(index == 1){
+      if(currentlySelectedHumanProvince == null){
+        printMessageToTerminal("Please select the province");
+      }
+      String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      if(flag == 1){
+        temp.increaseTaxRate();
+      }else{
+        temp.decreaseTaxRate();
+      }
+    }else{
+      if(currentlySelectedEnemyProvince == null){
+        printMessageToTerminal("Please select the province");
+      }
+      String myProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      Province temp = thegame.getProvinceFromString(myProvince);
+      if(flag == 1){
+        temp.increaseTaxRate();
+      }else{
+        temp.decreaseTaxRate();
+      }
+    }
+  }
+
   public void buyTroopButton(ActionEvent e, String unitname, int index, int qty) throws IOException {
     if(currentlySelectedEnemyProvince != null && index == 2){
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
