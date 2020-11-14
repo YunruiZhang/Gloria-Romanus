@@ -266,7 +266,21 @@ public class GloriaRomanusController{
       return gaulppstring;
     }
   }
+  public int getGoldAmount(ActionEvent e, int index){
+    if(index == 1){
+      return (int)romeplayer.getGold();
+    }else{
+      return (int)gaulplayer.getGold();
+    }
+  }
 
+  public String getGoal(int index){
+    if(index == 1){
+      return romeplayer.getGoal();
+    }else{
+      return gaulplayer.getGoal();
+    }
+  }
   public ArrayList<String> retriveUnitName(int index){
     if(index == 1 && currentlySelectedHumanProvince != null){
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
