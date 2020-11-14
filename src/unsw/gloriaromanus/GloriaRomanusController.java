@@ -156,16 +156,22 @@ public class GloriaRomanusController{
     Province mine = thegame.getProvinceFromString(humanProvince);
     Province enemy = thegame.getProvinceFromString(enemyProvince);
     if(index == 1){
-      if(!thegame.Battle(mine.getOwner(), mine.getUnits(), humanProvince, enemyProvince)){
+      int result = thegame.Battle(mine.getOwner(), mine.getUnits(), humanProvince, enemyProvince);
+      if(result == 2){
         printMessageToTerminal("loss battle!");
-      }else{
+      }else if(result == 1){
         printMessageToTerminal("Won battle!");
+      }else{
+        printMessageToTerminal("invalid input");
       }
     }else{
-      if(!thegame.Battle(enemy.getOwner(), enemy.getUnits(), enemyProvince, humanProvince)){
+      int result = thegame.Battle(enemy.getOwner(), enemy.getUnits(), enemyProvince, humanProvince);
+      if(result == 2){
         printMessageToTerminal("loss battle!");
-      }else{
+      }else if(result == 1){
         printMessageToTerminal("Won battle!");
+      }else{
+        printMessageToTerminal("invalid input");
       }
     }
     provinceToNumberTroopsMap.put(humanProvince, mine.totalSolider()); 
