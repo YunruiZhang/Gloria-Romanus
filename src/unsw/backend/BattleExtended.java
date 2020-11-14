@@ -39,9 +39,6 @@ public class BattleExtended {
                 double soliders = (double) tp1.getSoldiers();
                 int dies = (int)Math.ceil(soliders*random1);
                 tp1.soliders_die(dies);
-                if(tp1.getSoldiers() == 0){
-                    Myarmy.remove(tp1);
-                }
             }
             dest.getUnits().addAll(Myarmy);
         }else{
@@ -52,9 +49,6 @@ public class BattleExtended {
                 double soliders = (double) tp.getSoldiers();
                 int dies = (int)Math.ceil(soliders*random);
                 tp.soliders_die(dies);
-                if(tp.getSoldiers() == 0){
-                    Myarmy.remove(tp);
-                }
             }
             Myarmy.clear();
         }
