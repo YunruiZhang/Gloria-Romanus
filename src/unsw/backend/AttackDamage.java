@@ -29,6 +29,8 @@ public class AttackDamage {
             this.damage = 4;
         } else if (Arrays.stream(e).anyMatch(type::equals)){
             this.damage = 5;
+        }else{
+            this.damage = 1;
         }
     }
     

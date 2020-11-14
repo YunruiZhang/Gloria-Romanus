@@ -92,14 +92,14 @@ public class UnitTest{
         assertEquals(y1.getSoldiers(), 4);
 
 
-        if(newGame.Battle(temp, Army, "Thracia", "Bithynia et Pontus")){
+        /*if(newGame.Battle(temp, Army, "Thracia", "Bithynia et Pontus")){
             System.out.println("WE WON THE BATTLE HOORRRAAAAYYYYY :) :) :) :) :) :) :) :) :) :) :) :) ");
         } else {
             System.out.println("FUCK MAN WE LOST THE BATTLE FML :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( :(( ");
         }
 
         //atteck Bithynia et Pontus
-        //from Thracia
+        //from Thracia*/
 
     }
 

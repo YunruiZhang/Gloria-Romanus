@@ -16,14 +16,18 @@ public class BattleExtended {
     }
 
     public int StartBattle(){
-        int MyarmyStrength = 0;
-        int EnemyarmyStrength = 0;
+        double MyarmyStrength = 0;
+        double EnemyarmyStrength = 0;
         int result;
         for(Unit temp : Myarmy){
-            MyarmyStrength += temp.getSoldiers() * temp.getAttackDamage() * temp.GetArmour();
+            if(temp.getSoldiers() != 0){
+                MyarmyStrength += temp.getSoldiers() * temp.getAttackDamage() * temp.GetArmour();
+            }
         }
         for(Unit temp1 : Enemyarmy){
-            EnemyarmyStrength += temp1.getSoldiers() * temp1.getAttackDamage() * temp1.GetArmour();
+            if(temp1.getSoldiers() != 0){
+                EnemyarmyStrength += temp1.getSoldiers() * temp1.getAttackDamage() * temp1.GetArmour();
+            }
         }
         double winChance = MyarmyStrength/(MyarmyStrength + EnemyarmyStrength);
         if( new Random().nextDouble() <= winChance ){
