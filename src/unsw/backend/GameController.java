@@ -313,9 +313,19 @@ public class GameController{
      */
     public void removeFromProvince(ArrayList<Unit> Army){
         Province temp = Army.get(0).getLocation();
-        //String name = temp
-        for(Unit temp1: Army){
-            temp.removeUnit(temp1);
+        String name = temp.getName();
+        Province temp1 = null;
+        for(Province pp:provinces){
+            if(pp.getName().equals(name)){
+                temp1 =pp;
+            }
+        }
+        if(temp1 == null){
+            return;
+        }
+        for(Unit temp2: Army){
+            temp.removeUnit(temp2);
+            temp1.removeUnit(temp2);
         }
 
     }
