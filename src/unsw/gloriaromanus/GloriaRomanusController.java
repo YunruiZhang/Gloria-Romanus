@@ -341,6 +341,7 @@ public class GloriaRomanusController{
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       temp.setTax(level);
+      printMessageToTerminal("the tax level is set to level" + level);
     }else{
       if(currentlySelectedEnemyProvince == null){
         printMessageToTerminal("Please select the province");
@@ -348,6 +349,7 @@ public class GloriaRomanusController{
       String myProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       temp.setTax(level);
+      printMessageToTerminal("the tax level is set to level" + level);
     }
   }
 //1 for increase 2 for decrease
@@ -360,8 +362,10 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(myProvince);
       if(flag == 1){
         temp.increaseTaxRate();
+        printMessageToTerminal("the tax level is increased by one level" );
       }else{
         temp.decreaseTaxRate();
+        printMessageToTerminal("the tax level is decreased by one level" );
       }
     }else{
       if(currentlySelectedEnemyProvince == null){
@@ -371,8 +375,10 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(myProvince);
       if(flag == 1){
         temp.increaseTaxRate();
+        printMessageToTerminal("the tax level is increased by one level" );
       }else{
         temp.decreaseTaxRate();
+        printMessageToTerminal("the tax level is decreased by one level" );
       }
     }
   }
