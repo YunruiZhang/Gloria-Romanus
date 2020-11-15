@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="261.0" prefHeight="404.0" prefWidth="261.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.statsController">
+<VBox maxWidth="261.0" prefHeight="459.0" prefWidth="261.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.statsController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -91,6 +91,16 @@
                   </Pane>
                </children>
             </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="GOALS :   ">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="goalsP1" text="                                          " />
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Label prefHeight="27.0" prefWidth="244.0" text="                   PLAYER 2">
@@ -160,5 +170,15 @@
             </HBox>
          </children>
       </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="GOALS :   ">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="goalsP2" text="                                          " />
+         </children>
+      </HBox>
    </children>
 </VBox>
