@@ -8,6 +8,8 @@ public class Player implements Observer{
     private double gold;
     private int turn;
     GoalSystem goalsystem;
+    private int moneyborrowed;
+
 
     /**
      * constructor
@@ -19,6 +21,7 @@ public class Player implements Observer{
         this.gold = 10000;
         this.faction = faction;
         this.goalsystem = goalsystem;
+        this.moneyborrowed = 0;
     }
 
     /**
@@ -29,8 +32,24 @@ public class Player implements Observer{
         if(goalsystem.checkMeet(this)){
             System.out.println("Victory!!!");
         }
+        this.moneyborrowed = (int)(moneyborrowed*1.1);
     }
 
+    public void borrowmoney(int amount){
+        this.moneyborrowed += amount;
+    }
+
+    public int getLoan(){
+        return this.moneyborrowed;
+    }
+    public boolean payback(int amount){
+        if(amount > this.moneyborrowed || amount > this.gold){
+            return false;
+        }else{
+            this.moneyborrowed -= amount;
+            return true;
+        }
+    }
     public String getGoal(){
         return goalsystem.getType();
     }
