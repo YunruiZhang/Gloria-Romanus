@@ -37,10 +37,10 @@ public class BasicMenuController extends MenuController{
     private TextField troopqty;
     
     @FXML
-    private ChoiceBox<String> Infrabuymenu;
+    private ComboBox<String> Infrabuymenu;
 
     @FXML
-    private ChoiceBox<String> infraupgrademenu;
+    private ComboBox<String> infraupgrademenu;
 
     @FXML
     private ComboBox<String> trooptype;
@@ -49,7 +49,7 @@ public class BasicMenuController extends MenuController{
     private ComboBox<String> trooptype1;
 
     @FXML
-    private ChoiceBox<String> unitTypeMenu;
+    private ComboBox<String> unitTypeMenu;
 
     @FXML
     private TextArea out_terminal;
