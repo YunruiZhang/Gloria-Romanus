@@ -142,6 +142,25 @@ public class GloriaRomanusController{
     }
 
   }
+
+  public void borrowMoney(ActionEvent e, int amount, int index){
+    if(index == 1){
+      romeplayer.addGold(amount);
+      romeplayer.borrowmoney(amount);
+    }else{
+      gaulplayer.addGold(amount);
+      gaulplayer.borrowmoney(amount);
+    }
+  }
+
+  public boolean paybackmoney(ActionEvent e, int amount, int index){
+    if(index == 1){
+      return romeplayer.payback(amount);
+    }else{
+      return gaulplayer.payback(amount);
+    }
+  }
+
   public void clickedInvadeButton(ActionEvent e, int index, ArrayList<String> units) throws IOException {
 
     if(currentlySelectedHumanProvince == null || currentlySelectedEnemyProvince == null){
