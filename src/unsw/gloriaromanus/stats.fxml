@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Background?>
 <?import javafx.scene.layout.BackgroundFill?>
 <?import javafx.scene.layout.HBox?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="261.0" prefHeight="459.0" prefWidth="261.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.statsController">
+<VBox maxWidth="261.0" prefHeight="658.0" prefWidth="261.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.statsController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -168,17 +170,70 @@
                   </Pane>
                </children>
             </HBox>
+            <HBox prefHeight="46.0" prefWidth="241.0">
+               <children>
+                  <Label text="GOALS :   ">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="goalsP2" text="                                          " />
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <VBox prefHeight="204.0" prefWidth="241.0">
          <children>
-            <Label text="GOALS :   ">
+            <Label text="        BANK">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Bodoni 72 Oldstyle Book" size="44.0" />
                </font>
             </Label>
-            <Label fx:id="goalsP2" text="                                          " />
+            <Label text="Borrow Gold : ">
+               <font>
+                  <Font name="Bodoni 72 Smallcaps Book" size="17.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="30.0" prefWidth="241.0">
+               <children>
+                  <TextField fx:id="bankBorrowAmount" prefHeight="27.0" prefWidth="94.0" promptText="Enter amount" />
+                  <Button mnemonicParsing="false" onAction="#bankBorrowp1" text="Borrow p1" />
+                  <Button mnemonicParsing="false" onAction="#bankBorrowp2" text="Borrow p2" />
+               </children>
+            </HBox>
+            <Label text="Return Gold : ">
+               <font>
+                  <Font name="Bodoni 72 Smallcaps Book" size="17.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="29.0" prefWidth="241.0">
+               <children>
+                  <TextField fx:id="bankreturnAmount1" prefHeight="27.0" prefWidth="94.0" promptText="Enter amount" />
+                  <Button mnemonicParsing="false" onAction="#bankretp1" text="Return p1" />
+                  <Button mnemonicParsing="false" onAction="#bankretp2" text="Return p2" />
+               </children>
+            </HBox>
+            <HBox prefHeight="34.0" prefWidth="241.0">
+               <children>
+                  <Label text="Player 1 Amount due : ">
+                     <font>
+                        <Font name="Bodoni 72 Smallcaps Book" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="p1amtdue" text="                        " />
+               </children>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="241.0">
+               <children>
+                  <Label text="Player 2 Amount due : ">
+                     <font>
+                        <Font name="Bodoni 72 Smallcaps Book" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="p2amtdue" text="                       " />
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </VBox>
