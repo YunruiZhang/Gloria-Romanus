@@ -29,9 +29,9 @@
         </Background>
     </background>
    <children>
-      <Label prefHeight="27.0" prefWidth="244.0" text="                   PLAYER 1">
+      <Label prefHeight="27.0" prefWidth="244.0" text="  PLAYER 1 STATS">
          <font>
-            <Font size="21.0" />
+            <Font name="Arial Black" size="22.0" />
          </font>
       </Label>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -40,7 +40,7 @@
                <children>
                   <Label text="GOLD :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="P1gold" text="                              " />
@@ -50,7 +50,7 @@
                <children>
                   <Label text="WEALTH :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="WEALTHBOX1" text="                       " />
@@ -61,17 +61,17 @@
                      <children>
                         <Label text="NUMBER OF">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="18.0" />
                            </font>
                         </Label>
-                        <Label text="     OWNED">
+                        <Label text="  OWNED">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="19.0" />
                            </font>
                         </Label>
                         <Label text="PROVINCES">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="19.0" />
                            </font>
                         </Label>
                      </children>
@@ -79,8 +79,11 @@
                   <VBox prefHeight="72.0" prefWidth="28.0">
                      <children>
                         <Label text="  " />
-                        <Label text="." />
-                        <Label text="." />
+                        <Label text=" :">
+                           <font>
+                              <Font name="Copperplate" size="15.0" />
+                           </font></Label>
+                        <Label />
                         <Label text="  " />
                      </children>
                   </VBox>
@@ -93,7 +96,7 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="241.0">
                <children>
                   <Label text="GOALS :   ">
                      <font>
@@ -105,9 +108,9 @@
             </HBox>
          </children>
       </VBox>
-      <Label prefHeight="27.0" prefWidth="244.0" text="                   PLAYER 2">
+      <Label prefHeight="27.0" prefWidth="244.0" text="  PLAYER 2 STATS">
          <font>
-            <Font size="21.0" />
+            <Font name="Arial Black" size="21.0" />
          </font>
       </Label>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -116,17 +119,17 @@
                <children>
                   <Label text="GOLD :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="P2gold" text="                                       " />
+                  <Label fx:id="P2gold" prefWidth="104.0" text="                                       " />
                </children>
             </HBox>
             <HBox prefHeight="35.0" prefWidth="241.0">
                <children>
                   <Label text="WEALTH :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="WEALTHBOX2" text="                       " />
@@ -138,12 +141,12 @@
                      <children>
                         <Label text="NUMBER OF">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="18.0" />
                            </font>
                         </Label>
                         <Label text="     OWNED">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="18.0" />
                            </font>
                         </Label>
                         <Label text="PROVINCES">
@@ -156,8 +159,11 @@
                   <VBox prefHeight="72.0" prefWidth="28.0">
                      <children>
                         <Label text="  " />
-                        <Label text="." />
-                        <Label text="." />
+                        <Label text=" :">
+                           <font>
+                              <Font name="Copperplate" size="15.0" />
+                           </font></Label>
+                        <Label />
                         <Label text="  " />
                      </children>
                   </VBox>
