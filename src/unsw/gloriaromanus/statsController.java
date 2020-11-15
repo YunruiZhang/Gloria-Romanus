@@ -1,8 +1,12 @@
 package unsw.gloriaromanus;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class statsController extends MenuController{
     @FXML
@@ -17,6 +21,10 @@ public class statsController extends MenuController{
     private Label OWNEDPROVS1;
     @FXML
     private Label OWNEDPROVS2;
+    @FXML 
+    private Label goalsP1;
+    @FXML 
+    private Label goalsP2;
 
     public void updateGoldAmt(ActionEvent e) throws Exception {
         int goldA = getParent().getGoldAmount(e, 1);
@@ -31,5 +39,11 @@ public class statsController extends MenuController{
         int provsB = getParent().getNumberProvinces(e, 2);
         OWNEDPROVS1.setText(Integer.toString(provsA));
         OWNEDPROVS2.setText(Integer.toString(provsB));
+        //goalsP1
+        String goalsA = getParent().getGoal(1);
+        String goalsB = getParent().getGoal(2);
+        goalsP1.setText(goalsA);
+        goalsP2.setText(goalsB);
+        
     }
 }
