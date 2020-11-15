@@ -1,16 +1,16 @@
 package unsw.gloriaromanus;
 
 import java.io.IOException;
-import java.io.File;
+//import java.io.File;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.MediaView;
 
 public class GloriaRomanusApplication extends Application {
 
@@ -23,10 +23,10 @@ public class GloriaRomanusApplication extends Application {
     Parent root = loader.load();
     controller = loader.getController();
     Scene scene = new Scene(root);
-    String path = "/Users/arpitrulania/Documents/unsw/2511/internationalefr.mp3";
-    Media media = new Media(new File(path).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.setAutoPlay(true);
+    //String path = "/Users/arpitrulania/Documents/unsw/2511/w11b-420/internationalefr.mp3";
+    //Media media = new Media(new File(path).toURI().toString());
+    //MediaPlayer mediaPlayer = new MediaPlayer(media);
+    //mediaPlayer.setAutoPlay(true);
     // set up the stage
     stage.setTitle("Gloria Romanus");
     stage.setWidth(800);

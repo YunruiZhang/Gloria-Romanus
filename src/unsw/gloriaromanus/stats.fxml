@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Background?>
 <?import javafx.scene.layout.BackgroundFill?>
 <?import javafx.scene.layout.HBox?>
@@ -41,7 +40,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="P1gold" />
+                  <Label fx:id="P1gold" text="                              " />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
@@ -61,7 +60,7 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="P2gold" />
+                  <Label fx:id="P2gold" text="                                       " />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />

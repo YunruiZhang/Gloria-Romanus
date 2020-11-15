@@ -28,6 +28,7 @@ public class Province implements Observer{
         this.faction = faction;
         this.Owner = owner;
         this.tax = new Tax(this);
+        this.provinceWealth = 100;
     }
 
     public void update (Object o){

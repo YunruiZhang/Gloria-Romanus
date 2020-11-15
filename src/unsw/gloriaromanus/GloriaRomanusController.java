@@ -689,6 +689,12 @@ public class GloriaRomanusController{
     }
   }
 
+  public void updateGoldd(ActionEvent e) throws Exception {
+    if (controllerParentPairs.get(6).getKey() instanceof statsController){
+      ((statsController)controllerParentPairs.get(6).getKey()).updateGoldAmt(e);
+    }
+  }
+
   public void switchMenu(int a, int b) throws JsonParseException, JsonMappingException, IOException {
     /*
     System.out.println("trying to switch menu");
@@ -709,7 +715,6 @@ public class GloriaRomanusController{
     Collections.swap(controllerParentPairs, 0, b);
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
   }
-
 }
 
 
