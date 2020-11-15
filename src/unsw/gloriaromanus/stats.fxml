@@ -157,7 +157,7 @@
                         </Label>
                         <Label text="PROVINCES">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="Copperplate" size="19.0" />
                            </font>
                         </Label>
                      </children>
@@ -187,7 +187,7 @@
                <children>
                   <Label text="GOALS :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="goalsP2" text="                                          " />
