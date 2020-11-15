@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Background?>
 <?import javafx.scene.layout.BackgroundFill?>
@@ -46,6 +47,7 @@
                   <Label fx:id="P1gold" text="                              " />
                </children>
             </HBox>
+            <ProgressBar fx:id="pbB1" prefWidth="200.0" progress="0.0" />
             <HBox prefHeight="35.0" prefWidth="241.0">
                <children>
                   <Label text="WEALTH :   ">
@@ -55,6 +57,7 @@
                   </Label>
                   <Label fx:id="WEALTHBOX1" text="                       " />
                </children></HBox>
+            <ProgressBar fx:id="pbB2" prefWidth="200.0" progress="0.0" />
             <HBox prefHeight="60.0" prefWidth="241.0">
                <children>
                   <VBox prefHeight="72.0" prefWidth="115.0">
@@ -64,7 +67,7 @@
                               <Font name="Copperplate" size="18.0" />
                            </font>
                         </Label>
-                        <Label text="  OWNED">
+                        <Label text="OWNED">
                            <font>
                               <Font name="Copperplate" size="19.0" />
                            </font>
@@ -96,11 +99,12 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="241.0">
+            <ProgressBar fx:id="pbB3" prefWidth="200.0" progress="0.0" />
+            <HBox prefHeight="32.0" prefWidth="241.0">
                <children>
                   <Label text="GOALS :   ">
                      <font>
-                        <Font size="19.0" />
+                        <Font name="Copperplate" size="19.0" />
                      </font>
                   </Label>
                   <Label fx:id="goalsP1" text="                                          " />
@@ -125,6 +129,7 @@
                   <Label fx:id="P2gold" prefWidth="104.0" text="                                       " />
                </children>
             </HBox>
+            <ProgressBar fx:id="pbB4" prefWidth="200.0" progress="0.0" />
             <HBox prefHeight="35.0" prefWidth="241.0">
                <children>
                   <Label text="WEALTH :   ">
@@ -135,6 +140,7 @@
                   <Label fx:id="WEALTHBOX2" text="                       " />
                </children>
             </HBox>
+            <ProgressBar fx:id="pbB5" prefWidth="200.0" progress="0.0" />
             <HBox prefHeight="60.0" prefWidth="241.0">
                <children>
                   <VBox prefHeight="72.0" prefWidth="115.0">
@@ -144,7 +150,7 @@
                               <Font name="Copperplate" size="18.0" />
                            </font>
                         </Label>
-                        <Label text="     OWNED">
+                        <Label text="OWNED">
                            <font>
                               <Font name="Copperplate" size="18.0" />
                            </font>
@@ -176,7 +182,8 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="241.0">
+            <ProgressBar fx:id="pbB6" prefWidth="200.0" progress="0.0" />
+            <HBox prefHeight="30.0" prefWidth="241.0">
                <children>
                   <Label text="GOALS :   ">
                      <font>

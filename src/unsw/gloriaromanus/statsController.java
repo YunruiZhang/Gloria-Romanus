@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -35,6 +36,19 @@ public class statsController extends MenuController{
     private Label p1amtdue;
     @FXML 
     private Label p2amtdue;
+    @FXML
+    private ProgressBar pbB1;
+    @FXML
+    private ProgressBar pbB2;
+    @FXML
+    private ProgressBar pbB3;
+    @FXML
+    private ProgressBar pbB4;
+    @FXML
+    private ProgressBar pbB5;
+    @FXML
+    private ProgressBar pbB6;
+
 
     public void updateGoldAmt(ActionEvent e) throws Exception {
         int goldA = getParent().getGoldAmount(e, 1);
@@ -58,6 +72,12 @@ public class statsController extends MenuController{
         int loangoldB = getParent().getLoan(2);
         p1amtdue.setText(Integer.toString(loangoldA));
         p2amtdue.setText(Integer.toString(loangoldB));
+        pbB1.setProgress((double)goldA/(100000.00));
+        pbB2.setProgress((double)wealthA/(400000.00));
+        pbB3.setProgress((double)provsA/(53.00));
+        pbB4.setProgress((double)goldB/(100000.00));
+        pbB5.setProgress((double)wealthB/(400000.00));
+        pbB6.setProgress((double)provsB/(53.00));
     }
 
     @FXML
