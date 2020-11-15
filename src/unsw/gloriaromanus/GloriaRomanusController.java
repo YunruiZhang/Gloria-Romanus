@@ -231,16 +231,19 @@ public class GloriaRomanusController{
   }
 
   public ArrayList<String> retriveOwnedProvinces(int index){
+    ArrayList<Province> all = new ArrayList<Province>();
     if(index == 1){
       if(currentlySelectedHumanProvince == null){
         return null;
       }
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      ArrayList<Province> romepp = romeplayer.getProvinces();
+      //ArrayList<Province> romepp = romeplayer.getProvinces();
       ArrayList<String> romeppstring = new ArrayList<String>();
-      for(Province temppp : romepp){
+      for(Province temppp : all){
         if(!myProvince.equals(temppp.getName())){
-          romeppstring.add(temppp.getName());
+          if(temppp.getFaction().equals("Rome")){
+            romeppstring.add(temppp.getName());
+          }
         } 
       }
       return romeppstring;
@@ -249,11 +252,13 @@ public class GloriaRomanusController{
         return null;
       }
       String EnemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      ArrayList<Province> gaulpp = gaulplayer.getProvinces();
+      //ArrayList<Province> gaulpp = gaulplayer.getProvinces();
       ArrayList<String> gaulppstring = new ArrayList<String>();
-      for(Province temppp : gaulpp){
+      for(Province temppp : all){
         if(!EnemyProvince.equals(temppp.getName())){
-          gaulppstring.add(temppp.getName());
+          if(temppp.getFaction().equals("Gaul")){
+            gaulppstring.add(temppp.getName());
+          }
         } 
       }
       return gaulppstring;
