@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -77,30 +75,35 @@ public class BasicMenuController extends MenuController{
     }
 
     @FXML
-    public void buyInfraButtonp2(ActionEvent e) throws IOException {
+    public void buyInfraButtonp2(ActionEvent e) throws Exception {
         getParent().buyInfraButton(e, Infrabuymenu.getValue(), 2);
+        getParent().updateGoldd(e);
     }
 
     @FXML
-    public void buyInfraButton(ActionEvent e) throws IOException {
+    public void buyInfraButton(ActionEvent e) throws Exception {
         getParent().buyInfraButton(e, Infrabuymenu.getValue(), 1);
+        getParent().updateGoldd(e);
     }
 
     @FXML
-    public void upgradeInfraButtonp2(ActionEvent e) throws IOException {
+    public void upgradeInfraButtonp2(ActionEvent e) throws Exception {
         getParent().upgradeInfraButton(e, infraupgrademenu.getValue(), 2);
+        getParent().updateGoldd(e);
     }
 
     @FXML
-    public void upgradeInfraButton(ActionEvent e) throws IOException {
+    public void upgradeInfraButton(ActionEvent e) throws Exception {
         getParent().upgradeInfraButton(e, infraupgrademenu.getValue(), 1);
+        getParent().updateGoldd(e);
     }
 
     @FXML
-    public void buyTroopButtonp2(ActionEvent e) throws IOException {
+    public void buyTroopButtonp2(ActionEvent e) throws Exception {
         try {
             int qty = Integer.parseInt(troopqty.getText());
             getParent().buyTroopButton(e, trooptype1.getValue(), 2, qty);
+            getParent().updateGoldd(e);
         } catch (NumberFormatException g) {
             out_terminal.appendText("Text entered should be a number");
         }
@@ -108,10 +111,11 @@ public class BasicMenuController extends MenuController{
     }
 
     @FXML
-    public void buyTroopButton(ActionEvent e) throws IOException {
+    public void buyTroopButton(ActionEvent e) throws Exception {
         try {
             int qty = Integer.parseInt(troopqty.getText());
             getParent().buyTroopButton(e, trooptype.getValue(), 1, qty);
+            getParent().updateGoldd(e);
         } catch (NumberFormatException g) {
             out_terminal.appendText("Text entered should be a number");
         }
@@ -148,8 +152,9 @@ public class BasicMenuController extends MenuController{
     }
 
     @FXML
-    public void bmNEXTturn(ActionEvent e) throws IOException {
+    public void bmNEXTturn(ActionEvent e) throws Exception {
         getParent().nextTurnClick(e);
+        getParent().updateGoldd(e);
     }
     //ObservableList<unitTypeMenu> items = FXCollections.observableList(e -> new Observable[] {e.nameProperty()} );
 }
