@@ -24,19 +24,24 @@
             </fills>
         </Background>
     </background>
-   <Button mnemonicParsing="false" onAction="#attackmenucalledb" prefHeight="99.0" prefWidth="250.0" text="ATTACK!!!" textFill="#ff00bf">
+   <Button mnemonicParsing="false" onAction="#attackmenucalledb" prefHeight="203.5" prefWidth="230.0" text="ATTACK!!!" textFill="#9d40b8">
       <font>
          <Font name="Rockwell" size="32.0" />
       </font>
    </Button>
-   <Button mnemonicParsing="false" onAction="#buildmenucalledb" prefHeight="99.0" prefWidth="250.0" text="BUILD INFRASTRUCTURE" textFill="#9d40b8">
+   <Button mnemonicParsing="false" onAction="#buildmenucalledb" prefHeight="203.5" prefWidth="230.0" text="SHOP" textFill="#9d40b8">
       <font>
-         <Font name="Rockwell" size="14.0" />
+         <Font name="Rockwell" size="32.0" />
       </font>
    </Button>
-   <Button mnemonicParsing="false" onAction="#taxretebuttionb" prefHeight="99.0" prefWidth="250.0" text="SET TAX RATES" textFill="#9d40b8">
+   <Button mnemonicParsing="false" onAction="#taxretebuttionb" prefHeight="203.5" prefWidth="230.0" text="TAX OFFICE" textFill="#9d40b8">
       <font>
-         <Font name="Rockwell" size="14.0" />
+         <Font name="Rockwell" size="27.0" />
+      </font>
+   </Button>
+   <Button mnemonicParsing="false" onAction="#menumenunecxtturn" prefHeight="203.5" prefWidth="230.0" text="NEXT TURN" textFill="#9d40b8">
+      <font>
+         <Font name="Rockwell" size="27.0" />
       </font>
    </Button>
 </VBox>
