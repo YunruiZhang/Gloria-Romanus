@@ -55,7 +55,7 @@ public class InvasionMenuController extends MenuController{
     }
 
     @FXML
-    public void clickedInvadeButton(ActionEvent e) throws IOException {
+    public void clickedInvadeButton(ActionEvent e) throws Exception {
         ObservableList<Integer> selectedIndices = attackCombo1fxid.getSelectionModel().getSelectedIndices();
         ObservableList<String> selectedStuff = attackCombo1fxid.getItems();
         ArrayList<String> toOut = new ArrayList<String>();
@@ -64,10 +64,11 @@ public class InvasionMenuController extends MenuController{
         }
         getParent().clickedInvadeButton(e, 1, toOut);
         refresherCall();
+        getParent().updateGoldd(e);
     }
 
     @FXML
-    public void clickedInvadeButton2(ActionEvent e) throws IOException {
+    public void clickedInvadeButton2(ActionEvent e) throws Exception {
         ObservableList<Integer> selectedIndices = attackCombo2fxid.getSelectionModel().getSelectedIndices();
         ObservableList<String> selectedStuff = attackCombo2fxid.getItems();
         ArrayList<String> toOut = new ArrayList<String>();
@@ -76,6 +77,7 @@ public class InvasionMenuController extends MenuController{
         }
         getParent().clickedInvadeButton(e, 2, toOut);
         refresherCall();
+        getParent().updateGoldd(e);
     }
 
     @FXML
@@ -103,8 +105,9 @@ public class InvasionMenuController extends MenuController{
     }
 
     @FXML
-    public void nextTurnButton(ActionEvent e) throws IOException {
+    public void nextTurnButton(ActionEvent e) throws Exception {
         getParent().nextTurnClick(e);
+        getParent().updateGoldd(e);
     }
 
     @FXML
@@ -128,8 +131,9 @@ public class InvasionMenuController extends MenuController{
     }
 
     @FXML 
-    public void refresh_invade(ActionEvent e) throws IOException {
+    public void refresh_invade(ActionEvent e) throws Exception {
         refresherCall();
+        getParent().updateGoldd(e);
     }
 
     public void refresherCall() {
