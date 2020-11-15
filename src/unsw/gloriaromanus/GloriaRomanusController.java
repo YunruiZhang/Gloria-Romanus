@@ -231,16 +231,19 @@ public class GloriaRomanusController{
   }
 
   public ArrayList<String> retriveOwnedProvinces(int index){
+    ArrayList<Province> all = new ArrayList<Province>();
     if(index == 1){
       if(currentlySelectedHumanProvince == null){
         return null;
       }
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      ArrayList<Province> romepp = romeplayer.getProvinces();
+      //ArrayList<Province> romepp = romeplayer.getProvinces();
       ArrayList<String> romeppstring = new ArrayList<String>();
-      for(Province temppp : romepp){
+      for(Province temppp : all){
         if(!myProvince.equals(temppp.getName())){
-          romeppstring.add(temppp.getName());
+          if(temppp.getFaction().equals("Rome")){
+            romeppstring.add(temppp.getName());
+          }
         } 
       }
       return romeppstring;
@@ -249,11 +252,13 @@ public class GloriaRomanusController{
         return null;
       }
       String EnemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      ArrayList<Province> gaulpp = gaulplayer.getProvinces();
+      //ArrayList<Province> gaulpp = gaulplayer.getProvinces();
       ArrayList<String> gaulppstring = new ArrayList<String>();
-      for(Province temppp : gaulpp){
+      for(Province temppp : all){
         if(!EnemyProvince.equals(temppp.getName())){
-          gaulppstring.add(temppp.getName());
+          if(temppp.getFaction().equals("Gaul")){
+            gaulppstring.add(temppp.getName());
+          }
         } 
       }
       return gaulppstring;
@@ -341,6 +346,7 @@ public class GloriaRomanusController{
       String myProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       temp.setTax(level);
+      printMessageToTerminal("the tax level is set to level" + level);
     }else{
       if(currentlySelectedEnemyProvince == null){
         printMessageToTerminal("Please select the province");
@@ -348,6 +354,7 @@ public class GloriaRomanusController{
       String myProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       Province temp = thegame.getProvinceFromString(myProvince);
       temp.setTax(level);
+      printMessageToTerminal("the tax level is set to level" + level);
     }
   }
 //1 for increase 2 for decrease
@@ -360,8 +367,10 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(myProvince);
       if(flag == 1){
         temp.increaseTaxRate();
+        printMessageToTerminal("the tax level is increased by one level" );
       }else{
         temp.decreaseTaxRate();
+        printMessageToTerminal("the tax level is decreased by one level" );
       }
     }else{
       if(currentlySelectedEnemyProvince == null){
@@ -371,8 +380,10 @@ public class GloriaRomanusController{
       Province temp = thegame.getProvinceFromString(myProvince);
       if(flag == 1){
         temp.increaseTaxRate();
+        printMessageToTerminal("the tax level is increased by one level" );
       }else{
         temp.decreaseTaxRate();
+        printMessageToTerminal("the tax level is decreased by one level" );
       }
     }
   }
