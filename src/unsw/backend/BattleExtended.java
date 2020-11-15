@@ -34,6 +34,9 @@ public class BattleExtended {
             result = 1; // we win
             Enemyarmy.clear();
             double mylosspercentage = EnemyarmyStrength/(MyarmyStrength + EnemyarmyStrength);
+            if(mylosspercentage == 0){
+                mylosspercentage = 0.1;
+            }
             for(Unit tp1 : Myarmy){
                 double random1 = ThreadLocalRandom.current().nextDouble(0, mylosspercentage);
                 double soliders = (double) tp1.getSoldiers();
@@ -44,6 +47,9 @@ public class BattleExtended {
         }else{
             result = 2; // we loss
             double Enemylosspercentage = MyarmyStrength/(MyarmyStrength + EnemyarmyStrength);
+            if(Enemylosspercentage == 0){
+                Enemylosspercentage = 0.1;
+            }
             for(Unit tp : Enemyarmy){
                 double random = ThreadLocalRandom.current().nextDouble(0, Enemylosspercentage);
                 double soliders = (double) tp.getSoldiers();
