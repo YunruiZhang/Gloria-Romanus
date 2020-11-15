@@ -161,6 +161,13 @@ public class GloriaRomanusController{
     }
   }
 
+  public int getLoan(int index){
+    if(index == 1){
+      return romeplayer.getLoan();
+    }else{
+      return gaulplayer.getLoan();
+    }
+  }
   public void clickedInvadeButton(ActionEvent e, int index, ArrayList<String> units) throws IOException {
 
     if(currentlySelectedHumanProvince == null || currentlySelectedEnemyProvince == null){
