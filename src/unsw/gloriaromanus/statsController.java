@@ -1,5 +1,6 @@
 package unsw.gloriaromanus;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class statsController extends MenuController{
     @FXML
@@ -25,6 +27,14 @@ public class statsController extends MenuController{
     private Label goalsP1;
     @FXML 
     private Label goalsP2;
+    @FXML
+    private TextField bankBorrowAmount;
+    @FXML
+    private TextField bankreturnAmount1;
+    @FXML 
+    private Label p1amtdue;
+    @FXML 
+    private Label p2amtdue;
 
     public void updateGoldAmt(ActionEvent e) throws Exception {
         int goldA = getParent().getGoldAmount(e, 1);
@@ -44,6 +54,37 @@ public class statsController extends MenuController{
         String goalsB = getParent().getGoal(2);
         goalsP1.setText(goalsA);
         goalsP2.setText(goalsB);
-        
+        int loangoldA = getParent().getLoan(1);
+        int loangoldB = getParent().getLoan(2);
+        p1amtdue.setText(Integer.toString(loangoldA));
+        p2amtdue.setText(Integer.toString(loangoldB));
+    }
+
+    @FXML
+    public void bankBorrowp1(ActionEvent e) throws Exception {
+        int qty = Integer.parseInt(bankBorrowAmount.getText());
+        getParent().borrowMoney(e, qty, 1);
+        updateGoldAmt(e);
+    }
+
+    @FXML
+    public void bankBorrowp2(ActionEvent e) throws Exception {
+        int qty = Integer.parseInt(bankBorrowAmount.getText());
+        getParent().borrowMoney(e, qty, 2);
+        updateGoldAmt(e);
+    }
+
+    @FXML
+    public void bankretp1(ActionEvent e) throws Exception {
+        int qty = Integer.parseInt(bankreturnAmount1.getText());
+        getParent().paybackmoney(e, qty, 1);
+        updateGoldAmt(e);
+    }
+
+    @FXML
+    public void bankretp2(ActionEvent e) throws Exception {
+        int qty = Integer.parseInt(bankreturnAmount1.getText());
+        getParent().paybackmoney(e, qty, 2);
+        updateGoldAmt(e);
     }
 }
