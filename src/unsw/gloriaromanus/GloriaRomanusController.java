@@ -231,7 +231,7 @@ public class GloriaRomanusController{
   }
 
   public ArrayList<String> retriveOwnedProvinces(int index){
-    ArrayList<Province> all = new ArrayList<Province>();
+    ArrayList<Province> all = thegame.getAllPovinces();
     if(index == 1){
       if(currentlySelectedHumanProvince == null){
         return null;
