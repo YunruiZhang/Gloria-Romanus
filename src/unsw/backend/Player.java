@@ -39,6 +39,9 @@ public class Player implements Observer{
         this.moneyborrowed += amount;
     }
 
+    public int getLoan(){
+        return this.moneyborrowed;
+    }
     public boolean payback(int amount){
         if(amount > this.moneyborrowed || amount > this.gold){
             return false;
