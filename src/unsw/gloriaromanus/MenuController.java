@@ -31,7 +31,7 @@ public abstract class MenuController {
 
     @FXML
     public void Startgameb(ActionEvent e) throws Exception {
-        parent.switchMenu(0, 4);
+        parent.switchMenu(0, 7);
     }
 
     @FXML
@@ -87,5 +87,10 @@ public abstract class MenuController {
     @FXML 
     public void stAMAMtax(ActionEvent e) throws Exception {
         parent.switchMenu(5, 1);
+    }
+
+    @FXML 
+    public void INSTRUCTSCREENSW(ActionEvent e) throws Exception {
+        parent.switchMenu(7, 4);
     }
 }
