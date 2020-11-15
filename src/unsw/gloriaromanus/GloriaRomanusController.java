@@ -120,6 +120,28 @@ public class GloriaRomanusController{
     initializeProvinceLayers();
   }
 
+  public int gettotalwealth(ActionEvent e, int index){
+    double total = 0;
+    if(index == 1){
+      for(Province tp: romeplayer.getProvinces()){
+        total += tp.getProvinceWealth();
+      }
+    }else{
+      for(Province tp: gaulplayer.getProvinces()){
+        total += tp.getProvinceWealth();
+      }
+    }
+    return (int)total;
+  }
+
+  public int getNumberProvinces(ActionEvent e, int index){
+    if(index == 1){
+     return romeplayer.getProvinces().size();
+    }else{
+      return gaulplayer.getProvinces().size();
+    }
+
+  }
   public void clickedInvadeButton(ActionEvent e, int index, ArrayList<String> units) throws IOException {
 
     if(currentlySelectedHumanProvince == null || currentlySelectedEnemyProvince == null){
